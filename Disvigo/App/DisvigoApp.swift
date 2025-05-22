@@ -9,9 +9,14 @@ import SwiftUI
 
 @main
 struct DisvigoApp: App {
+    
+    @State var router  = Router()
+
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            RootView()
+                .environment(router)
         }
     }
 }
