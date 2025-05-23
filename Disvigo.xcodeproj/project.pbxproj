@@ -38,6 +38,12 @@
 		F5F2D8192DDF5F47008074F5 /* DLabeledIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5F2D8182DDF5F47008074F5 /* DLabeledIconView.swift */; };
 		F5F2D81D2DDF5FAB008074F5 /* DSafariView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5F2D81C2DDF5FAB008074F5 /* DSafariView.swift */; };
 		F5F2D81F2DDF6AC9008074F5 /* DCategoryCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5F2D81E2DDF6AC9008074F5 /* DCategoryCardView.swift */; };
+		F5F337AC2DE0F32C00D8345F /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5F337AB2DE0F32C00D8345F /* Location.swift */; };
+		F5F337AE2DE0F35500D8345F /* Food.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5F337AD2DE0F35500D8345F /* Food.swift */; };
+		F5F337B02DE0F37100D8345F /* Memory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5F337AF2DE0F37100D8345F /* Memory.swift */; };
+		F5F338482DE109A600D8345F /* View+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5F338472DE109A600D8345F /* View+Ext.swift */; };
+		F5F3384D2DE10E2C00D8345F /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5F3384C2DE10E2C00D8345F /* String+Ext.swift */; };
+		F5F338562DE1174800D8345F /* LocationMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5F338552DE1174800D8345F /* LocationMapView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -85,6 +91,12 @@
 		F5F2D8182DDF5F47008074F5 /* DLabeledIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DLabeledIconView.swift; sourceTree = "<group>"; };
 		F5F2D81C2DDF5FAB008074F5 /* DSafariView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DSafariView.swift; sourceTree = "<group>"; };
 		F5F2D81E2DDF6AC9008074F5 /* DCategoryCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DCategoryCardView.swift; sourceTree = "<group>"; };
+		F5F337AB2DE0F32C00D8345F /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		F5F337AD2DE0F35500D8345F /* Food.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Food.swift; sourceTree = "<group>"; };
+		F5F337AF2DE0F37100D8345F /* Memory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Memory.swift; sourceTree = "<group>"; };
+		F5F338472DE109A600D8345F /* View+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Ext.swift"; sourceTree = "<group>"; };
+		F5F3384C2DE10E2C00D8345F /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
+		F5F338552DE1174800D8345F /* LocationMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationMapView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -111,6 +123,21 @@
 		F5F2D8202DDF83CC008074F5 /* Model */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = Model;
+			sourceTree = "<group>";
+		};
+		F5F337B42DE104BF00D8345F /* View */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = View;
+			sourceTree = "<group>";
+		};
+		F5F337B52DE104C100D8345F /* ViewModel */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		F5F3385B2DE11CAD00D8345F /* Map */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Map;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -246,6 +273,8 @@
 				F574532F2DDE0DD40047E989 /* Home */,
 				F5BFF70F2DDE6D8700AEF27D /* City */,
 				F574532C2DDE0DD40047E989 /* Favorite */,
+				F5F337B22DE1049D00D8345F /* Location */,
+				F5F337BC2DE104E900D8345F /* LocationMap */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -253,6 +282,7 @@
 		F57453392DDE0DD40047E989 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
+				F5F3385B2DE11CAD00D8345F /* Map */,
 				F5BFF54F2DDE510900AEF27D /* Network */,
 			);
 			path = Manager;
@@ -263,6 +293,9 @@
 			children = (
 				F5BFF53A2DDE211200AEF27D /* DTabModel.swift */,
 				F5BFF54D2DDE50D700AEF27D /* City.swift */,
+				F5F337AB2DE0F32C00D8345F /* Location.swift */,
+				F5F337AD2DE0F35500D8345F /* Food.swift */,
+				F5F337AF2DE0F37100D8345F /* Memory.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -312,6 +345,8 @@
 			isa = PBXGroup;
 			children = (
 				F574534B2DDE0DD40047E989 /* Font+Ext.swift */,
+				F5F338472DE109A600D8345F /* View+Ext.swift */,
+				F5F3384C2DE10E2C00D8345F /* String+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -378,6 +413,39 @@
 			path = City;
 			sourceTree = "<group>";
 		};
+		F5F337B22DE1049D00D8345F /* Location */ = {
+			isa = PBXGroup;
+			children = (
+				F5F337B52DE104C100D8345F /* ViewModel */,
+				F5F337B42DE104BF00D8345F /* View */,
+			);
+			path = Location;
+			sourceTree = "<group>";
+		};
+		F5F337BA2DE104E900D8345F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F5F338552DE1174800D8345F /* LocationMapView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		F5F337BB2DE104E900D8345F /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		F5F337BC2DE104E900D8345F /* LocationMap */ = {
+			isa = PBXGroup;
+			children = (
+				F5F337BA2DE104E900D8345F /* View */,
+				F5F337BB2DE104E900D8345F /* ViewModel */,
+			);
+			path = LocationMap;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -400,6 +468,9 @@
 				F5BFF54F2DDE510900AEF27D /* Network */,
 				F5BFF66A2DDE59AD00AEF27D /* Components */,
 				F5F2D8202DDF83CC008074F5 /* Model */,
+				F5F337B42DE104BF00D8345F /* View */,
+				F5F337B52DE104C100D8345F /* ViewModel */,
+				F5F3385B2DE11CAD00D8345F /* Map */,
 			);
 			name = Disvigo;
 			packageProductDependencies = (
@@ -476,7 +547,10 @@
 			files = (
 				F57453512DDE0DD40047E989 /* DisvigoApp.swift in Sources */,
 				F57453522DDE0DD40047E989 /* FavoriteView.swift in Sources */,
+				F5F338562DE1174800D8345F /* LocationMapView.swift in Sources */,
 				F57453532DDE0DD40047E989 /* HomeView.swift in Sources */,
+				F5F337AC2DE0F32C00D8345F /* Location.swift in Sources */,
+				F5F3384D2DE10E2C00D8345F /* String+Ext.swift in Sources */,
 				F57453542DDE0DD40047E989 /* RootView.swift in Sources */,
 				F5F2D8192DDF5F47008074F5 /* DLabeledIconView.swift in Sources */,
 				F57453552DDE0DD40047E989 /* SplashView.swift in Sources */,
@@ -484,12 +558,15 @@
 				F5F2D81D2DDF5FAB008074F5 /* DSafariView.swift in Sources */,
 				F57453572DDE0DD40047E989 /* AppImages.swift in Sources */,
 				F57453582DDE0DD40047E989 /* Font+Ext.swift in Sources */,
+				F5F337AE2DE0F35500D8345F /* Food.swift in Sources */,
 				F5BFF54E2DDE50D700AEF27D /* City.swift in Sources */,
 				F5F2D81F2DDF6AC9008074F5 /* DCategoryCardView.swift in Sources */,
+				F5F337B02DE0F37100D8345F /* Memory.swift in Sources */,
 				F57453592DDE0DD40047E989 /* ContentView.swift in Sources */,
 				F5F2D8152DDF257C008074F5 /* Router.swift in Sources */,
 				F5F2D8172DDF260C008074F5 /* CityDetailView.swift in Sources */,
 				F5BFF53B2DDE211200AEF27D /* DTabModel.swift in Sources */,
+				F5F338482DE109A600D8345F /* View+Ext.swift in Sources */,
 				F5BFF5392DDE20F200AEF27D /* DTabView.swift in Sources */,
 				F5BFF66E2DDE5AAE00AEF27D /* DeveloperPreview.swift in Sources */,
 			);

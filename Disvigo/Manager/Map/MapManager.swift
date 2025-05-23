@@ -1,0 +1,60 @@
+//
+//  MapManager.swift
+//  Disvigo
+//
+//  Created by abdullah on 24.05.2025.
+//
+
+import SwiftUI
+import MapKit
+
+class MapManager {
+    static let shared = MapManager()
+    
+    private init() {}
+    
+    func openInAppleMaps(coordinate: CLLocationCoordinate2D, name: String) {
+        let destinationPlacemark = MKPlacemark(coordinate: coordinate)
+        let destinationMapItem = MKMapItem(placemark: destinationPlacemark)
+        destinationMapItem.name = name
+        
+        MKMapItem.openMaps(
+            with: [destinationMapItem],
+            launchOptions: [
+                MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving
+            ]
+        )
+    }
+    
+    func openInGoogleMaps(coordinate: CLLocationCoordinate2D, name: String) {
+        let urlString = "comgooglemaps://?daddr=\(coordinate.latitude),\(coordinate.longitude)&directionsmode=driving"
+        
+        if let encoded = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
+           let url = URL(string: encoded),
+           UIApplication.shared.canOpenURL(url)
+        {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        } else {
+            // Web fallback
+            let webUrlString = "https://www.google.com/maps/dir/?api=1&destination=\(coordinate.latitude),\(coordinate.longitude)&travelmode=driving"
+            if let encoded = webUrlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
+               let url = URL(string: encoded)
+            {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            }
+        }
+    }
+    
+    func openInYandexMaps(coordinate: CLLocationCoordinate2D, name: String) {
+        let urlString = "yandexmaps://build_route_on_map?lat_to=\(coordinate.latitude)&lon_to=\(coordinate.longitude)"
+        
+        if let encoded = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
+           let url = URL(string: encoded),
+           UIApplication.shared.canOpenURL(url)
+        {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
+    }
+    
+   
+}

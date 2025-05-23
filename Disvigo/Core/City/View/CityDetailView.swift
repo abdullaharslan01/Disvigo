@@ -41,8 +41,6 @@ struct CityDetailView: View {
                     cityImageView
 
                     cityContentView
-
-                    
                 }
             }
             .navigationBarTitleDisplayMode(.large)
@@ -70,7 +68,7 @@ struct CityDetailView: View {
 
                 categoryView
                     .transition(.slide)
-                
+
                 cityMapView
             }
         }
@@ -110,26 +108,7 @@ struct CityDetailView: View {
     }
 
     var descriptionView: some View {
-        VStack(alignment: .leading) {
-            Text(city.description)
-                .font(.poppins(.light, size: .body))
-                .lineSpacing(4)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .lineLimit(showFullDescription ? nil : 3)
-
-            if isDescriptionTruncated() {
-                Button(action: {
-                    withAnimation(.easeInOut(duration: 0.3)) {
-                        showFullDescription.toggle()
-                    }
-                }) {
-                    Text(showFullDescription ? String(localized: "Show Less") : String(localized: "Read More"))
-                        .font(.poppins(.medium, size: .callout))
-                        .foregroundColor(.accent)
-                        .padding(.vertical, 4)
-                }
-            }
-        }
+        ExpandableTextView(text: city.description, font: .light, fontSize: .body, lineLimit: 3, horizontalPadding: 16)
     }
 
     var categoryView: some View {
@@ -148,25 +127,7 @@ struct CityDetailView: View {
         Map(position: $position) {}.frame(height: 250)
             .frame(maxWidth: .infinity)
             .toolbarBackgroundVisibility(.hidden, for: .navigationBar)
-            .padding(.top,30)
-    }
-}
-
-extension CityDetailView {
-    private func isDescriptionTruncated() -> Bool {
-        let text = city.description
-        let font = UIFont(name: "Poppins-Light", size: 16) ?? UIFont.systemFont(ofSize: 16)
-        let attributes: [NSAttributedString.Key: Any] = [.font: font]
-
-        let constraintRect = CGSize(width: UIScreen.main.bounds.width - 32,
-                                    height: .greatestFiniteMagnitude)
-
-        let boundingBox = text.boundingRect(with: constraintRect,
-                                            options: .usesLineFragmentOrigin,
-                                            attributes: attributes,
-                                            context: nil)
-
-        return boundingBox.height > font.lineHeight * 3
+            .padding(.top, 30)
     }
 }
 
@@ -176,3 +137,4 @@ extension CityDetailView {
     }
     .environment(Router())
 }
+
