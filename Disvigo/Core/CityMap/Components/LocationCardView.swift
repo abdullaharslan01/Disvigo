@@ -86,24 +86,26 @@ struct LocationCardView: View {
     }
     
     private var content: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            title
-            detailButton
-        }
-        .padding(16)
+        VStack {
+            VStack(alignment: .leading) {
+                title
+                detailButton
+            }
+        }.padding(.bottom,35)
+            .padding(.horizontal,16)
     }
     
     private var title: some View {
         Text(location.title)
-            .font(.poppins(.semiBold, size: .title))
+            .font(.poppins(.semiBold, size: .title2))
             .foregroundStyle(.appTextLight)
-            .lineLimit(2)
-            .minimumScaleFactor(0.8)
-            .frame(maxWidth: 200, alignment: .leading)
+            .minimumScaleFactor(0.65)
+            .lineLimit(4)
+            .frame(maxWidth: 250, alignment: .leading)
     }
     
     private var detailButton: some View {
-        DLabelButtonView(systemImage: AppIcons.walkIcon, title: String(localized: "Go to Detail")) {
+        DLabelButtonView(systemImage: AppIcons.walkIcon, title: String(localized: "Detail"), symbolFont: .callout, textFont: .callout) {
             onTapDetail?()
         }
     }
@@ -111,7 +113,7 @@ struct LocationCardView: View {
 
 #Preview {
     LocationCardView(
-        location: .init(title: "Adana Gaziantep İstanbul Ankara İzmir", description: "", images: [], coordinates: .init(latitude: 0, longitude: 0)),
+        location: .init(title: "Gaziantep Kalesi", description: "", images: [], coordinates: .init(latitude: 0, longitude: 0)),
         distance: "1km",
         onTapDetail: {}
     ).frame(height: 180).preferredColorScheme(.dark)

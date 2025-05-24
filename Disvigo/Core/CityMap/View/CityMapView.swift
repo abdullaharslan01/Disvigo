@@ -113,7 +113,7 @@ struct CityMapView: View {
     private var scrollableLocationCards: some View {
         TabView(selection: $selectedLocation) {
             ForEach(Array(vm.sortedLocations.enumerated()), id: \.element.id) { index, location in
-                LocationCardView(location: location) {}
+                LocationCardView(location: location, distance: vm.formattedDistance(for: location)) {}
                     .tag(location)
                     .onAppear {
                         withAnimation {
