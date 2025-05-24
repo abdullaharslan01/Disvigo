@@ -7,9 +7,30 @@
 
 import SwiftUI
 
+enum DIconButtonType {
+    case location
+    case user
+    case favorite(Bool)
+
+    case custom(String)
+
+    var systemName: String {
+        switch self {
+        case .location:
+            return AppIcons.focusOnLocation
+        case .user:
+            return AppIcons.personCircle
+        case .favorite(let favoriteState):
+            return favoriteState ? AppIcons.heart : AppIcons.heartFill
+        case .custom(let symbolName):
+            return symbolName
+        }
+    }
+}
+
 struct DIconButtonView: View {
-    let systemName: String
-    var fontSize: Font = .poppins(.regular, size: .largeTitle)
+    let iconButtonType: DIconButtonType
+    var fontSize: Font = .poppins(.regular, size: .title)
     var iconColor: Color = .red
     var bgColor: Color = .white
     var cornerRadius: CGFloat = 16
@@ -17,7 +38,7 @@ struct DIconButtonView: View {
     var padding: CGFloat = 12
     var bgMaterial: Material? = nil
     let action: (() -> ())?
-    
+
     var body: some View {
         Group {
             if action != nil {
@@ -31,9 +52,9 @@ struct DIconButtonView: View {
             }
         }
     }
-    
+
     private var iconContent: some View {
-        Image(systemName: systemName)
+        Image(systemName: iconButtonType.systemName)
             .font(fontSize)
             .foregroundStyle(iconColor)
             .padding(padding)
@@ -51,9 +72,6 @@ struct DIconButtonView: View {
     }
 }
 
-
 #Preview {
-    DIconButtonView(systemName: "heart") {
-        
-    }
+    DIconButtonView(iconButtonType: .favorite(true)) {}
 }

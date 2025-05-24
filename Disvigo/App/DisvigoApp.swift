@@ -15,8 +15,11 @@ struct DisvigoApp: App {
     
     var body: some Scene {
         WindowGroup {
-            RootView()
-                .environment(router)
+            
+            LocationMapView(location: DeveloperPreview.shared.location)
+            
+//            RootView()
+//                .environment(router)
         }
     }
 }

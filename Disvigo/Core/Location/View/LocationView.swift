@@ -14,8 +14,11 @@ struct LocationView: View {
     @State private var rotationTimer: Timer?
     
     @State var rotationAngle: Double = 0
+    
+    var isFavorite: Bool {
+        return false
+    }
   
-
     let location: Location
     var body: some View {
         ZStack {
@@ -43,7 +46,7 @@ struct LocationView: View {
         DImageCollageView(images: location.images, height: 350)
             .overlay(alignment: .top) {
                 VStack {
-                    DIconButtonView(systemName: AppIcons.heartFill) {}.padding(.top, getSafeArea().top == 0 ? 15 : getSafeArea().top)
+                    DIconButtonView(iconButtonType: .favorite(isFavorite)) {}.padding(.top, getSafeArea().top == 0 ? 15 : getSafeArea().top)
                         .padding(.horizontal)
                 }.frame(maxWidth: .infinity, alignment: .trailing)
             }
@@ -93,8 +96,8 @@ struct LocationView: View {
         rotationTimer?.invalidate()
     }
     
-     func updateCameraPosition() {
-         rotationAngle = (rotationAngle + 0.08)
+    func updateCameraPosition() {
+        rotationAngle = (rotationAngle + 0.08)
             .truncatingRemainder(dividingBy: 360)
 
         mapCameraPosition = .camera(
@@ -111,6 +114,5 @@ struct LocationView: View {
 #Preview {
     NavigationStack {
         LocationView(location: DeveloperPreview.shared.location)
-
     }
 }

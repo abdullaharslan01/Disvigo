@@ -17,8 +17,8 @@ struct DLabelButtonView: View {
     init(
         systemImage: String = AppIcons.locationSquare,
         title: String,
-        symbolFont: Font = .poppins(.regular, size: .title3),
-        textFont: Font = .poppins(.regular, size: .headline),
+        symbolFont: Font = .poppins(.medium, size: .title3),
+        textFont: Font = .poppins(.medium, size: .headline),
         onTap: @escaping () -> Void = {}
     ) {
         self.systemImage = systemImage

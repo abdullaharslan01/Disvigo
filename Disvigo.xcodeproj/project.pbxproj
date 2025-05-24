@@ -33,6 +33,7 @@
 		F5BFF53B2DDE211200AEF27D /* DTabModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5BFF53A2DDE211200AEF27D /* DTabModel.swift */; };
 		F5BFF54E2DDE50D700AEF27D /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5BFF54D2DDE50D700AEF27D /* City.swift */; };
 		F5BFF66E2DDE5AAE00AEF27D /* DeveloperPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5BFF66D2DDE5AAE00AEF27D /* DeveloperPreview.swift */; };
+		F5EAD4EB2DE1D09D00BA957C /* LocationMapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5EAD4EA2DE1D09D00BA957C /* LocationMapViewModel.swift */; };
 		F5F2D8152DDF257C008074F5 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5F2D8142DDF257C008074F5 /* Router.swift */; };
 		F5F2D8172DDF260C008074F5 /* CityDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5F2D8162DDF260C008074F5 /* CityDetailView.swift */; };
 		F5F2D8192DDF5F47008074F5 /* DLabeledIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5F2D8182DDF5F47008074F5 /* DLabeledIconView.swift */; };
@@ -86,6 +87,7 @@
 		F5BFF53A2DDE211200AEF27D /* DTabModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DTabModel.swift; sourceTree = "<group>"; };
 		F5BFF54D2DDE50D700AEF27D /* City.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
 		F5BFF66D2DDE5AAE00AEF27D /* DeveloperPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeveloperPreview.swift; sourceTree = "<group>"; };
+		F5EAD4EA2DE1D09D00BA957C /* LocationMapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationMapViewModel.swift; sourceTree = "<group>"; };
 		F5F2D8142DDF257C008074F5 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		F5F2D8162DDF260C008074F5 /* CityDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityDetailView.swift; sourceTree = "<group>"; };
 		F5F2D8182DDF5F47008074F5 /* DLabeledIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DLabeledIconView.swift; sourceTree = "<group>"; };
@@ -118,6 +120,11 @@
 		F5BFF66A2DDE59AD00AEF27D /* Components */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = Components;
+			sourceTree = "<group>";
+		};
+		F5EAD4EF2DE1D7D700BA957C /* Alert */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Alert;
 			sourceTree = "<group>";
 		};
 		F5F2D8202DDF83CC008074F5 /* Model */ = {
@@ -354,6 +361,7 @@
 		F574534D2DDE0DD40047E989 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				F5EAD4EF2DE1D7D700BA957C /* Alert */,
 				F57453662DDE0DF00047E989 /* Comman */,
 				F574534A2DDE0DD40047E989 /* Constants */,
 				F574534C2DDE0DD40047E989 /* Extensions */,
@@ -433,6 +441,7 @@
 		F5F337BB2DE104E900D8345F /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				F5EAD4EA2DE1D09D00BA957C /* LocationMapViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -467,6 +476,7 @@
 				F5BFF53C2DDE2D6700AEF27D /* ViewModel */,
 				F5BFF54F2DDE510900AEF27D /* Network */,
 				F5BFF66A2DDE59AD00AEF27D /* Components */,
+				F5EAD4EF2DE1D7D700BA957C /* Alert */,
 				F5F2D8202DDF83CC008074F5 /* Model */,
 				F5F337B42DE104BF00D8345F /* View */,
 				F5F337B52DE104C100D8345F /* ViewModel */,
@@ -565,6 +575,7 @@
 				F57453592DDE0DD40047E989 /* ContentView.swift in Sources */,
 				F5F2D8152DDF257C008074F5 /* Router.swift in Sources */,
 				F5F2D8172DDF260C008074F5 /* CityDetailView.swift in Sources */,
+				F5EAD4EB2DE1D09D00BA957C /* LocationMapViewModel.swift in Sources */,
 				F5BFF53B2DDE211200AEF27D /* DTabModel.swift in Sources */,
 				F5F338482DE109A600D8345F /* View+Ext.swift in Sources */,
 				F5BFF5392DDE20F200AEF27D /* DTabView.swift in Sources */,
