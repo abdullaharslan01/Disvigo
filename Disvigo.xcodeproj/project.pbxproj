@@ -127,6 +127,21 @@
 			path = Alert;
 			sourceTree = "<group>";
 		};
+		F5EAD4F82DE1E85700BA957C /* View */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = View;
+			sourceTree = "<group>";
+		};
+		F5EAD4F92DE1E85B00BA957C /* ViewModel */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		F5EAD4FF2DE1F26800BA957C /* Components */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Components;
+			sourceTree = "<group>";
+		};
 		F5F2D8202DDF83CC008074F5 /* Model */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = Model;
@@ -279,6 +294,7 @@
 				F57453372DDE0DD40047E989 /* Tab */,
 				F574532F2DDE0DD40047E989 /* Home */,
 				F5BFF70F2DDE6D8700AEF27D /* City */,
+				F5EAD4F72DE1E84F00BA957C /* CityMap */,
 				F574532C2DDE0DD40047E989 /* Favorite */,
 				F5F337B22DE1049D00D8345F /* Location */,
 				F5F337BC2DE104E900D8345F /* LocationMap */,
@@ -421,6 +437,16 @@
 			path = City;
 			sourceTree = "<group>";
 		};
+		F5EAD4F72DE1E84F00BA957C /* CityMap */ = {
+			isa = PBXGroup;
+			children = (
+				F5EAD4FF2DE1F26800BA957C /* Components */,
+				F5EAD4F92DE1E85B00BA957C /* ViewModel */,
+				F5EAD4F82DE1E85700BA957C /* View */,
+			);
+			path = CityMap;
+			sourceTree = "<group>";
+		};
 		F5F337B22DE1049D00D8345F /* Location */ = {
 			isa = PBXGroup;
 			children = (
@@ -477,6 +503,9 @@
 				F5BFF54F2DDE510900AEF27D /* Network */,
 				F5BFF66A2DDE59AD00AEF27D /* Components */,
 				F5EAD4EF2DE1D7D700BA957C /* Alert */,
+				F5EAD4F82DE1E85700BA957C /* View */,
+				F5EAD4F92DE1E85B00BA957C /* ViewModel */,
+				F5EAD4FF2DE1F26800BA957C /* Components */,
 				F5F2D8202DDF83CC008074F5 /* Model */,
 				F5F337B42DE104BF00D8345F /* View */,
 				F5F337B52DE104C100D8345F /* ViewModel */,

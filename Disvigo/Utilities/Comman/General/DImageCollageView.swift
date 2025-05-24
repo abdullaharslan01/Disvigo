@@ -44,7 +44,7 @@ struct DImageCollageView: View {
     }
 
     var contentUnavaliableView: some View {
-        EmptyStateView(title: "Image Not Found", subtitle: "The image will be uploaded shortly.", iconName: "photo.badge.exclamationmark.fill")
+        DEmptyStateView(type: .imageNotFound)
     }
 }
 

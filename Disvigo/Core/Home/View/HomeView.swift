@@ -38,10 +38,9 @@ struct HomeView: View {
         ScrollView {
             LazyVStack(spacing: 20) {
                 if vm.filteredCities.isEmpty && !vm.citySearchText.isEmpty {
-                    EmptyStateView(buttonText: "Clear", onTapGesture: {
+                    DEmptyStateView(type: .noCityFound) {
                         vm.citySearchText = ""
-                    })
-                    .transition(.scale.combined(with: .opacity))
+                    }.transition(.scale.combined(with: .opacity))
                 } else {
                     ForEach(vm.filteredCities) { city in
 

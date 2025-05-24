@@ -28,7 +28,7 @@ struct LocationMapView: View {
             MapCompass()
             MapPitchToggle()
         }
-        .tint(.white)
+        
         .navigationTitle(vm.location.title)
         .navigationBarTitleDisplayMode(.inline)
         .preferredColorScheme(.dark)
@@ -114,7 +114,6 @@ struct LocationMapView: View {
     }
 
     private func focusOnUser() {
-        print("Focus on User worked")
         guard let userLocation = vm.getUserLocation() else { return }
         withAnimation {
             position = .region(.init(center: userLocation.clLocationCoordinate2D, latitudinalMeters: 350, longitudinalMeters: 350))

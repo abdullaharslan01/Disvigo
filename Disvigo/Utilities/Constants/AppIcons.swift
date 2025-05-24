@@ -16,9 +16,12 @@ enum AppIcons {
     static let search = "magnifyingglass.circle"
     static let locationSquare = "location.square"
     static let star = "star"
+    static let starFill = "star.fill"
     static let personCircle = "person.circle"
-
     static let focusOnLocation = "location.fill.viewfinder"
+    static let defaultLocation = "mappin"
+    static let photo = "photo.badge.exclamationmark.fill"
+    static let walkIcon = "figure.walk"
     
 
 }

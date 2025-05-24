@@ -10,6 +10,7 @@ import Foundation
 @Observable
 class LocationMapViewModel {
     let location: Location
+    
     var showMapSelectionSheet = false
 
     var permissionAlertStatus = false
