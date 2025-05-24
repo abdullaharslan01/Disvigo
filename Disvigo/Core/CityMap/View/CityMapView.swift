@@ -14,6 +14,8 @@ struct CityMapView: View {
     @State var position: MapCameraPosition = .automatic
     @State var selectedLocation: Location?
 
+    @State var countsDown: Bool = false
+
     init(city: City, locations: [Location]) {
         self._vm = State(wrappedValue: CityMapViewModel(city: city, locations: locations))
     }
@@ -28,18 +30,19 @@ struct CityMapView: View {
                 })
                 .onAppear {
                     focusOnCity()
+                }.onChange(of: vm.focusOnUserState) {
+                    focusOnUser()
                 }
 
         }.preferredColorScheme(.dark)
             .navigationTitle(vm.city.name)
             .navigationBarTitleDisplayMode(.inline)
-            .alert(isPresented: $vm.permissionAlertStatus) {
-                DAlertType.locationPermission {
+            .alert(item: $vm.permissionAlertType, content: { type in
+                DAlertType.locationPermission(permissionAlertType: type) {
                     vm.openMapsForPermission()
                 }.build()
-            }.onChange(of: vm.focusOnUserState) {
-                focusOnUser()
-            }
+
+            })
     }
 
     var locationMap: some View {
@@ -49,7 +52,7 @@ struct CityMapView: View {
                     .tag(location)
                     .tint(selectedLocation == location ? Color.appGreenPrimary : .blue)
             }
-            
+
             UserAnnotation()
         }
         .mapStyle(.standard(elevation: .realistic))
@@ -67,29 +70,67 @@ struct CityMapView: View {
     }
 
     private var locationButtons: some View {
-        VStack {
-            DIconButtonView(iconButtonType: .user, iconColor: .appTextLight, bgMaterial: .ultraThinMaterial) {
-               focusOnUser()
+        HStack(alignment: .bottom, spacing: 30) {
+            HStack(spacing: 20) {
+                DIconButtonView(iconButtonType: .custom(AppIcons.jumpFirst), iconColor: .accent, bgMaterial: .ultraThinMaterial) {
+                    jum(to: .forward)
+                }
+                VStack(spacing: 0) {
+                    Text("\(vm.currentPageIndex + 1)")
+                        .frame(width: 50)
+                        .contentTransition(.numericText(countsDown: countsDown))
+
+                    Divider()
+
+                    Text("\(vm.locationCount)")
+                        .frame(width: 50)
+                }
+                .monospacedDigit()
+                .lineLimit(1)
+                .font(.poppins(.medium, size: .title2))
+                .padding(5)
+                .background(.ultraThinMaterial)
+                .clipShape(RoundedRectangle(cornerRadius: 16))
+                DIconButtonView(iconButtonType: .custom(AppIcons.jumpEnd), iconColor: .accent, bgMaterial: .ultraThinMaterial) {
+                    jum(to: .bakcward)
+                }
             }
-        }.frame(maxWidth: .infinity, alignment: .trailing)
+
+            Spacer()
+
+            VStack(spacing: 20) {
+                DIconButtonView(iconButtonType: .custom(AppIcons.sort), iconColor: .yellow, bgMaterial: .ultraThinMaterial) {
+                    vm.requestForSortLocations()
+                }
+
+                DIconButtonView(iconButtonType: .user, iconColor: .mint, bgMaterial: .ultraThinMaterial) {
+                    vm.requestForFocusOnUser()
+                }
+            }
+        }.frame(maxWidth: .infinity)
     }
 
     private var scrollableLocationCards: some View {
         TabView(selection: $selectedLocation) {
-            ForEach(vm.locations) { location in
-
-                LocationCardView(location: location) {}.frame(height: 180)
+            ForEach(Array(vm.sortedLocations.enumerated()), id: \.element.id) { index, location in
+                LocationCardView(location: location) {}
                     .tag(location)
+                    .onAppear {
+                        withAnimation {
+                            countsDown = index < vm.currentPageIndex
+
+                            vm.currentPageIndex = index
+                        }
+                    }
             }
-        }.tabViewStyle(.page)
-            .frame(height: 180)
-            .animation(.default, value: selectedLocation)
-            .onChange(of: selectedLocation) { _, _ in
-                focusOnLocation()
-            }
+        }
+        .frame(height: 180)
+        .tabViewStyle(.page)
+        .animation(.default, value: selectedLocation)
+        .onChange(of: selectedLocation) { _, _ in
+            focusOnLocation()
+        }
     }
-    
-    
 }
 
 extension CityMapView {
@@ -106,6 +147,8 @@ extension CityMapView {
     private func focusOnLocation() {
         guard let location = selectedLocation else { return }
 
+        UIImpactFeedbackGenerator(style: .light).impactOccurred()
+
         withAnimation {
             position = .region(.init(
                 center: location.coordinates.clLocationCoordinate2D,
@@ -114,11 +157,19 @@ extension CityMapView {
             ))
         }
     }
-    
+
     private func focusOnUser() {
         guard let userLocation = vm.getUserLocation() else { return }
         withAnimation {
             position = .region(.init(center: userLocation.clLocationCoordinate2D, latitudinalMeters: 350, longitudinalMeters: 350))
+        }
+    }
+
+    private func jum(to sort: JumState) {
+        guard let location = vm.jump(to: sort) else { return }
+
+        withAnimation(.linear(duration: 0.5)) {
+            selectedLocation = location
         }
     }
 }

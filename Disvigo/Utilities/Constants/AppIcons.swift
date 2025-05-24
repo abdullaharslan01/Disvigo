@@ -22,6 +22,10 @@ enum AppIcons {
     static let defaultLocation = "mappin"
     static let photo = "photo.badge.exclamationmark.fill"
     static let walkIcon = "figure.walk"
+    static let sort = "bolt.circle"
+    
+    static let jumpFirst = "arrow.uturn.backward"
+    static let jumpEnd = "arrow.uturn.forward"
     
 
 }

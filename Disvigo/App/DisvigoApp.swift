@@ -16,6 +16,8 @@ struct DisvigoApp: App {
     var body: some Scene {
         WindowGroup {
             
+            
+
             CityMapView(city: DeveloperPreview.shared.city, locations: DeveloperPreview.shared.locations)
             
 //            RootView()

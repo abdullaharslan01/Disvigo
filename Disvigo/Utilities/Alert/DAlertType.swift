@@ -8,18 +8,18 @@
 import SwiftUI
 
 enum DAlertType {
-    case locationPermission(allowAction: () -> Void)
+    case locationPermission(permissionAlertType: PermissionAlertType, allowAction: () -> Void)
     case general(title: String, message: String)
     case custom(title: String, message: String, primary: Alert.Button, secondary: Alert.Button)
 
     func build() -> Alert {
         switch self {
-        case .locationPermission(let allowAction):
+        case .locationPermission(let permissionAlertType, let allowAction):
             return Alert(
-                title: Text("Location Access"),
-                message: Text("Allow access to your location to show your position on the map?"),
-                primaryButton: .default(Text("Allow"), action: allowAction),
-                secondaryButton: .cancel(Text("Not Now"))
+                title: Text(String(localized: "Location Access")),
+                message: Text(permissionAlertMessage),
+                primaryButton: .default(Text(String(localized: "Allow")), action: allowAction),
+                secondaryButton: .cancel(Text(String(localized: "Not Now")))
             )
 
         case .general(let title, let message):
@@ -36,6 +36,23 @@ enum DAlertType {
                 primaryButton: primary,
                 secondaryButton: secondary
             )
+        }
+    }
+
+    var permissionAlertMessage: String {
+        switch self {
+        case .locationPermission(let permissionAlertType, let allowAction):
+
+            switch permissionAlertType {
+            case .focusOnUser:
+                return String(localized: "Allow access to your location to show your position on the map?")
+            case .sortLocations:
+                return String(localized: "To sort the nearest cities according to your location, you need to grant location permission.")
+            }
+        case .general(title: let title, message: let message):
+            return ""
+        case .custom(title: let title, message: let message, primary: let primary, secondary: let secondary):
+            return ""
         }
     }
 }

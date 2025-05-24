@@ -10,10 +10,10 @@ import Foundation
 @Observable
 class LocationMapViewModel {
     let location: Location
-    
+
     var showMapSelectionSheet = false
 
-    var permissionAlertStatus = false
+    var permissionAlertStatus: PermissionAlertType?
 
     var focusOnUserState = false
 
@@ -24,7 +24,7 @@ class LocationMapViewModel {
         locationService.delegate = self
     }
 
-    func focusOnUser() {
+    func requestForFocusOnUser() {
         locationService.focusOnUser()
     }
 
@@ -41,11 +41,15 @@ class LocationMapViewModel {
 }
 
 extension LocationMapViewModel: LocationManagerDelegate {
-    func permissionAlert() {
-        permissionAlertStatus.toggle()
+    func permissionAlert(alert: PermissionAlertType) {
+        
+            permissionAlertStatus = alert
+        
     }
 
-    func focustOnUserStatus() {
+    func sortLocations() {}
+
+    func focustOnUser() {
         focusOnUserState.toggle()
     }
 }

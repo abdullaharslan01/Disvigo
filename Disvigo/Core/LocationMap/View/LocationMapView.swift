@@ -28,7 +28,7 @@ struct LocationMapView: View {
             MapCompass()
             MapPitchToggle()
         }
-        
+
         .navigationTitle(vm.location.title)
         .navigationBarTitleDisplayMode(.inline)
         .preferredColorScheme(.dark)
@@ -41,14 +41,14 @@ struct LocationMapView: View {
     }
 
     private var bottomButtons: some View {
-        VStack(spacing: 15) {
-            VStack(spacing: 15) {
-                DIconButtonView(iconButtonType: .location, iconColor: .appTextLight, bgMaterial: .ultraThinMaterial) {
+        VStack(spacing: 20) {
+            VStack(spacing: 35) {
+                DIconButtonView(iconButtonType: .location, iconColor: .yellow, bgMaterial: .ultraThinMaterial) {
                     focusOnLocation()
                 }
 
-                DIconButtonView(iconButtonType: .user, iconColor: .appTextLight, bgMaterial: .ultraThinMaterial) {
-                    vm.focusOnUser()
+                DIconButtonView(iconButtonType: .user, iconColor: .mint, bgMaterial: .ultraThinMaterial) {
+                    vm.requestForFocusOnUser()
                 }
             }.frame(maxWidth: .infinity, alignment: .trailing)
                 .padding(.horizontal)
@@ -91,11 +91,17 @@ struct LocationMapView: View {
             }
         ) {
             Text(Strings.chooseMapApp)
-        }.alert(isPresented: $vm.permissionAlertStatus) {
-            DAlertType.locationPermission {
+        }
+
+        .alert(item: $vm.permissionAlertStatus, content: { _ in
+
+            DAlertType.locationPermission(permissionAlertType: .focusOnUser) {
                 vm.openMapsForPermission()
             }.build()
-        }.onChange(of: vm.focusOnUserState) {
+
+        })
+
+        .onChange(of: vm.focusOnUserState) {
             focusOnUser()
         }
     }
