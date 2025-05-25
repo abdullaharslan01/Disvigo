@@ -105,9 +105,15 @@ struct CityDetailView: View {
 
                     DCategoryCardView(category: category, size: .init(width: 180, height: 250)) {
                         switch category {
-                        case .discoveryPoints, .journeyMemories, .localCuisine:
+                        case .location:
                             guard !vm.locations.isEmpty else { return }
                             router.navigate(to: .locationList(vm.locations, vm.city.name))
+                        case .food:
+                            guard !vm.foods.isEmpty else { return }
+                            router.navigate(to: .foodList(vm.foods, vm.city.name))
+                        case .memory:
+                            guard !vm.memories.isEmpty else {return}
+                            router.navigate(to: .memoryList(vm.memories, vm.city.name))
                         }
                     }
                 }

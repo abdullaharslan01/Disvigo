@@ -8,10 +8,9 @@
 import Foundation
 
 enum Category: CaseIterable {
-    case discoveryPoints
-
-    case journeyMemories
-    case localCuisine
+    case location
+    case food
+    case memory
 
     var id: String {
         return self.name
@@ -19,22 +18,22 @@ enum Category: CaseIterable {
 
     var name: String {
         switch self {
-        case .discoveryPoints:
+        case .location:
             return String(localized: "Discovery Points")
-        case .journeyMemories:
+        case .memory:
             return String(localized: "Journey Memories")
-        case .localCuisine:
+        case .food:
             return String(localized: "Local Cuisine")
         }
     }
 
     var imageName: String {
         switch self {
-        case .discoveryPoints:
+        case .location:
             return AppImages.Category.discoveryPoints
-        case .journeyMemories:
+        case .memory:
             return AppImages.Category.journeyMemories
-        case .localCuisine:
+        case .food:
             return AppImages.Category.localCuisine
         }
     }

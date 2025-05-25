@@ -8,14 +8,17 @@
 import SwiftUI
 
 struct LocationListView: View {
-    @State var vm: LocationListViewModel
-    @State private var previousResultCount = 0
-
-    @Environment(Router.self) var router
+ 
     init(locations: [Location], cityTitle: String) {
         self._vm = State(wrappedValue: LocationListViewModel(locations: locations, cityTitle: cityTitle))
-        self._previousResultCount = State(initialValue: locations.count)
+       
     }
+    
+    @State var vm: LocationListViewModel
+   
+
+    @Environment(Router.self) var router
+ 
 
     let columns: [GridItem] = [.init(.flexible()), .init(.flexible())]
 
@@ -61,7 +64,7 @@ struct LocationListView: View {
                 let impactFeedback = UIImpactFeedbackGenerator(style: .light)
                 impactFeedback.impactOccurred()
             }
-            previousResultCount = newValue
+            vm.previousResultCount = newValue
         }
         .animation(.easeInOut(duration: 0.3), value: vm.filteredLocations.isEmpty)
     }

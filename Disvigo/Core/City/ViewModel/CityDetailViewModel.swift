@@ -40,8 +40,10 @@ class CityDetailViewModel {
 
     func fetchLocations() {
         Task {
-            try? await Task.sleep(for: .seconds(3))
+            try? await Task.sleep(for: .seconds(1))
             locations = DeveloperPreview.shared.locations
+            foods = DeveloperPreview.shared.foods
+            memories = DeveloperPreview.shared.memories
         }
     }
 }

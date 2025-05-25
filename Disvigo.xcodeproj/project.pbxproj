@@ -130,6 +130,46 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
+		F58C1AFD2DE331EF008CEB64 /* View */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = View;
+			sourceTree = "<group>";
+		};
+		F58C1AFE2DE331F1008CEB64 /* ViewModel */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		F58C1B032DE332B2008CEB64 /* Components */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Components;
+			sourceTree = "<group>";
+		};
+		F58C1B0C2DE33DC5008CEB64 /* View */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = View;
+			sourceTree = "<group>";
+		};
+		F58C1B0D2DE33DC9008CEB64 /* ViewModel */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		F58C1B0E2DE33DCD008CEB64 /* View */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = View;
+			sourceTree = "<group>";
+		};
+		F58C1B0F2DE33DD0008CEB64 /* ViewModel */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		F58C1B1C2DE353B2008CEB64 /* Components */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Components;
+			sourceTree = "<group>";
+		};
 		F5BFF53C2DDE2D6700AEF27D /* ViewModel */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = ViewModel;
@@ -319,11 +359,13 @@
 				F5BFF70F2DDE6D8700AEF27D /* City */,
 				F5EAD4F72DE1E84F00BA957C /* CityMap */,
 				F574532C2DDE0DD40047E989 /* Favorite */,
-				F5F337B22DE1049D00D8345F /* Location */,
+				F5F337B22DE1049D00D8345F /* LocationDetail */,
 				F58C1AE82DE31363008CEB64 /* LocationList */,
 				F5F337BC2DE104E900D8345F /* LocationMap */,
 				F58C1AEF2DE320F5008CEB64 /* FoodDetail */,
 				F58C1AEE2DE320F5008CEB64 /* FoodList */,
+				F58C1B0A2DE33DBB008CEB64 /* MemoryList */,
+				F58C1B0B2DE33DBB008CEB64 /* MemoryDetail */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -464,6 +506,9 @@
 		F58C1AEE2DE320F5008CEB64 /* FoodList */ = {
 			isa = PBXGroup;
 			children = (
+				F58C1B032DE332B2008CEB64 /* Components */,
+				F58C1AFE2DE331F1008CEB64 /* ViewModel */,
+				F58C1AFD2DE331EF008CEB64 /* View */,
 			);
 			path = FoodList;
 			sourceTree = "<group>";
@@ -476,6 +521,25 @@
 				F58C1AF02DE320FD008CEB64 /* View */,
 			);
 			path = FoodDetail;
+			sourceTree = "<group>";
+		};
+		F58C1B0A2DE33DBB008CEB64 /* MemoryList */ = {
+			isa = PBXGroup;
+			children = (
+				F58C1B1C2DE353B2008CEB64 /* Components */,
+				F58C1B0D2DE33DC9008CEB64 /* ViewModel */,
+				F58C1B0C2DE33DC5008CEB64 /* View */,
+			);
+			path = MemoryList;
+			sourceTree = "<group>";
+		};
+		F58C1B0B2DE33DBB008CEB64 /* MemoryDetail */ = {
+			isa = PBXGroup;
+			children = (
+				F58C1B0F2DE33DD0008CEB64 /* ViewModel */,
+				F58C1B0E2DE33DCD008CEB64 /* View */,
+			);
+			path = MemoryDetail;
 			sourceTree = "<group>";
 		};
 		F5BFF70B2DDE6D8700AEF27D /* Components */ = {
@@ -525,13 +589,13 @@
 			path = CityMap;
 			sourceTree = "<group>";
 		};
-		F5F337B22DE1049D00D8345F /* Location */ = {
+		F5F337B22DE1049D00D8345F /* LocationDetail */ = {
 			isa = PBXGroup;
 			children = (
 				F5F337B52DE104C100D8345F /* ViewModel */,
 				F5F337B42DE104BF00D8345F /* View */,
 			);
-			path = Location;
+			path = LocationDetail;
 			sourceTree = "<group>";
 		};
 		F5F337BA2DE104E900D8345F /* View */ = {
@@ -580,6 +644,14 @@
 				F58C1AF02DE320FD008CEB64 /* View */,
 				F58C1AF12DE320FF008CEB64 /* ViewModel */,
 				F58C1AF22DE32101008CEB64 /* Components */,
+				F58C1AFD2DE331EF008CEB64 /* View */,
+				F58C1AFE2DE331F1008CEB64 /* ViewModel */,
+				F58C1B032DE332B2008CEB64 /* Components */,
+				F58C1B0C2DE33DC5008CEB64 /* View */,
+				F58C1B0D2DE33DC9008CEB64 /* ViewModel */,
+				F58C1B0E2DE33DCD008CEB64 /* View */,
+				F58C1B0F2DE33DD0008CEB64 /* ViewModel */,
+				F58C1B1C2DE353B2008CEB64 /* Components */,
 				F5BFF53C2DDE2D6700AEF27D /* ViewModel */,
 				F5BFF54F2DDE510900AEF27D /* Network */,
 				F5BFF66A2DDE59AD00AEF27D /* Components */,

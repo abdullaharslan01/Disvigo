@@ -5,8 +5,8 @@
 //  Created by abdullah on 24.05.2025.
 //
 
-import SwiftUI
 import MapKit
+import SwiftUI
 
 class MapManager {
     static let shared = MapManager()
@@ -56,5 +56,26 @@ class MapManager {
         }
     }
     
-   
+    func openAppleMaps(searchQuery: String) {
+        let encodedQuery = searchQuery.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+        let urlString = "http://maps.apple.com/?q=\(encodedQuery)"
+        
+        if let url = URL(string: urlString) {
+            UIApplication.shared.open(url)
+        }
+    }
+    
+    func openGoogleMaps(searchQuery: String) {
+        let encodedQuery = searchQuery.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+        let urlString = "comgooglemaps://?q=\(encodedQuery)"
+        
+        if let url = URL(string: urlString), UIApplication.shared.canOpenURL(url) {
+            UIApplication.shared.open(url)
+        } else {
+            let webUrlString = "https://www.google.com/maps/search/?api=1&query=\(encodedQuery)"
+            if let webUrl = URL(string: webUrlString) {
+                UIApplication.shared.open(webUrl)
+            }
+        }
+    }
 }

@@ -8,25 +8,17 @@
 import SwiftUI
 
 struct FoodDetailView: View {
-    var isFavorite: Bool {
-        return false
+    @State var vm: FoodDetailViewModel
+
+    init(food: Food) {
+        self._vm = State(wrappedValue: FoodDetailViewModel(food: food))
     }
 
-    @State var showSafari = false
-    let food: Food
     var body: some View {
         ZStack {
             Color.appBackgroundDark.ignoresSafeArea()
             contentView
         }.preferredColorScheme(.dark)
-    }
-
-    var url: URL? {
-        let query = food.title
-            .lowercased()
-            .components(separatedBy: CharacterSet.alphanumerics.inverted)
-            .joined(separator: "+")
-        return URL(string: "https://www.nefisyemektarifleri.com/ara/?s=\(query)")
     }
 
     var contentView: some View {
@@ -38,10 +30,10 @@ struct FoodDetailView: View {
     }
 
     var imageSection: some View {
-        DImageCollageView(images: food.images, height: 400)
+        DImageCollageView(images: vm.food.images, height: 400)
             .overlay(alignment: .top) {
                 VStack {
-                    DIconButtonView(iconButtonType: .favorite(isFavorite)) {}.padding(.top, getSafeArea().top == 0 ? 15 : getSafeArea().top)
+                    DIconButtonView(iconButtonType: .favorite(vm.isFavorite)) {}.padding(.top, getSafeArea().top == 0 ? 15 : getSafeArea().top)
                         .padding(.horizontal)
                 }.frame(maxWidth: .infinity, alignment: .trailing)
             }
@@ -49,23 +41,23 @@ struct FoodDetailView: View {
 
     var detailSection: some View {
         VStack(alignment: .leading, spacing: 15) {
-            Text(food.title)
+            Text(vm.food.title)
                 .font(.poppins(.semiBold, size: .largeTitle))
 
             recipeView
-            
-            ExpandableTextView(text: food.description, font: .regular, fontSize: .callout, lineLimit: 4, horizontalPadding: 16)
+
+            ExpandableTextView(text: vm.food.description, font: .regular, fontSize: .callout, lineLimit: 4, horizontalPadding: 16)
 
         }.frame(maxWidth: .infinity, alignment: .leading)
     }
 
     var recipeView: some View {
         Button {
-            showSafari.toggle()
+            vm.showSafari.toggle()
         } label: {
             DLabeledIconView(title: String(localized: "View Recipes"), symbolName: AppIcons.food, foregroundStyle: .yellow)
-        }.sheet(isPresented: $showSafari) {
-            if let url  {
+        }.sheet(isPresented: $vm.showSafari) {
+            if let url = vm.url {
                 DSafariView(url: url)
                     .presentationDragIndicator(.visible)
             }

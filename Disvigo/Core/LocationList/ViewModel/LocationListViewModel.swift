@@ -12,6 +12,8 @@ class LocationListViewModel {
     var searchText = ""
     var locations: [Location]
     let cityTitle: String
+    
+    var previousResultCount = 0
 
     var filteredLocations: [Location] {
         if searchText.isEmpty {
@@ -26,5 +28,6 @@ class LocationListViewModel {
     init(locations: [Location], cityTitle: String) {
         self.locations = locations
         self.cityTitle = cityTitle
+        previousResultCount = locations.count
     }
 }

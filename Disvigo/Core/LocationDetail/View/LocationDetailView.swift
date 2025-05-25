@@ -8,19 +8,17 @@
 import MapKit
 import SwiftUI
 
-struct LocationView: View {
-    @Environment(Router.self) var router
-    @State private var showFullDescription = false
-    @State var mapCameraPosition: MapCameraPosition = .automatic
-    @State private var rotationTimer: Timer?
+struct LocationDetailView: View {
+    @State var vm: LocationDetailViewModel
     
-    @State var rotationAngle: Double = 0
-    
-    var isFavorite: Bool {
-        return false
+    init(location: Location) {
+        self._vm = State(wrappedValue: LocationDetailViewModel(location: location))
     }
+    
+    @Environment(Router.self) var router
+    
+    @State var mapCameraPosition: MapCameraPosition = .automatic
   
-    let location: Location
     var body: some View {
         ZStack {
             Color.appBackgroundDark.ignoresSafeArea()
@@ -44,10 +42,10 @@ struct LocationView: View {
     }
     
     var imageSection: some View {
-        DImageCollageView(images: location.images, height: 350)
+        DImageCollageView(images: vm.location.images, height: 350)
             .overlay(alignment: .top) {
                 VStack {
-                    DIconButtonView(iconButtonType: .favorite(isFavorite)) {}.padding(.top, getSafeArea().top == 0 ? 15 : getSafeArea().top)
+                    DIconButtonView(iconButtonType: .favorite(vm.isFavorite)) {}.padding(.top, getSafeArea().top == 0 ? 15 : getSafeArea().top)
                         .padding(.horizontal)
                 }.frame(maxWidth: .infinity, alignment: .trailing)
             }
@@ -55,24 +53,24 @@ struct LocationView: View {
     
     var detailSection: some View {
         VStack(alignment: .leading, spacing: 15) {
-            Text(location.title)
+            Text(vm.location.title)
                 .font(.poppins(.semiBold, size: .largeTitle))
         
-            ExpandableTextView(text: location.description, font: .regular, fontSize: .callout, lineLimit: 4, horizontalPadding: 16)
+            ExpandableTextView(text: vm.location.description, font: .regular, fontSize: .callout, lineLimit: 4, horizontalPadding: 16)
         
         }.frame(maxWidth: .infinity, alignment: .leading)
     }
     
     var mapSection: some View {
         Map(position: $mapCameraPosition) {
-            Marker(location.title, coordinate: location.coordinates.clLocationCoordinate2D)
+            Marker(vm.location.title, coordinate: vm.location.coordinates.clLocationCoordinate2D)
                 .tint(.appGreenPrimary)
         }
         .mapStyle(.standard(elevation: .realistic))
         .frame(height: 300)
         .overlay(alignment: .bottom) {
             DLabelButtonView(title: String(localized: "View On Map"), onTap: {
-                router.navigate(to: .locationMap(location))
+                router.navigate(to: .locationMap(vm.location))
             })
             .padding(.bottom, 20)
         }
@@ -82,7 +80,7 @@ struct LocationView: View {
     }
     
     private func startRotation() {
-        rotationTimer = Timer.scheduledTimer(
+        vm.rotationTimer = Timer.scheduledTimer(
             withTimeInterval: 0.01,
             repeats: true
         ) { _ in
@@ -92,22 +90,22 @@ struct LocationView: View {
             }
         }
 
-        RunLoop.current.add(rotationTimer!, forMode: .common)
+        RunLoop.current.add(vm.rotationTimer!, forMode: .common)
     }
 
     private func stopRotation() {
-        rotationTimer?.invalidate()
+        vm.rotationTimer?.invalidate()
     }
     
     func updateCameraPosition() {
-        rotationAngle = (rotationAngle + 0.08)
+        vm.rotationAngle = (vm.rotationAngle + 0.08)
             .truncatingRemainder(dividingBy: 360)
 
         mapCameraPosition = .camera(
             MapCamera(
-                centerCoordinate: location.coordinates.clLocationCoordinate2D,
+                centerCoordinate: vm.location.coordinates.clLocationCoordinate2D,
                 distance: 400,
-                heading: rotationAngle,
+                heading: vm.rotationAngle,
                 pitch: 60
             )
         )
@@ -116,7 +114,7 @@ struct LocationView: View {
 
 #Preview {
     NavigationStack {
-        LocationView(location: DeveloperPreview.shared.location)
+        LocationDetailView(location: DeveloperPreview.shared.location)
             .environment(Router())
     }
 }

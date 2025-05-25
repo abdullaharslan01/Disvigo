@@ -58,7 +58,7 @@ struct DEmptyStateView: View {
             VStack(spacing: 10) {
                 Text(content.title)
                     .font(.poppins(.regular, size: .title2))
-                    .fontWeight(.semibold)
+                    .multilineTextAlignment(.center)
                 
                 Text(content.description)
                     .font(.body)

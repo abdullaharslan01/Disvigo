@@ -8,7 +8,7 @@
 import Foundation
 
 struct Location: Codable, Equatable, Hashable, Identifiable {
-    let id: UUID  // Otomatik UUID üretecek
+    let id: UUID
     let title: String
     let description: String
     let images: [String]
@@ -23,7 +23,7 @@ struct Location: Codable, Equatable, Hashable, Identifiable {
     }
     
     static func ==(lhs: Location, rhs: Location) -> Bool {
-        return lhs.id == rhs.id  // Artık ID'ye göre karşılaştırma yapıyoruz
+        return lhs.id == rhs.id
     }
     
     func hash(into hasher: inout Hasher) {

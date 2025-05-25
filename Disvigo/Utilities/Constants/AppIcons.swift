@@ -27,6 +27,8 @@ enum AppIcons {
     static let binoculars = "binoculars"
     static let locationDetail = "location.magnifyingglass"
     static let pin = "pin"
+    
+    static let basket = "basket"
 
     static let food = "fork.knife.circle"
     static let jumpFirst = "arrow.uturn.backward"

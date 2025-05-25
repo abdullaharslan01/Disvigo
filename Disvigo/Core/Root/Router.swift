@@ -12,7 +12,11 @@ enum Destination: Hashable {
     case locationDetail(Location)
     case locationMap(Location)
     case cityMap([Location], City)
-    case locationList([Location],String)
+    case locationList([Location], String)
+    case foodDetail(Food)
+    case foodList([Food], String)
+    case memoryDetail(Memory)
+    case memoryList([Memory], String)
 
     func hash(into hasher: inout Hasher) {
         switch self {
@@ -30,6 +34,18 @@ enum Destination: Hashable {
             hasher.combine(city.id)
         case .locationList(_, let cityName):
             hasher.combine("locationList")
+            hasher.combine(cityName)
+        case .foodDetail(let food):
+            hasher.combine("foodDetail")
+            hasher.combine(food.id)
+        case .foodList(_, let cityName):
+            hasher.combine("foodList")
+            hasher.combine(cityName)
+        case .memoryDetail(let memory):
+            hasher.combine("memoryDetail")
+            hasher.combine(memory.id)
+        case .memoryList(_, let cityName):
+            hasher.combine("memoryList")
             hasher.combine(cityName)
         }
     }
@@ -70,7 +86,7 @@ extension View {
                         router.toolbarVisibility = .hidden
                     }
             case .locationDetail(let location):
-                LocationView(location: location)
+                LocationDetailView(location: location)
                     .toolbarRole(.editor).onAppear {
                         router.toolbarVisibility = .hidden
                     }
@@ -86,10 +102,28 @@ extension View {
                         router.toolbarVisibility = .hidden
                     }
             case .locationList(let locations, let cityName):
-                LocationListView(locations: locations, cityTitle:cityName)
-                    .onTapGesture {
+                LocationListView(locations: locations, cityTitle: cityName)
+                    .onAppear {
                         router.toolbarVisibility = .hidden
                     }
+            case .foodDetail(let food):
+                FoodDetailView(food: food)
+                    .onAppear {
+                        router.toolbarVisibility = .hidden
+                    }
+            case .foodList(let foods, let cityName):
+                FoodListView(foods: foods, cityName: cityName)
+                    .onAppear {
+                        router.toolbarVisibility = .hidden
+                    }
+            case .memoryDetail(let memory):
+                MemoryDetailView(memory: memory).onAppear {
+                    router.toolbarVisibility = .hidden
+                }
+            case .memoryList(let memories, let cityName):
+                MemoryListView(memories: memories, cityName: cityName).onAppear {
+                    router.toolbarVisibility = .hidden
+                }
             }
         }
     }

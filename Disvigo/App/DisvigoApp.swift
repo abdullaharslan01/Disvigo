@@ -13,8 +13,12 @@ struct DisvigoApp: App {
 
     var body: some Scene {
         WindowGroup {
-            RootView()
-                .environment(router)
+            
+            
+            
+            
+           RootView()
+               .environment(router)
         }
     }
 }
