@@ -18,6 +18,7 @@ enum AppIcons {
     static let star = "star"
     static let starFill = "star.fill"
     static let personCircle = "person.circle"
+    static let personFill = "person.fill"
     static let focusOnLocation = "location.fill.viewfinder"
     static let defaultLocation = "mappin"
     static let photo = "photo.badge.exclamationmark.fill"

@@ -14,7 +14,7 @@ enum DAlertType {
 
     func build() -> Alert {
         switch self {
-        case .locationPermission(let permissionAlertType, let allowAction):
+        case .locationPermission(_, let allowAction):
             return Alert(
                 title: Text(String(localized: "Location Access")),
                 message: Text(permissionAlertMessage),
@@ -41,7 +41,7 @@ enum DAlertType {
 
     var permissionAlertMessage: String {
         switch self {
-        case .locationPermission(let permissionAlertType, let allowAction):
+        case .locationPermission(let permissionAlertType, _):
 
             switch permissionAlertType {
             case .focusOnUser:
@@ -49,9 +49,9 @@ enum DAlertType {
             case .sortLocations:
                 return String(localized: "To sort the nearest cities according to your location, you need to grant location permission.")
             }
-        case .general(title: let title, message: let message):
+        case .general(title: _, message: _):
             return ""
-        case .custom(title: let title, message: let message, primary: let primary, secondary: let secondary):
+        case .custom(title: _, message: _, primary: _, secondary: _):
             return ""
         }
     }

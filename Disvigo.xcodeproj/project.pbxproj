@@ -110,6 +110,11 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		F56321392DE38357004975DE /* Rotation */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Rotation;
+			sourceTree = "<group>";
+		};
 		F57453662DDE0DF00047E989 /* Comman */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = Comman;
@@ -352,6 +357,7 @@
 		F57453382DDE0DD40047E989 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				F56321392DE38357004975DE /* Rotation */,
 				F57453312DDE0DD40047E989 /* Root */,
 				F57453342DDE0DD40047E989 /* Splash */,
 				F57453372DDE0DD40047E989 /* Tab */,
@@ -640,6 +646,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
+				F56321392DE38357004975DE /* Rotation */,
 				F57453662DDE0DF00047E989 /* Comman */,
 				F58C1AF02DE320FD008CEB64 /* View */,
 				F58C1AF12DE320FF008CEB64 /* ViewModel */,
