@@ -23,13 +23,12 @@ enum AppIcons {
     static let photo = "photo.badge.exclamationmark.fill"
     static let walkIcon = "figure.walk"
     static let sort = "bolt.circle"
-    
+
     static let binoculars = "binoculars"
-    static let locationDetail  = "location.magnifyingglass"
+    static let locationDetail = "location.magnifyingglass"
     static let pin = "pin"
-    
+
+    static let food = "fork.knife.circle"
     static let jumpFirst = "arrow.uturn.backward"
     static let jumpEnd = "arrow.uturn.forward"
-    
-
 }

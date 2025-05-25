@@ -32,7 +32,7 @@ struct HomeView: View {
                 }
             }.onAppear {
                 router.toolbarVisibility = .visible
-            } 
+            }
     }
 
     var contentView: some View {
