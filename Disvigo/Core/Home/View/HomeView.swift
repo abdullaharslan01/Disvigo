@@ -10,6 +10,7 @@ import SwiftUI
 struct HomeView: View {
     @State var vm = HomeViewModel()
     let namespace: Namespace.ID
+    @Binding var isAllContentWasLoad: Bool
     @FocusState private var isSearchFocused: Bool
 
     @Environment(Router.self) private var router
@@ -20,25 +21,25 @@ struct HomeView: View {
 
             contentView
 
-            if !vm.isAllContentWasLoad {
-                SplashView()
-                    .transition(.move(edge: .top).combined(with: .opacity))
-            }
-
         }.navigationTitle(String(localized: "Explore Cities"))
             .preferredColorScheme(.dark)
             .task {
                 vm.fetchAllCities()
             }
-            .toolbarVisibility(vm.isAllContentWasLoad ? .visible : .hidden, for: .tabBar)
-            .toolbarVisibility(vm.isAllContentWasLoad ? .visible : .hidden, for: .navigationBar)
+            .onChange(of: vm.isAllContentWasLoad) { _, newValue in
+                if newValue {
+                    isAllContentWasLoad = true
+                }
+            }.onAppear {
+                router.toolbarVisibility = .visible
+            } 
     }
 
     var contentView: some View {
         ScrollView {
             LazyVStack(spacing: 20) {
                 if vm.filteredCities.isEmpty && !vm.citySearchText.isEmpty {
-                    DEmptyStateView(type: .noCityFound) {
+                    DEmptyStateView(type: .searchNotFound(title: String(localized: "No cities found"))) {
                         vm.citySearchText = ""
                     }.transition(.scale.combined(with: .opacity))
                 } else {

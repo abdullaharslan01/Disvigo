@@ -8,17 +8,17 @@
 import SwiftUI
 
 enum EmptyStateType {
-    case noCityFound
+    case searchNotFound(title:String)
     case imageNotFound
     case custom(title: String, description: String, buttonText: String?, icon: String)
     
     var content: (title: String, description: String, buttonText: String?, icon: String) {
         switch self {
-        case .noCityFound:
+        case .searchNotFound(let title):
             return (
-                String(localized: "No cities found"),
+               title, 
                 String(localized: "Try searching with a different keyword"),
-                nil,
+                String(localized: "Clear"),
                 AppIcons.search
             )
         case .imageNotFound:
@@ -39,7 +39,7 @@ struct DEmptyStateView: View {
     let onTapGesture: (() -> Void)?
     
     
-    init(type: EmptyStateType = .noCityFound, onTapGesture: (() -> Void)? = nil) {
+    init(type: EmptyStateType = .searchNotFound(title: String(localized: "No cities found")), onTapGesture: (() -> Void)? = nil) {
         self.type = type
         self.onTapGesture = onTapGesture
     }
@@ -92,7 +92,7 @@ struct DEmptyStateView: View {
         Color.appBackgroundDark.ignoresSafeArea()
         
         VStack {
-            DEmptyStateView(type: .noCityFound)
+            DEmptyStateView(type: .searchNotFound(title: String(localized: "No cities found")))
             DEmptyStateView(type: .imageNotFound) {
                 print("Button tapped")
             }

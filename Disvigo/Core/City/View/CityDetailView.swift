@@ -9,28 +9,14 @@ import MapKit
 import SwiftUI
 
 struct CityDetailView: View {
-    let city: City
-
-    @State private var showFullDescription = false
     @Environment(Router.self) private var router
-    @State private var showSafari = false
+
+    @State var vm: CityDetailViewModel
 
     @State var position: MapCameraPosition = .automatic
-    @State var didAppeear = false
 
-    var url: URL? {
-        let baseURL = "https://tr.wikipedia.org/wiki/"
-
-        var cityName = ""
-
-        switch city.name {
-        case "Tokat", "Ordu":
-            cityName = city.name + "_(şehir)"
-        default:
-            cityName = city.name
-        }
-
-        return URL(string: baseURL + cityName)
+    init(city: City) {
+        self._vm = State(wrappedValue: CityDetailViewModel(city: city))
     }
 
     var body: some View {
@@ -46,17 +32,17 @@ struct CityDetailView: View {
             .navigationBarTitleDisplayMode(.large)
             .ignoresSafeArea(edges: [.top])
             .preferredColorScheme(.dark)
-        }
+        }.toolbarVisibility(.visible, for: .tabBar)
     }
 
     var cityImageView: some View {
-        DImageLoaderView(url: city.imageUrl, contentMode: .fill)
+        DImageLoaderView(url: vm.city.imageUrl, contentMode: .fill)
             .frame(height: 360)
     }
 
     var cityContentView: some View {
         VStack(alignment: .leading, spacing: 10) {
-            if didAppeear {
+            if vm.didAppeear {
                 VStack(alignment: .leading, spacing: 25) {
                     headerTextView
                         .transition(.flipFromLeft(duration: 0.5))
@@ -77,30 +63,31 @@ struct CityDetailView: View {
         .clipShape(UnevenRoundedRectangle(cornerRadii: .init(topLeading: 32, bottomLeading: 0, bottomTrailing: 0, topTrailing: 32)))
         .offset(y: -50)
         .onAppear {
+            vm.fetchLocations()
             withAnimation(.easeInOut(duration: 1)) {
-                didAppeear = true
-                position = .region(.init(center: city.coordinates.clLocationCoordinate2D, latitudinalMeters: 5000, longitudinalMeters: 5000))
+                vm.didAppeear = true
+                position = .region(.init(center: vm.city.coordinates.clLocationCoordinate2D, latitudinalMeters: 5000, longitudinalMeters: 5000))
             }
         }
     }
 
     var headerTextView: some View {
-        Text(city.name)
+        Text(vm.city.name)
             .font(.poppins(.semiBold, size: .largeTitle))
             .fontWeight(.bold)
     }
 
     var moreDetailView: some View {
         VStack(alignment: .leading, spacing: 16) {
-            DLabeledIconView(title: city.region, symbolName: AppIcons.location)
+            DLabeledIconView(title: vm.city.region, symbolName: AppIcons.location)
 
             Button {
-                showSafari.toggle()
+                vm.showSafari.toggle()
             } label: {
                 DLabeledIconView(title: String(localized: "Learn More"), symbolName: AppIcons.safari, foregroundStyle: .blue)
             }
-        }.sheet(isPresented: $showSafari) {
-            if let url {
+        }.sheet(isPresented: $vm.showSafari) {
+            if let url = vm.url {
                 DSafariView(url: url)
                     .presentationDragIndicator(.visible)
             }
@@ -108,7 +95,7 @@ struct CityDetailView: View {
     }
 
     var descriptionView: some View {
-        ExpandableTextView(text: city.description, font: .light, fontSize: .body, lineLimit: 3, horizontalPadding: 16)
+        ExpandableTextView(text: vm.city.description, font: .light, fontSize: .body, lineLimit: 3, horizontalPadding: 16)
     }
 
     var categoryView: some View {
@@ -116,7 +103,13 @@ struct CityDetailView: View {
             HStack {
                 ForEach(Category.allCases, id: \.id) { category in
 
-                    DCategoryCardView(category: category, size: .init(width: 180, height: 250)) {}
+                    DCategoryCardView(category: category, size: .init(width: 180, height: 250)) {
+                        switch category {
+                        case .discoveryPoints, .journeyMemories, .localCuisine:
+                            guard !vm.locations.isEmpty else { return }
+                            router.navigate(to: .locationList(vm.locations, vm.city.name))
+                        }
+                    }
                 }
             }.padding(.horizontal)
         }.scrollIndicators(.hidden)
@@ -124,9 +117,24 @@ struct CityDetailView: View {
     }
 
     var cityMapView: some View {
-        Map(position: $position) {}.frame(height: 250)
+        Map(position: $position) {
+            ForEach(vm.locations) { location in
+
+                Marker(location.title, systemImage: AppIcons.pin, coordinate: location.coordinates.clLocationCoordinate2D)
+                    .tint(.blue)
+
+                UserAnnotation()
+            }
+        }.frame(height: 300)
             .frame(maxWidth: .infinity)
             .toolbarBackgroundVisibility(.hidden, for: .navigationBar)
+            .overlay(alignment: .bottom, content: {
+                DLabelButtonView(systemImage: AppIcons.binoculars, title: String(localized: "Explore Locations")) {
+                    router.navigate(to: .cityMap(vm.locations, vm.city))
+                }
+                .padding(.bottom)
+
+            })
             .padding(.top, 30)
     }
 }
@@ -137,4 +145,3 @@ struct CityDetailView: View {
     }
     .environment(Router())
 }
-

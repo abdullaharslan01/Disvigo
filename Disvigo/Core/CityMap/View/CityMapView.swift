@@ -9,6 +9,7 @@ import MapKit
 import SwiftUI
 
 struct CityMapView: View {
+    @Environment(Router.self) var router
     @State var vm: CityMapViewModel
 
     @State var position: MapCameraPosition = .automatic
@@ -35,6 +36,7 @@ struct CityMapView: View {
                 }
 
         }.preferredColorScheme(.dark)
+            .toolbarVisibility(.hidden, for: .tabBar)
             .navigationTitle(vm.city.name)
             .navigationBarTitleDisplayMode(.inline)
             .alert(item: $vm.permissionAlertType, content: { type in
@@ -48,7 +50,7 @@ struct CityMapView: View {
     var locationMap: some View {
         Map(position: $position, selection: $selectedLocation) {
             ForEach(vm.locations, id: \.title) { location in
-                Marker(location.title, systemImage: selectedLocation == location ? AppIcons.starFill : AppIcons.defaultLocation, coordinate: location.coordinates.clLocationCoordinate2D)
+                Marker(location.title, systemImage: selectedLocation == location ? AppIcons.starFill : AppIcons.pin, coordinate: location.coordinates.clLocationCoordinate2D)
                     .tag(location)
                     .tint(selectedLocation == location ? Color.appGreenPrimary : .blue)
             }
@@ -113,15 +115,17 @@ struct CityMapView: View {
     private var scrollableLocationCards: some View {
         TabView(selection: $selectedLocation) {
             ForEach(Array(vm.sortedLocations.enumerated()), id: \.element.id) { index, location in
-                LocationCardView(location: location, distance: vm.formattedDistance(for: location)) {}
-                    .tag(location)
-                    .onAppear {
-                        withAnimation {
-                            countsDown = index < vm.currentPageIndex
+                LocationCardView(location: location, distance: vm.formattedDistance(for: location)) {
+                    router.navigate(to: .locationDetail(location))
+                }
+                .tag(location)
+                .onAppear {
+                    withAnimation {
+                        countsDown = index < vm.currentPageIndex
 
-                            vm.currentPageIndex = index
-                        }
+                        vm.currentPageIndex = index
                     }
+                }
             }
         }
         .frame(height: 180)
@@ -177,5 +181,6 @@ extension CityMapView {
 #Preview {
     NavigationStack {
         CityMapView(city: DeveloperPreview.shared.city, locations: DeveloperPreview.shared.locations)
+            .environment(Router())
     }
 }

@@ -24,6 +24,10 @@ enum AppIcons {
     static let walkIcon = "figure.walk"
     static let sort = "bolt.circle"
     
+    static let binoculars = "binoculars"
+    static let locationDetail  = "location.magnifyingglass"
+    static let pin = "pin"
+    
     static let jumpFirst = "arrow.uturn.backward"
     static let jumpEnd = "arrow.uturn.forward"
     

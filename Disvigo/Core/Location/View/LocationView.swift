@@ -9,6 +9,7 @@ import MapKit
 import SwiftUI
 
 struct LocationView: View {
+    @Environment(Router.self) var router
     @State private var showFullDescription = false
     @State var mapCameraPosition: MapCameraPosition = .automatic
     @State private var rotationTimer: Timer?
@@ -70,8 +71,10 @@ struct LocationView: View {
         .mapStyle(.standard(elevation: .realistic))
         .frame(height: 300)
         .overlay(alignment: .bottom) {
-            DLabelButtonView(title: String(localized: "View On Map"))
-                .padding(.bottom, 20)
+            DLabelButtonView(title: String(localized: "View On Map"), onTap: {
+                router.navigate(to: .locationMap(location))
+            })
+            .padding(.bottom, 20)
         }
         .onAppear(perform: startRotation)
         .onDisappear(perform: stopRotation)
@@ -114,5 +117,6 @@ struct LocationView: View {
 #Preview {
     NavigationStack {
         LocationView(location: DeveloperPreview.shared.location)
+            .environment(Router())
     }
 }
