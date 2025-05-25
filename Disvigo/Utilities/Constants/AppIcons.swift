@@ -34,4 +34,5 @@ enum AppIcons {
     static let food = "fork.knife.circle"
     static let jumpFirst = "arrow.uturn.backward"
     static let jumpEnd = "arrow.uturn.forward"
+    static let warning = "exclamationmark.triangle.fill"
 }

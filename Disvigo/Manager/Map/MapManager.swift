@@ -104,25 +104,28 @@ class MapManager {
     }
     
     func openRouteInGoogleMaps(stops: [Location], mode: TravelMode = .automobile) {
-        guard stops.count >= 2 else { return } 
-        
-        let start = stops.first!
-        let destination = stops.last!
-        let waypoints = stops.dropFirst().dropLast().map { "\($0.coordinates.latitude),\($0.coordinates.longitude)" }
-        
-        var webUrl = "https://www.google.com/maps/dir/?api=1"
-        webUrl += "&origin=\(start.coordinates.latitude),\(start.coordinates.longitude)"
-        webUrl += "&destination=\(destination.coordinates.latitude),\(destination.coordinates.longitude)"
-        
-        if !waypoints.isEmpty {
-            let encodedWaypoints = waypoints.joined(separator: "|")
-                .addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
-            webUrl += "&waypoints=\(encodedWaypoints)"
+        guard stops.count >= 2 else { return }
+
+        let origin = stops.first!.coordinates
+        let destination = stops.last!.coordinates
+        let waypoints = stops.dropFirst().dropLast().map {
+            "\($0.coordinates.latitude),\($0.coordinates.longitude)"
         }
-        
-        webUrl += "&travelmode=\(mode.googleMapsValue)"
-        
-        if let url = URL(string: webUrl) {
+
+        var urlString = "https://www.google.com/maps/dir/?api=1"
+        urlString += "&origin=\(origin.latitude),\(origin.longitude)"
+        urlString += "&destination=\(destination.latitude),\(destination.longitude)"
+
+        if !waypoints.isEmpty {
+            let waypointString = waypoints.joined(separator: "|")
+            if let encoded = waypointString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
+                urlString += "&waypoints=\(encoded)"
+            }
+        }
+
+        urlString += "&travelmode=\(mode.googleMapsValue)"
+
+        if let url = URL(string: urlString) {
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }
     }

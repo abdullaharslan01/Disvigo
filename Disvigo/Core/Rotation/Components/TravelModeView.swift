@@ -55,6 +55,8 @@ struct TravelModeView: View {
             ForEach(TravelMode.allCases) { mode in
                 Button(action: {
                     withAnimation(.spring(response: 0.4, dampingFraction: 0.7)) {
+                        let impactFeedback = UIImpactFeedbackGenerator(style: .medium)
+                        impactFeedback.impactOccurred()
                         selectedMode = mode
                     }
                 }) {
@@ -83,4 +85,3 @@ struct TravelModeView: View {
         .clipShape(RoundedRectangle(cornerRadius: 20))
     }
 }
-

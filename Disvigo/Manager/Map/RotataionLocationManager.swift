@@ -13,8 +13,10 @@ import MapKit
 class RotationLocationManager: NSObject, CLLocationManagerDelegate {
     private let manager = CLLocationManager()
     var userLocation: CLLocationCoordinate2D?
-    
+
+    weak var delegate: RotataionLocationManagerDelegate?
     var userLocationReady: Bool = false
+    var settingsWarningState = false
 
     override init() {
         super.init()
@@ -31,4 +33,28 @@ class RotationLocationManager: NSObject, CLLocationManagerDelegate {
         userLocation = locations.last?.coordinate
         userLocationReady = true
     }
+
+     func checkLocationAuthorization() {
+        switch manager.authorizationStatus {
+        case .authorizedWhenInUse, .authorizedAlways:
+            manager.startUpdatingLocation()
+            delegate?.focusOnUser()
+        case .notDetermined:
+            manager.requestWhenInUseAuthorization()
+        case .denied, .restricted:
+            settingsWarningState = true
+        @unknown default:
+            break
+        }
+    }
+
+    func openSettingsForLocationPermission() {
+        if let url = URL(string: UIApplication.openSettingsURLString) {
+            UIApplication.shared.open(url)
+        }
+    }
+}
+
+protocol RotataionLocationManagerDelegate: AnyObject {
+    func focusOnUser()
 }
