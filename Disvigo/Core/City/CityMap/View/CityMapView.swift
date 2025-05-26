@@ -16,6 +16,7 @@ struct CityMapView: View {
     @State var selectedLocation: Location?
 
     @State var countsDown: Bool = false
+    @State private var previousSelectedLocation: Location?
 
     init(city: City, locations: [Location]) {
         self._vm = State(wrappedValue: CityMapViewModel(city: city, locations: locations))
@@ -50,9 +51,16 @@ struct CityMapView: View {
     var locationMap: some View {
         Map(position: $position, selection: $selectedLocation) {
             ForEach(vm.locations, id: \.title) { location in
-                Marker(location.title, systemImage: selectedLocation == location ? AppIcons.starFill : AppIcons.pin, coordinate: location.coordinates.clLocationCoordinate2D)
-                    .tag(location)
-                    .tint(selectedLocation == location ? Color.appGreenPrimary : .blue)
+
+                Annotation(coordinate: location.coordinates.clLocationCoordinate2D) {
+                    DImageLoaderView(url: location.images[0], contentMode: .fill)
+                        .clipShape(.circle)
+                        .frame(width: location == selectedLocation ? 80 : 40, height: location == selectedLocation ? 80 : 40)
+                        .transition(.scale.combined(with: .opacity))
+
+                } label: {
+                    Text(location.title)
+                }.tag(location)
             }
 
             UserAnnotation()
@@ -76,6 +84,13 @@ struct CityMapView: View {
             HStack(spacing: 20) {
                 DIconButtonView(iconButtonType: .custom(AppIcons.jumpFirst), iconColor: .accent, bgMaterial: .ultraThinMaterial) {
                     jum(to: .forward)
+                }.contextMenu {
+                    Button {
+                        jum(to: .forward)
+
+                    } label: {
+                        Label(String(localized: "Nearest to you."), systemImage: AppIcons.jumpFirst)
+                    }
                 }
                 VStack(spacing: 0) {
                     Text("\(vm.currentPageIndex + 1)")
@@ -95,18 +110,53 @@ struct CityMapView: View {
                 .clipShape(RoundedRectangle(cornerRadius: 16))
                 DIconButtonView(iconButtonType: .custom(AppIcons.jumpEnd), iconColor: .accent, bgMaterial: .ultraThinMaterial) {
                     jum(to: .bakcward)
+                }.contextMenu {
+                    Button {
+                        jum(to: .bakcward)
+                    } label: {
+                        Label(String(localized: "Farthest from you."), systemImage: AppIcons.jumpEnd)
+                    }
                 }
             }
 
             Spacer()
 
             VStack(spacing: 20) {
+                DIconButtonView(iconButtonType: .custom(AppIcons.map), iconColor: .cyan, bgMaterial: .ultraThinMaterial) {
+                    router.navigate(to: .rotationSelection(vm.locations))
+                }
+                .contextMenu {
+                    Button {
+                        router.navigate(to: .rotationSelection(vm.locations))
+
+
+                    } label: {
+                        Label(String(localized: "Create route from selected locations."), systemImage: AppIcons.map)
+                    }
+                }
+
                 DIconButtonView(iconButtonType: .custom(AppIcons.sort), iconColor: .yellow, bgMaterial: .ultraThinMaterial) {
                     vm.requestForSortLocations()
+                }
+                .contextMenu {
+                    Button {
+                        vm.requestForSortLocations()
+
+                    } label: {
+                        Label(String(localized: "Orders locations by proximity."), systemImage: AppIcons.sort)
+                    }
                 }
 
                 DIconButtonView(iconButtonType: .user, iconColor: .mint, bgMaterial: .ultraThinMaterial) {
                     vm.requestForFocusOnUser()
+                }
+                .contextMenu {
+                    Button {
+                        vm.requestForFocusOnUser()
+
+                    } label: {
+                        Label(String(localized: "Centers on your position."), systemImage: AppIcons.sort)
+                    }
                 }
             }
         }.frame(maxWidth: .infinity)
@@ -114,24 +164,29 @@ struct CityMapView: View {
 
     private var scrollableLocationCards: some View {
         TabView(selection: $selectedLocation) {
-            ForEach(Array(vm.sortedLocations.enumerated()), id: \.element.id) { index, location in
+            ForEach(Array(vm.sortedLocations.enumerated()), id: \.element.id) { _, location in
                 LocationCardView(location: location, distance: vm.formattedDistance(for: location)) {
                     router.navigate(to: .locationDetail(location))
                 }
                 .tag(location)
-                .onAppear {
-                    withAnimation {
-                        countsDown = index < vm.currentPageIndex
-
-                        vm.currentPageIndex = index
-                    }
-                }
             }
         }
         .frame(height: 180)
         .tabViewStyle(.page)
         .animation(.default, value: selectedLocation)
-        .onChange(of: selectedLocation) { _, _ in
+        .onChange(of: selectedLocation) { _, newValue in
+            guard let newLocation = newValue,
+                  newLocation != previousSelectedLocation else { return }
+
+            if let newIndex = vm.sortedLocations.firstIndex(where: { $0.id == newLocation.id }) {
+                UIImpactFeedbackGenerator(style: .light).impactOccurred()
+                withAnimation {
+                    countsDown = newIndex < vm.currentPageIndex
+                    vm.currentPageIndex = newIndex
+                }
+            }
+
+            previousSelectedLocation = newLocation
             focusOnLocation()
         }
     }
@@ -164,6 +219,7 @@ extension CityMapView {
 
     private func focusOnUser() {
         guard let userLocation = vm.getUserLocation() else { return }
+        UIImpactFeedbackGenerator(style: .light).impactOccurred()
         withAnimation {
             position = .region(.init(center: userLocation.clLocationCoordinate2D, latitudinalMeters: 350, longitudinalMeters: 350))
         }
@@ -171,7 +227,7 @@ extension CityMapView {
 
     private func jum(to sort: JumState) {
         guard let location = vm.jump(to: sort) else { return }
-
+        UIImpactFeedbackGenerator(style: .light).impactOccurred()
         withAnimation(.linear(duration: 0.5)) {
             selectedLocation = location
         }

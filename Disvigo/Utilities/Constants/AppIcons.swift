@@ -8,6 +8,7 @@
 import Foundation
 
 enum AppIcons {
+    static let map = "map"
     static let home = "house"
     static let heart = "heart"
     static let heartFill = "heart.fill"
@@ -18,19 +19,24 @@ enum AppIcons {
     static let star = "star"
     static let starFill = "star.fill"
     static let personCircle = "person.circle"
+    static let personWalking = "figure.walk.motion"
     static let personFill = "person.fill"
     static let focusOnLocation = "location.fill.viewfinder"
     static let defaultLocation = "mappin"
     static let photo = "photo.badge.exclamationmark.fill"
     static let walkIcon = "figure.walk"
     static let sort = "bolt.circle"
+    static let chevronLeft = "chevron.left"
 
     static let binoculars = "binoculars"
     static let locationDetail = "location.magnifyingglass"
     static let pin = "pin"
-    
-    static let basket = "basket"
 
+    static let basket = "basket"
+    static let xmark = "xmark.circle"
+
+    static let info = "info"
+    static let infoCircle = "info.circle"
     static let food = "fork.knife.circle"
     static let jumpFirst = "arrow.uturn.backward"
     static let jumpEnd = "arrow.uturn.forward"

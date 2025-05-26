@@ -14,11 +14,10 @@ struct DisvigoApp: App {
     var body: some Scene {
         WindowGroup {
             
-            RotationView(stops: DeveloperPreview.shared.locations)
             
-//            
-//           RootView()
-//               .environment(router)
+           
+           RootView()
+               .environment(router)
         }
     }
 }

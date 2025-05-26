@@ -23,8 +23,7 @@ enum DIconButtonType {
         }
     }
 
-    // Varsayılan boyutlar
-    var defaultSize: CGFloat { 44 } // Apple HIG standartı
+    var defaultSize: CGFloat { 44 } 
 }
 
 struct DIconButtonView: View {
@@ -37,11 +36,10 @@ struct DIconButtonView: View {
     var padding: CGFloat = 12
     let impactFeedback: UIImpactFeedbackGenerator? = UIImpactFeedbackGenerator(style: .medium)
     var bgMaterial: Material? = nil
-    var width: CGFloat? = nil // Dışarıdan opsiyonel genişlik
-    var height: CGFloat? = nil // Dışarıdan opsiyonel yükseklik
+    var width: CGFloat? = nil
+    var height: CGFloat? = nil
     let action: (() -> Void)?
 
-    // Gerçek kullanılacak boyutlar
     private var resolvedWidth: CGFloat {
         width ?? iconButtonType.defaultSize
     }

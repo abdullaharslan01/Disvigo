@@ -34,7 +34,7 @@ struct LocationCardView: View {
     private var backgroundImage: some View {
         Group {
             if !location.images.isEmpty {
-                DImageLoaderView(url: location.images.randomElement(), contentMode: .fill)
+                DImageLoaderView(url: location.images.first, contentMode: .fill)
                     .transition(.opacity.animation(.easeInOut(duration: 0.3)))
             } else {
                 Rectangle()

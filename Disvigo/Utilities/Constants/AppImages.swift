@@ -10,6 +10,7 @@ import Foundation
 enum AppImages {
     enum Lottie {
         static let splashLoading = "splashLoading"
+        static let walkingPerson = "one-person-walking"
     }
     enum Constant {
         static let logoTransparent = "logoTransparent"

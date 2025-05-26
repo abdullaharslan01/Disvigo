@@ -17,6 +17,8 @@ enum Destination: Hashable {
     case foodList([Food], String)
     case memoryDetail(Memory)
     case memoryList([Memory], String)
+    case rotationDetail([Location])
+    case rotationSelection([Location])
 
     func hash(into hasher: inout Hasher) {
         switch self {
@@ -47,6 +49,10 @@ enum Destination: Hashable {
         case .memoryList(_, let cityName):
             hasher.combine("memoryList")
             hasher.combine(cityName)
+        case .rotationDetail(let locations):
+            hasher.combine("rotationDetail")
+        case .rotationSelection(let locations):
+            hasher.combine("rotationSelection")
         }
     }
 }
@@ -124,6 +130,12 @@ extension View {
                 MemoryListView(memories: memories, cityName: cityName).onAppear {
                     router.toolbarVisibility = .hidden
                 }
+            case .rotationDetail(let locations):
+                RotataionDetailView(stops: locations)
+                    .navigationBarBackButtonHidden()
+            case .rotationSelection(let locations):
+                RotationSelectionView(locations: locations)
+                    .navigationBarBackButtonHidden()
             }
         }
     }

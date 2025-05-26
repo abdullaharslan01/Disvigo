@@ -1,7 +1,7 @@
 import MapKit
 import SwiftUI
 
-struct RotationView: View {
+struct RotataionDetailView: View {
     var stops: [Location]
 
     @State var selectedLocation: Location?
@@ -32,13 +32,23 @@ struct RotationView: View {
     private let maxRequests = 50
     private let throttleWindow: TimeInterval = 60
     
+    @Environment(Router.self) var router
+    
     var body: some View {
         GeometryReader { _ in
             ZStack(alignment: .bottom) {
                 Map(position: $position, selection: $selectedLocation) {
-                    ForEach(sortedStops) { stop in
-                        Marker(stop.title, systemImage: AppIcons.star, coordinate: stop.coordinates.clLocationCoordinate2D)
-                            .tint(.appGreenLight)
+                    ForEach(sortedStops) { location in
+                        
+                        Annotation(coordinate: location.coordinates.clLocationCoordinate2D) {
+                            DImageLoaderView(url: location.images[0], contentMode: .fill)
+                                .clipShape(.circle)
+                                .frame(width: location == selectedLocation ? 80 : 40, height: location == selectedLocation ? 80 : 40)
+                                .transition(.scale.combined(with: .opacity))
+
+                        } label: {
+                            Text(location.title)
+                        }.tag(location)
                     }
                     
                     if let userLocation = vm.locationManager.userLocation {
@@ -66,8 +76,12 @@ struct RotationView: View {
                 .onChange(of: selectedMode) { _, _ in
                     updateRoute()
                 }
+                .onChange(of: selectedLocation) { _, _ in
+                    
+                    focusOn(location: selectedLocation)
+                }
                 .ignoresSafeArea()
-                .overlay(alignment: .topTrailing) {
+                .overlay(alignment: .topLeading) {
                     viewOnMapButton
                         .padding(.horizontal)
                         .padding(.vertical)
@@ -119,6 +133,7 @@ struct RotationView: View {
             }
         }
         .ignoresSafeArea(edges: [.bottom])
+        .toolbarBackgroundVisibility(.hidden, for: .navigationBar)
         .alert(String(localized: "Rate Limit Exceeded"),
                isPresented: $showThrottlingAlert,
                actions: {
@@ -160,6 +175,20 @@ struct RotationView: View {
         
         requestCount += 1
         calculateRoute(from: userLocation)
+    }
+    
+    private func focusOn(location: Location?) {
+        UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+        
+        guard let location = location?.coordinates.clLocationCoordinate2D else { return }
+        
+        withAnimation {
+            position = .region(MKCoordinateRegion(
+                center: location,
+                latitudinalMeters: 1000,
+                longitudinalMeters: 1000
+            ))
+        }
     }
     
     private func startThrottling() {
@@ -292,18 +321,40 @@ struct RotationView: View {
     }
     
     private var viewOnMapButton: some View {
-        VStack(alignment: .trailing, spacing: 20) {
-            DLabelButtonView(systemImage: AppIcons.locationSquare, title: String(localized: "Get Directions")) {
-                let impactFeedback = UIImpactFeedbackGenerator(style: .medium)
-                impactFeedback.impactOccurred()
-                
-                showMapSelectionSheet.toggle()
+        HStack(alignment: .top) {
+            Button {
+                UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+                router.navigateBack()
+            } label: {
+                Image(systemName: AppIcons.chevronLeft)
+                    .foregroundStyle(.yellow)
+                    .font(.poppins(.medium, size: .title))
+                    .padding(10)
+                    .padding(.horizontal)
+                    .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 16))
+            }.contextMenu {
+                Button {
+                    UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+                    router.navigateBack()
+                } label: {
+                    Text(String(localized: "Back"))
+                }
             }
-            .disabled(isThrottled)
-            .opacity(isThrottled ? 0.6 : 1.0)
             
-            DIconButtonView(iconButtonType: .user, iconColor: .teal, bgMaterial: .ultraThinMaterial) {
-                vm.locationManager.checkLocationAuthorization()
+            Spacer()
+            VStack(alignment: .trailing, spacing: 20) {
+                DLabelButtonView(systemImage: AppIcons.locationSquare, title: String(localized: "Get Directions")) {
+                    UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+                    showMapSelectionSheet.toggle()
+                }
+                .disabled(isThrottled)
+                .opacity(isThrottled ? 0.6 : 1.0)
+                
+                DIconButtonView(iconButtonType: .user, iconColor: .teal, bgMaterial: .ultraThinMaterial) {
+                    UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+
+                    vm.locationManager.checkLocationAuthorization()
+                }
             }
         }.onChange(of: vm.focusOnUserStatus) { _, _ in
            
@@ -354,14 +405,19 @@ struct RotationView: View {
             
             List {
                 ForEach(Array(sortedStops.enumerated()), id: \.offset) { index, item in
-                    RouteStopRowView(index: index, stop: item, userLocation: vm.locationManager.userLocation)
-                        .contextMenu {
-                            Button {} label: {
-                                Label(String(localized: "Go to Detail"), systemImage: selectedMode.iconName)
-                            }
+                    RouteStopRowView(index: index, stop: item, userLocation: vm.locationManager.userLocation) {
+                        selectedLocation = item
+                    }
+                        
+                    .contextMenu {
+                        Button {
+                            router.navigate(to: .locationDetail(item))
+                        } label: {
+                            Label(String(localized: "Go to Detail"), systemImage: selectedMode.iconName)
                         }
-                        .listRowBackground(Color.clear)
-                        .listRowInsets(EdgeInsets(top: 5, leading: 0, bottom: 5, trailing: 0))
+                    }
+                    .listRowBackground(Color.clear)
+                    .listRowInsets(EdgeInsets(top: 5, leading: 0, bottom: 5, trailing: 0))
                 }
             }
             .background(.clear)
@@ -406,5 +462,8 @@ extension Array where Element == CLLocationCoordinate2D {
 }
 
 #Preview {
-    RotationView(stops: DeveloperPreview.shared.locations)
+    NavigationStack {
+        RotataionDetailView(stops: DeveloperPreview.shared.locations)
+            .environment(Router())
+    }
 }
