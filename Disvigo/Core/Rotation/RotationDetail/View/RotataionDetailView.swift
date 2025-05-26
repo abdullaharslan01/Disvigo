@@ -43,8 +43,14 @@ struct RotataionDetailView: View {
                         Annotation(coordinate: location.coordinates.clLocationCoordinate2D) {
                             DImageLoaderView(url: location.images[0], contentMode: .fill)
                                 .clipShape(.circle)
-                                .frame(width: location == selectedLocation ? 80 : 40, height: location == selectedLocation ? 80 : 40)
-                                .transition(.scale.combined(with: .opacity))
+                                .frame(width: location == selectedLocation ? 70 : 35, height: location == selectedLocation ? 70 : 35)
+                                .contextMenu {
+                                    DLabelButtonView(systemImage: AppIcons.locationDetail, title: String(localized: "Go to Detail")) {
+                                        UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+
+                                        router.navigate(to: .locationDetail(location))
+                                    }
+                                }.transition(.scale.combined(with: .opacity))
 
                         } label: {
                             Text(location.title)
@@ -413,7 +419,7 @@ struct RotataionDetailView: View {
                         Button {
                             router.navigate(to: .locationDetail(item))
                         } label: {
-                            Label(String(localized: "Go to Detail"), systemImage: selectedMode.iconName)
+                            DLabelButtonView(systemImage: AppIcons.locationDetail, title: String(localized: "Go to Detail")) {}
                         }
                     }
                     .listRowBackground(Color.clear)

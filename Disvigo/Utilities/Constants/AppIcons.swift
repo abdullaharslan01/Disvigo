@@ -41,4 +41,7 @@ enum AppIcons {
     static let jumpFirst = "arrow.uturn.backward"
     static let jumpEnd = "arrow.uturn.forward"
     static let warning = "exclamationmark.triangle.fill"
+    
+    static let checkedAllList = "checklist.checked"
+    static let unCheckedAllList = "checklist.unchecked"
 }

@@ -55,7 +55,14 @@ struct CityMapView: View {
                 Annotation(coordinate: location.coordinates.clLocationCoordinate2D) {
                     DImageLoaderView(url: location.images[0], contentMode: .fill)
                         .clipShape(.circle)
-                        .frame(width: location == selectedLocation ? 80 : 40, height: location == selectedLocation ? 80 : 40)
+                        .frame(width: location == selectedLocation ? 70 : 35, height: location == selectedLocation ? 70 : 35)
+                        .contextMenu {
+                            DLabelButtonView(systemImage: AppIcons.locationDetail, title: String(localized: "Go to Detail")) {
+                                UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+
+                                router.navigate(to: .locationDetail(location))
+                            }
+                        }
                         .transition(.scale.combined(with: .opacity))
 
                 } label: {

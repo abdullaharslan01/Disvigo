@@ -15,6 +15,8 @@ struct CityDetailView: View {
 
     @State var position: MapCameraPosition = .automatic
 
+    @State var selectedLocation: Location?
+
     init(city: City) {
         self._vm = State(wrappedValue: CityDetailViewModel(city: city))
     }
@@ -112,7 +114,7 @@ struct CityDetailView: View {
                             guard !vm.foods.isEmpty else { return }
                             router.navigate(to: .foodList(vm.foods, vm.city.name))
                         case .memory:
-                            guard !vm.memories.isEmpty else {return}
+                            guard !vm.memories.isEmpty else { return }
                             router.navigate(to: .memoryList(vm.memories, vm.city.name))
                         }
                     }
@@ -123,11 +125,25 @@ struct CityDetailView: View {
     }
 
     var cityMapView: some View {
-        Map(position: $position) {
+        Map(position: $position, selection: $selectedLocation) {
             ForEach(vm.locations) { location in
 
-                Marker(location.title, systemImage: AppIcons.pin, coordinate: location.coordinates.clLocationCoordinate2D)
-                    .tint(.blue)
+                Annotation(coordinate: location.coordinates.clLocationCoordinate2D) {
+                    DImageLoaderView(url: location.images[0], contentMode: .fill)
+                        .clipShape(.circle)
+                        .frame(width: location == selectedLocation ? 60 : 30, height: location == selectedLocation ? 60 : 30)
+                        .transition(.scale.combined(with: .opacity))
+                        .contextMenu {
+                            DLabelButtonView(systemImage: AppIcons.locationDetail, title: String(localized: "Go to Detail")) {
+                                UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+
+                                router.navigate(to: .locationDetail(location))
+                            }
+                        }
+
+                } label: {
+                    Text(location.title)
+                }.tag(location)
 
                 UserAnnotation()
             }
@@ -142,6 +158,23 @@ struct CityDetailView: View {
 
             })
             .padding(.top, 30)
+            .onChange(of: selectedLocation) { _, _ in
+                focusOn(location: selectedLocation)
+            }
+    }
+
+    private func focusOn(location: Location?) {
+        UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+
+        guard let location = location?.coordinates.clLocationCoordinate2D else { return }
+
+        withAnimation {
+            position = .region(MKCoordinateRegion(
+                center: location,
+                latitudinalMeters: 1000,
+                longitudinalMeters: 1000
+            ))
+        }
     }
 }
 
