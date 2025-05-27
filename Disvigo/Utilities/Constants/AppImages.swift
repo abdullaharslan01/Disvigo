@@ -15,6 +15,7 @@ enum AppImages {
     enum Constant {
         static let logoTransparent = "logoTransparent"
         static let cityPlaceHolder = "placeholder"
+        static let gemini = "gemini"
     }
     enum Category {
         static let discoveryPoints = "discoveryPoints"

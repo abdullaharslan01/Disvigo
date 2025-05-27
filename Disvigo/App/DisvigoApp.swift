@@ -10,14 +10,13 @@ import SwiftUI
 @main
 struct DisvigoApp: App {
     @State var router = Router()
+    @State var gemineManager = GemineViewStateController()
 
     var body: some Scene {
         WindowGroup {
-            
-            
-           
-           RootView()
-               .environment(router)
+            RootView()
+                .environment(router)
+                .environment(gemineManager)
         }
     }
 }

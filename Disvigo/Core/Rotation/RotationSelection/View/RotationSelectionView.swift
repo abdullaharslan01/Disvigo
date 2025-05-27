@@ -12,15 +12,17 @@ struct RotationSelectionView: View {
 
     @State private var selectedItems = Set<Location.ID>()
     @State private var editMode: EditMode = .active
-    @State private var alertState: Bool = false
-    @State private var showLimitAlert: Bool = false
-    @State private var allSelected: Bool = false
-    
-    @State private var previousSelectionCount: Int = 0
-    
-   
+    @State private var showMinSelectionAlert = false
+    @State private var showLimitAlert = false
+    @State private var previousSelectionCount = 0
+    @State private var isViewAppeared = false // View lifecycle tracking
 
     @Environment(Router.self) var router
+
+    // MARK: - Constants
+
+    private let maxSelectionLimit = 50
+    private let minSelectionLimit = 2
 
     var body: some View {
         ZStack {
@@ -32,62 +34,77 @@ struct RotationSelectionView: View {
             }
         }
         .preferredColorScheme(.dark)
-        .alert(isPresented: $alertState) {
-            Alert(
-                title: Text(String(localized: "No Locations Selected")),
-                message: Text(String(localized: "Please select at least two locations to create a route"))
-            )
+        .alert("No Locations Selected", isPresented: $showMinSelectionAlert) {
+            Button("OK") {}
+        } message: {
+            Text("Please select at least \(minSelectionLimit) locations to create a route")
         }
-        .alert(isPresented: $showLimitAlert) {
-            Alert(
-                title: Text(String(localized: "Selection Limit")),
-                message: Text(String(localized: "You can select up to 50 locations only."))
-            )
+        .alert("Selection Limit", isPresented: $showLimitAlert) {
+            Button("OK") {}
+        } message: {
+            Text("You can select up to \(maxSelectionLimit) locations only.")
         }
         .onChange(of: selectedItems) { _, newSelection in
-            if newSelection.count > 50 {
-                withAnimation {
-                    selectedItems = Set(newSelection.prefix(50))
-                    showLimitAlert = true
-                }
-            }
-        }.onChange(of: selectedItems.count) { oldValue, newValue in
-            previousSelectionCount = selectedItems.count
+            handleSelectionChange(newSelection)
+        }
+        .onAppear {
+            setupInitialState()
+        }
+        .onDisappear {
+            isViewAppeared = false
         }
     }
 
+    // MARK: - Header View
+
     private var headerView: some View {
         HStack {
-            DIconButtonView(iconButtonType: .custom(AppIcons.xmark), iconColor: .appTextLight, bgColor: .red) {
-                UIImpactFeedbackGenerator(style: .medium).impactOccurred()
-                router.navigateBack()
-            }
-
+            closeButton
             Spacer()
-
-            Button {
-                createRouteAction()
-            } label: {
-                Label(String(localized: "Create a route"), systemImage: AppIcons.personWalking)
-                    .padding()
-                    .symbolEffect(.pulse, isActive: true)
-                    .background(.appGreenPrimary, in: RoundedRectangle(cornerRadius: 16))
-                    .foregroundStyle(.appTextLight)
-                    .font(.poppins(.medium, size: .callout))
-                    .opacity(locations.isEmpty ? 0.7 : 1)
-            }
-            .disabled(locations.isEmpty)
+            createRouteButton
         }
         .padding(.horizontal, 30)
         .padding(.top, 30)
     }
 
+    private var closeButton: some View {
+        DIconButtonView(
+            iconButtonType: .custom(AppIcons.xmark),
+            iconColor: .appTextLight,
+            bgColor: .red
+        ) {
+            UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+            router.navigateBack()
+        }
+    }
+
+    private var createRouteButton: some View {
+        Button(action: createRouteAction) {
+            Label("Create a route", systemImage: AppIcons.personWalking)
+                .padding()
+                .symbolEffect(.pulse, isActive: !locations.isEmpty && selectedItems.count >= minSelectionLimit)
+                .background(buttonBackgroundColor, in: RoundedRectangle(cornerRadius: 16))
+                .foregroundStyle(.appTextLight)
+                .font(.poppins(.medium, size: .callout))
+        }
+        .disabled(locations.isEmpty)
+    }
+
+    private var buttonBackgroundColor: Color {
+        if locations.isEmpty {
+            return .appGreenPrimary.opacity(0.7)
+        }
+        return selectedItems.count >= minSelectionLimit ? .appGreenPrimary : .appGreenPrimary.opacity(0.7)
+    }
+
+    // MARK: - Content View
+
     private var contentView: some View {
-        ZStack {
+        Group {
             if !locations.isEmpty {
                 VStack(spacing: 20) {
                     infoView
-                    selectAll
+                    selectionControlView
                     locationsList
                 }
             } else {
@@ -102,25 +119,30 @@ struct RotationSelectionView: View {
                 .font(.title3)
                 .foregroundStyle(.blue)
 
-            Text(String(localized: "You can select up to 50 locations to create a route. Please select the locations you want to include."))
+            Text("You can select up to \(maxSelectionLimit) locations to create a route. Please select the locations you want to include.")
                 .font(.poppins(.regular, size: .callout))
                 .multilineTextAlignment(.leading)
         }
         .padding(.horizontal)
     }
 
-    private var selectAll: some View {
+    private var selectionControlView: some View {
         HStack(spacing: 16) {
-            DIconButtonView(iconButtonType: .custom(allSelected ? AppIcons.unCheckedAllList : AppIcons.checkedAllList), fontSize: .body) {
-                UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
-                toggleSelection()
-            }
-
+            selectAllButton
             selectionCounterView
-
             Spacer()
         }
         .padding(.horizontal, 30)
+    }
+
+    private var selectAllButton: some View {
+        DIconButtonView(
+            iconButtonType: .custom(isAllSelected ? AppIcons.unCheckedAllList : AppIcons.checkedAllList),
+            fontSize: .body
+        ) {
+            UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
+            toggleAllSelection()
+        }
     }
 
     private var selectionCounterView: some View {
@@ -131,7 +153,7 @@ struct RotationSelectionView: View {
 
             Text("/")
 
-            Text("50")
+            Text("\(maxSelectionLimit)")
                 .frame(width: 30)
         }
         .foregroundColor(.secondary)
@@ -139,19 +161,7 @@ struct RotationSelectionView: View {
     }
 
     private var locationsList: some View {
-        List(locations, id: \.id, selection: Binding(
-            get: { selectedItems },
-            set: { newValue in
-                if newValue.count <= 50 {
-                    withAnimation {
-                        selectedItems = newValue
-                    }
-
-                } else {
-                    showLimitAlert = true
-                }
-            }
-        )) { location in
+        List(locations, id: \.id, selection: selectionBinding) { location in
             RotationSelectionRowView(location: location)
                 .listRowBackground(Color.clear)
                 .listRowSeparator(.hidden)
@@ -160,59 +170,164 @@ struct RotationSelectionView: View {
         .listStyle(.plain)
         .background(.clear)
         .scrollContentBackground(.hidden)
+        .refreshable {
+            // Force refresh selection state
+            await refreshSelectionState()
+        }
     }
 
     private var emptyStateView: some View {
         DLottieEmtyView(
             lottieName: AppImages.Lottie.walkingPerson,
-            title: String(localized: "Unable to create route"),
-            buttonTitle: String(localized: "Explore Now", comment: "Button to explore places"),
-            message: String(localized: "You need at least two cities to generate a route. You can do this by adding at least two cities to your favorites.")
+            title: "Unable to create route",
+            buttonTitle: "Explore Now",
+            message: "You need at least two cities to generate a route. You can do this by adding at least two cities to your favorites."
         ) {
             router.navigateBack()
         }
     }
 
-    private func toggleSelection() {
-        withAnimation {
-            if allSelected {
+    private var isAllSelected: Bool {
+        !selectedItems.isEmpty && selectedItems.count == min(locations.count, maxSelectionLimit)
+    }
+
+    private var selectionBinding: Binding<Set<Location.ID>> {
+        Binding(
+            get: {
+                selectedItems
+            },
+            set: { newValue in
+                // Selection güncellenmesini optimize et
+                if newValue.count <= maxSelectionLimit {
+                    DispatchQueue.main.async {
+                        withAnimation(.easeInOut(duration: 0.15)) {
+                            selectedItems = newValue
+                        }
+                    }
+                } else {
+                    // Limit aşıldığında eski selection'ı koru ve alert göster
+                    DispatchQueue.main.async {
+                        showLimitAlert = true
+                    }
+                }
+            }
+        )
+    }
+
+    private func setupInitialState() {
+        editMode = .active
+        isViewAppeared = true
+        
+        // Eğer selection state problemi devam ederse bu kısmı aktif et
+        if !selectedItems.isEmpty {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                let currentSelection = selectedItems
+                withAnimation(.none) {
+                    selectedItems = Set<Location.ID>()
+                }
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+                    withAnimation(.easeInOut(duration: 0.2)) {
+                        selectedItems = currentSelection
+                    }
+                }
+            }
+        }
+    }
+
+    private func handleSelectionChange(_ newSelection: Set<Location.ID>) {
+        if newSelection.count > maxSelectionLimit {
+            let limitedSelection = Set(Array(newSelection).prefix(maxSelectionLimit))
+            
+            DispatchQueue.main.async {
+                selectedItems = limitedSelection
+            }
+            showLimitAlert = true
+        }
+
+        if newSelection.count != previousSelectionCount {
+            UIImpactFeedbackGenerator(style: .light).impactOccurred()
+            previousSelectionCount = newSelection.count
+        }
+    }
+
+    private func updateSelection(_ newValue: Set<Location.ID>) {
+        if newValue.count <= maxSelectionLimit {
+            withAnimation(.easeInOut(duration: 0.2)) {
+                selectedItems = newValue
+            }
+        } else {
+            showLimitAlert = true
+        }
+    }
+
+    private func toggleAllSelection() {
+        withAnimation(.easeInOut(duration: 0.3)) {
+            if isAllSelected {
                 selectedItems.removeAll()
-                allSelected = false
             } else {
-                let first50 = locations.prefix(50)
-                selectedItems = Set(first50.map { $0.id })
-                allSelected = true
+                let selectableLocations = locations.prefix(maxSelectionLimit)
+                selectedItems = Set(selectableLocations.map(\.id))
+            }
+        }
+        
+        // Force UI refresh
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            editMode = .inactive
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+                editMode = .active
             }
         }
     }
 
     private func createRouteAction() {
-        if selectedItems.count < 2 {
-            alertState.toggle()
-        } else {
-            let selectedLocationList = locations.filter { location in
-                selectedItems.contains(location.id)
-            }
+        guard selectedItems.count >= minSelectionLimit else {
+            showMinSelectionAlert = true
+            return
+        }
 
-            router.navigate(to: .rotationDetail(selectedLocationList))
+        let selectedLocationList = locations.filter { location in
+            selectedItems.contains(location.id)
+        }
+
+        router.navigate(to: .rotationDetail(selectedLocationList))
+    }
+    
+    // MARK: - Selection State Helpers
+    
+    @MainActor
+    private func refreshSelectionState() async {
+        let currentSelection = selectedItems
+        
+        withAnimation(.none) {
+            selectedItems = Set<Location.ID>()
+        }
+        
+        try? await Task.sleep(nanoseconds: 50_000_000) // 0.05 seconds
+        
+        withAnimation(.easeInOut(duration: 0.2)) {
+            selectedItems = currentSelection
         }
     }
 }
 
 #Preview {
-    RotationSelectionView(
-        locations: temptLocation
-    )
-    .environment(Router())
+    RotationSelectionView(locations: tempLocations)
+        .environment(Router())
 }
 
-var temptLocation: [Location] {
-    return Array(0 ..< 60).map { index in
+// MARK: - Preview Data
+
+private var tempLocations: [Location] {
+    Array(0 ..< 60).map { index in
         Location(
             title: "Location \(index + 1)",
             description: "Test description \(index + 1)",
             images: [],
-            coordinates: .init(latitude: 37.0 + Double(index) * 0.001, longitude: 35.0 + Double(index) * 0.001)
+            coordinates: .init(
+                latitude: 37.0 + Double(index) * 0.001,
+                longitude: 35.0 + Double(index) * 0.001
+            )
         )
     }
 }

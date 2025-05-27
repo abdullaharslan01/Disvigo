@@ -13,6 +13,7 @@ struct CityDetailView: View {
 
     @State var vm: CityDetailViewModel
 
+
     @State var position: MapCameraPosition = .automatic
 
     @State var selectedLocation: Location?
@@ -65,6 +66,9 @@ struct CityDetailView: View {
         .clipShape(UnevenRoundedRectangle(cornerRadii: .init(topLeading: 32, bottomLeading: 0, bottomTrailing: 0, topTrailing: 32)))
         .offset(y: -50)
         .onAppear {
+            
+            
+            
             vm.fetchLocations()
             withAnimation(.easeInOut(duration: 1)) {
                 vm.didAppeear = true

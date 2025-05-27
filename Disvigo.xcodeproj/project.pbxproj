@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		F5358C442DE4A3C100C2912E /* one-person-walking.json in Resources */ = {isa = PBXBuildFile; fileRef = F5358C432DE4A3C100C2912E /* one-person-walking.json */; };
+		F56C3DD22DE5DE4100425480 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = F56C3DD12DE5DE4100425480 /* Message.swift */; };
+		F56C3DD42DE5DE7300425480 /* Text+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = F56C3DD32DE5DE7300425480 /* Text+Ext.swift */; };
+		F56C3DDB2DE5DF5D00425480 /* GoogleGenerativeAI in Frameworks */ = {isa = PBXBuildFile; productRef = F56C3DDA2DE5DF5D00425480 /* GoogleGenerativeAI */; };
+		F56C3E6A2DE5F8AA00425480 /* GemineViewStateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F56C3E692DE5F8AA00425480 /* GemineViewStateController.swift */; };
 		F57453212DDE0D7D0047E989 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = F57453202DDE0D7D0047E989 /* Lottie */; };
 		F57453262DDE0DB90047E989 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = F57453252DDE0DB90047E989 /* SDWebImageSwiftUI */; };
 		F57453512DDE0DD40047E989 /* DisvigoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F57453272DDE0DD40047E989 /* DisvigoApp.swift */; };
@@ -58,6 +62,9 @@
 /* Begin PBXFileReference section */
 		F5358C432DE4A3C100C2912E /* one-person-walking.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "one-person-walking.json"; sourceTree = "<group>"; };
 		F553F69B2DDE06B400E06FEA /* Disvigo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Disvigo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F56C3DD12DE5DE4100425480 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		F56C3DD32DE5DE7300425480 /* Text+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text+Ext.swift"; sourceTree = "<group>"; };
+		F56C3E692DE5F8AA00425480 /* GemineViewStateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GemineViewStateController.swift; sourceTree = "<group>"; };
 		F57453272DDE0DD40047E989 /* DisvigoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisvigoApp.swift; sourceTree = "<group>"; };
 		F57453282DDE0DD40047E989 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		F574532A2DDE0DD40047E989 /* FavoriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteView.swift; sourceTree = "<group>"; };
@@ -117,6 +124,16 @@
 			path = Rotation;
 			sourceTree = "<group>";
 		};
+		F56C3DC32DE5D9F400425480 /* ChatAI */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = ChatAI;
+			sourceTree = "<group>";
+		};
+		F56C3DDC2DE5DF9A00425480 /* AI */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = AI;
+			sourceTree = "<group>";
+		};
 		F57453662DDE0DF00047E989 /* Comman */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = Comman;
@@ -154,6 +171,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F56C3DDB2DE5DF5D00425480 /* GoogleGenerativeAI in Frameworks */,
 				F57453262DDE0DB90047E989 /* SDWebImageSwiftUI in Frameworks */,
 				F57453212DDE0D7D0047E989 /* Lottie in Frameworks */,
 			);
@@ -258,6 +276,7 @@
 		F57453362DDE0DD40047E989 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				F56C3E692DE5F8AA00425480 /* GemineViewStateController.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -274,6 +293,7 @@
 		F57453382DDE0DD40047E989 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				F56C3DC32DE5D9F400425480 /* ChatAI */,
 				F5358C162DE4A02E00C2912E /* City */,
 				F5358C042DE4A02300C2912E /* Memory */,
 				F5358BF12DE4A01B00C2912E /* Food */,
@@ -291,6 +311,7 @@
 		F57453392DDE0DD40047E989 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
+				F56C3DDC2DE5DF9A00425480 /* AI */,
 				F5F3385B2DE11CAD00D8345F /* Map */,
 				F5BFF54F2DDE510900AEF27D /* Network */,
 			);
@@ -305,6 +326,7 @@
 				F5F337AB2DE0F32C00D8345F /* Location.swift */,
 				F5F337AD2DE0F35500D8345F /* Food.swift */,
 				F5F337AF2DE0F37100D8345F /* Memory.swift */,
+				F56C3DD12DE5DE4100425480 /* Message.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -357,6 +379,7 @@
 				F574534B2DDE0DD40047E989 /* Font+Ext.swift */,
 				F5F338472DE109A600D8345F /* View+Ext.swift */,
 				F5F3384C2DE10E2C00D8345F /* String+Ext.swift */,
+				F56C3DD32DE5DE7300425480 /* Text+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -410,6 +433,8 @@
 				F5358C042DE4A02300C2912E /* Memory */,
 				F5358C162DE4A02E00C2912E /* City */,
 				F56321392DE38357004975DE /* Rotation */,
+				F56C3DC32DE5D9F400425480 /* ChatAI */,
+				F56C3DDC2DE5DF9A00425480 /* AI */,
 				F57453662DDE0DF00047E989 /* Comman */,
 				F5BFF53C2DDE2D6700AEF27D /* ViewModel */,
 				F5BFF54F2DDE510900AEF27D /* Network */,
@@ -421,6 +446,7 @@
 			packageProductDependencies = (
 				F57453202DDE0D7D0047E989 /* Lottie */,
 				F57453252DDE0DB90047E989 /* SDWebImageSwiftUI */,
+				F56C3DDA2DE5DF5D00425480 /* GoogleGenerativeAI */,
 			);
 			productName = Disvigo;
 			productReference = F553F69B2DDE06B400E06FEA /* Disvigo.app */;
@@ -453,6 +479,7 @@
 			packageReferences = (
 				F574531F2DDE0D7D0047E989 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 				F57453242DDE0DB90047E989 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
+				F56C3DD92DE5DF5D00425480 /* XCRemoteSwiftPackageReference "generative-ai-swift" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = F553F69C2DDE06B400E06FEA /* Products */;
@@ -496,11 +523,13 @@
 				F57453532DDE0DD40047E989 /* HomeView.swift in Sources */,
 				F5F337AC2DE0F32C00D8345F /* Location.swift in Sources */,
 				F5F3384D2DE10E2C00D8345F /* String+Ext.swift in Sources */,
+				F56C3E6A2DE5F8AA00425480 /* GemineViewStateController.swift in Sources */,
 				F57453542DDE0DD40047E989 /* RootView.swift in Sources */,
 				F57453552DDE0DD40047E989 /* SplashView.swift in Sources */,
 				F57453562DDE0DD40047E989 /* AppIcons.swift in Sources */,
 				F57453572DDE0DD40047E989 /* AppImages.swift in Sources */,
 				F57453582DDE0DD40047E989 /* Font+Ext.swift in Sources */,
+				F56C3DD42DE5DE7300425480 /* Text+Ext.swift in Sources */,
 				F5F337AE2DE0F35500D8345F /* Food.swift in Sources */,
 				F5BFF54E2DDE50D700AEF27D /* City.swift in Sources */,
 				F5F337B02DE0F37100D8345F /* Memory.swift in Sources */,
@@ -509,6 +538,7 @@
 				F5BFF53B2DDE211200AEF27D /* DTabModel.swift in Sources */,
 				F5F338482DE109A600D8345F /* View+Ext.swift in Sources */,
 				F5BFF5392DDE20F200AEF27D /* DTabView.swift in Sources */,
+				F56C3DD22DE5DE4100425480 /* Message.swift in Sources */,
 				F5BFF66E2DDE5AAE00AEF27D /* DeveloperPreview.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -725,6 +755,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		F56C3DD92DE5DF5D00425480 /* XCRemoteSwiftPackageReference "generative-ai-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/generative-ai-swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.5.6;
+			};
+		};
 		F574531F2DDE0D7D0047E989 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/airbnb/lottie-ios";
@@ -744,6 +782,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		F56C3DDA2DE5DF5D00425480 /* GoogleGenerativeAI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F56C3DD92DE5DF5D00425480 /* XCRemoteSwiftPackageReference "generative-ai-swift" */;
+			productName = GoogleGenerativeAI;
+		};
 		F57453202DDE0D7D0047E989 /* Lottie */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = F574531F2DDE0D7D0047E989 /* XCRemoteSwiftPackageReference "lottie-ios" */;

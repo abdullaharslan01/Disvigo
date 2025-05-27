@@ -27,6 +27,8 @@ enum AppIcons {
     static let walkIcon = "figure.walk"
     static let sort = "bolt.circle"
     static let chevronLeft = "chevron.left"
+    static let paperplaneFill =  "paperplane.fill"
+
 
     static let binoculars = "binoculars"
     static let locationDetail = "location.magnifyingglass"

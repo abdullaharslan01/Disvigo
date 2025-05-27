@@ -1,6 +1,15 @@
 {
-  "originHash" : "2f0e5e95caa0ba3716859cc25e11787df9dae69f8ddcd948b1f9026f175a6409",
+  "originHash" : "deb5340ad7261cf84226428a64440d91cd49d0ff84acd5bd3399b7f65ff6081f",
   "pins" : [
+    {
+      "identity" : "generative-ai-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/google/generative-ai-swift",
+      "state" : {
+        "revision" : "44b8ce120425f9cf53ca756f3434ca2c2696f8bd",
+        "version" : "0.5.6"
+      }
+    },
     {
       "identity" : "lottie-ios",
       "kind" : "remoteSourceControl",

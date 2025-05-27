@@ -14,25 +14,28 @@ struct HomeView: View {
     @FocusState private var isSearchFocused: Bool
 
     @Environment(Router.self) private var router
+    @Environment(GemineViewStateController.self) private var gemineManager
 
     var body: some View {
         ZStack {
             Color.appBackgroundDark.ignoresSafeArea()
 
             contentView
+        }
 
-        }.navigationTitle(String(localized: "Explore Cities"))
-            .preferredColorScheme(.dark)
-            .task {
-                vm.fetchAllCities()
+        .navigationTitle(String(localized: "Explore Cities"))
+        .preferredColorScheme(.dark)
+        .task {
+            vm.fetchAllCities()
+        }
+        .onChange(of: vm.isAllContentWasLoad) { _, newValue in
+            if newValue {
+                isAllContentWasLoad = true
             }
-            .onChange(of: vm.isAllContentWasLoad) { _, newValue in
-                if newValue {
-                    isAllContentWasLoad = true
-                }
-            }.onAppear {
-                router.toolbarVisibility = .visible
-            }
+        }.onAppear {
+            router.toolbarVisibility = .visible
+            gemineManager.gemineViewState = .turkey
+        }
     }
 
     var contentView: some View {
