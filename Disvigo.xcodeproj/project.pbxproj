@@ -129,11 +129,6 @@
 			path = ChatAI;
 			sourceTree = "<group>";
 		};
-		F56C3DDC2DE5DF9A00425480 /* AI */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = AI;
-			sourceTree = "<group>";
-		};
 		F57453662DDE0DF00047E989 /* Comman */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = Comman;
@@ -311,7 +306,6 @@
 		F57453392DDE0DD40047E989 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
-				F56C3DDC2DE5DF9A00425480 /* AI */,
 				F5F3385B2DE11CAD00D8345F /* Map */,
 				F5BFF54F2DDE510900AEF27D /* Network */,
 			);
@@ -434,7 +428,6 @@
 				F5358C162DE4A02E00C2912E /* City */,
 				F56321392DE38357004975DE /* Rotation */,
 				F56C3DC32DE5D9F400425480 /* ChatAI */,
-				F56C3DDC2DE5DF9A00425480 /* AI */,
 				F57453662DDE0DF00047E989 /* Comman */,
 				F5BFF53C2DDE2D6700AEF27D /* ViewModel */,
 				F5BFF54F2DDE510900AEF27D /* Network */,

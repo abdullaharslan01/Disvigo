@@ -14,7 +14,9 @@ class GeminiAIManager {
     private let model: GenerativeModel
     
     private init() {
-        let apiKey = "AIzaSyBl7HA4uMTA0X3la_sPijmT_QBr8BrQ49s"
+        let apiKey = GemineApiKey.default
+        
+        
         model = GenerativeModel(name: "gemini-2.0-flash", apiKey: apiKey)
     }
     
