@@ -37,4 +37,15 @@ enum Category: CaseIterable {
             return AppImages.Category.localCuisine
         }
     }
+    
+    var systemImageName:String {
+        switch self {
+        case .location:
+            return AppIcons.locationDetail
+        case .food:
+            return AppIcons.food
+        case .memory:
+            return AppIcons.fossil
+        }
+    }
 }

@@ -11,50 +11,20 @@ class DeveloperPreview {
     static let shared = DeveloperPreview()
 
     let memory: Memory = .init(
-        title: "Bakır Eşyalar",
+        id: "1", title: "Bakır Eşyalar",
         description: "Kazancılar (Bakırcılar) Çarşısında dilediğiniz bakır ürünlerini bulabilirsiniz",
         images: [
             "https://www.kulturportali.gov.tr/repoKulturPortali/small/23112015/832eda0c-d35b-4035-9895-13ee0c211524.jpg?format=jpg&quality=50"
         ]
     )
 
-    let memories: [Memory] = [
-        Memory(
-            title: "Bakır Eşyalar",
-            description: "Kazancılar (Bakırcılar) Çarşısında dilediğiniz bakır ürünlerini bulabilirsiniz",
-            images: [
-                "https://www.kulturportali.gov.tr/repoKulturPortali/small/23112015/832eda0c-d35b-4035-9895-13ee0c211524.jpg?format=jpg&quality=50"
-            ]
-        ),
-        Memory(
-            title: "Yemeni",
-            description: "Adana’dan klasik bir hediye getirmek istiyorsanız, kesinlikle yemenilerden almalısınız...",
-            images: [
-                "https://www.kulturportali.gov.tr/repoKulturPortali/small/23112015/b9cc11dc-b8f5-4590-8135-c32135c2448e.jpg?format=jpg&quality=50"
-            ]
-        ),
-        Memory(
-            title: "Cezerye",
-            description: "Cezerye",
-            images: [
-                "https://www.kulturportali.gov.tr/repoKulturPortali/small/23112015/4bdd3939-cf7c-45b7-9547-343136da7da9.jpg?format=jpg&quality=50"
-            ]
-        ),
-        Memory(
-            title: "Narenciye",
-            description: "Adana’dan meyve alma fikri ilk başta garip gelebilir...",
-            images: [
-                "https://www.kulturportali.gov.tr/repoKulturPortali/small/23112015/d47faa09-f93f-4221-8830-2f1138693ca8.jpg?format=jpg&quality=50"
-            ]
-        ),
-        Memory(
-            title: "Şalgam",
-            description: "Gelsin kebaplar, gitsin şalgam suları...",
-            images: [
-                "https://www.kulturportali.gov.tr/repoKulturPortali/small/23112015/391b119e-9d95-4b3b-9f85-cfbdab856d8c.jpg?format=jpg&quality=50"
-            ]
-        )
-    ]
+    let memories: [Memory] = [.init(
+        id: "1", title: "Bakır Eşyalar",
+        description: "Kazancılar (Bakırcılar) Çarşısında dilediğiniz bakır ürünlerini bulabilirsiniz",
+        images: [
+            "https://www.kulturportali.gov.tr/repoKulturPortali/small/23112015/832eda0c-d35b-4035-9895-13ee0c211524.jpg?format=jpg&quality=50"
+        ]
+    )]
 
     let city: City = .init(
         id: 1,
@@ -149,89 +119,21 @@ class DeveloperPreview {
     ]
 
     let locations: [Location] = [
-        Location(
-            title: "Taş Köprü",
-            description: "Adana Taş Köprü Seyhan Nehri üzerindedir...",
+        .init(
+            id: "4", title: "Taş Köprü",
+            description: "Adana Taş Köprü Seyhan Nehri üzerindedir. Köprünün ilk kez Roma İmparatoru Hadrianus tarafından yaptırıldığını öne süren kayıtlara rastlanmaktadır. Ancak bölgedeki Roma köprülerinin, Pompeus veya Augustus döneminde yapıldığı şeklinde görüşler de bulunmaktadır. Köprü, İmparatorluğun geniş topraklarındaki hakimiyetin zorlaştığı, dolayısıyla ulaşımın önem kazandığı 4. yüzyılda inşa edilmiştir. Yapı yüzyıllarca Avrupa ile Asya arasında önemli bir köprü olmuştur. Harun Reşit köprüyü bazı eklerle Adana Kalesi'ne birleştirmiştir. IX. yüzyıl başında Harun Reşit’in oğlu olan 7'inci Abbasi Halifesi Memun döneminde onarılan köprünün, III. Ahmet, Kel Hasan Paşa ve Adana Valisi Ziya Paşa tarafından da farklı zamanlarda bakım görmüştür. Son üç onarımının yazıtları mevcuttur. Son onarım 1949 yılında yapılmıştır. Roma köprü konstrüksiyonunun görkemli bir uygulaması olan Adana Köprüsü, Roma köprülerinin karakteristik niteliklerine sahiptir. Doğu-batı doğrultusunda uzanan Taşköprü, günümüzde 300 metre uzunluğa, 14 kemer gözüne ve 5 tahliye kemerine sahiptir. Yaklaşık 12 metre yükseklikteki köprünün ortası, yanlarından 2,5 metre kadar daha yüksektir. Ve ortalama 9,50- 9,70 metre genişliktedir. Taş Köprü dünyanın halen kullanılan en eski köprülerden biri olarak bilinmektedir. Kaynaklar: Adana İl Kültür ve Turizm Müdürlüğü Adana’da Roma Dönemi Köprüsü: Taşköprü, Ç.Ü. Sosyal Bilimler Enstitüsü Dergisi, Cilt 18, Sayı 1, 2009, s.305–322, Yrd. Doç. Dr. Gözde RAMAZANOĞLU Adana Gezilecek Yerler",
             images: [
                 "https://www.kulturportali.gov.tr/repoKulturPortali/small/SehirRehberi//GezilecekYer/20190111110947922_THK%20ORHAN%20OZGULBAS%20ADANA%20Seyhan%20Nehri%20Taskopru%20logolu.jpg?format=jpg&quality=50",
                 "https://www.kulturportali.gov.tr/repoKulturPortali/small/SehirRehberi//GezilecekYer/20190809151212631_20190111110934849_ADANA%20Tas%20Kopru%20%20Alimurat%20CORUK%20logolu%20p.jpg?format=jpg&quality=50",
                 "https://www.kulturportali.gov.tr/repoKulturPortali/small/SehirRehberi//GezilecekYer/20190809151226959_20190111110947922_THK%20ORHAN%20OZGULBAS%20ADANA%20Seyhan%20Nehri%20Taskopru%20logolu%20p%20.jpg?format=jpg&quality=50",
                 "https://www.kulturportali.gov.tr/repoKulturPortali/small/SehirRehberi//GezilecekYer/20190809151242865_20190111110918906_2%20ADANA%20tas%20kopru%20ERDAL%20YAZICI%20logolu%20p%20.%20jpg.jpg?format=jpg&quality=50"
             ],
-            coordinates: Coordinates(latitude: 36.986312, longitude: 35.335067)
-        ),
-
-        Location(
-            title: "Büyük Saat Kulesi",
-            description: "Adana Büyük Saat Kulesi Seyhan ilçesi Ali Münif Caddesi üzerindedir...",
-            images: [
-                "https://www.kulturportali.gov.tr/repoKulturPortali/small/26032013/5fcd243f-680f-4f55-a8bd-96666a409483.jpg?format=jpg&quality=50",
-                "https://www.kulturportali.gov.tr/repoKulturPortali/small/SehirRehberi//GezilecekYer/20171016141538056_ADANA%20SAAT%20KULESI%20GULCAN%20ACAR%20(11).jpg?format=jpg&quality=50"
-            ],
-            coordinates: Coordinates(latitude: 36.984, longitude: 35.3294)
-        ),
-
-        Location(
-            title: "Sabancı Merkez Cami",
-            description: "Adana'nın Reşatbey Semti'nde, Merkez Park'ın güneyinde ve Seyhan Nehri'nin batı kıyısında yer alan c...",
-            images: [
-                "https://www.kulturportali.gov.tr/repoKulturPortali/small/27032013/98c02bba-053a-4301-9d97-2670551dda99.jpg?format=jpg&quality=50",
-                "https://www.kulturportali.gov.tr/repoKulturPortali/small/SehirRehberi//GezilecekYer/20171016141310869_ADANA%20%20SEYHAN%20VE%20SABANCI%20CAMISI%20GULCAN%20ACAR%20(3).jpg?format=jpg&quality=50"
-            ],
-            coordinates: Coordinates(latitude: 36.991553, longitude: 35.334112)
-        ),
-
-        Location(
-            title: "Adana Ulu Camii",
-            description: "Ulu Camii büyüklüğü ve tarihî açısından Adana'nın önemli eserleri arasında gösterilmektedir...",
-            images: [
-                "https://www.kulturportali.gov.tr/repoKulturPortali/small/19032013/66205bcb-d6db-443a-975c-f10d330fd327.jpg?format=jpg&quality=50"
-            ],
-            coordinates: Coordinates(latitude: 36.984992, longitude: 35.330773)
-        ),
-
-        Location(
-            title: "Adana Müzesi",
-            description: "Adana Müzesi, cumhuriyetin ilanından hemen sonra, 1924 yılında kurulmuş olup Türkiye'nin en eski 10...",
-            images: [
-                "https://www.kulturportali.gov.tr/repoKulturPortali/small/SehirRehberi//GezilecekYer/20190724104408634_Adana%20Muze%20Kompleksi%20(2).png?format=jpg&quality=50",
-                "https://www.kulturportali.gov.tr/repoKulturPortali/small/SehirRehberi//GezilecekYer/20190724104422024_Adana%20Muze%20Kompleksi%20(3).png?format=jpg&quality=50",
-                "https://www.kulturportali.gov.tr/repoKulturPortali/small/SehirRehberi//GezilecekYer/20190724104433899_Adana%20Muze%20Kompleksi%20(4).png?format=jpg&quality=50",
-                "https://www.kulturportali.gov.tr/repoKulturPortali/small/SehirRehberi//GezilecekYer/20190724104459851_Adana%20Muze%20Kompleksi%20(6).png?format=jpg&quality=50",
-                "https://www.kulturportali.gov.tr/repoKulturPortali/small/SehirRehberi//GezilecekYer/20190724104526006_Adana%20Muze%20Kompleksi%20(8).png?format=jpg&quality=50",
-                "https://www.kulturportali.gov.tr/repoKulturPortali/small/SehirRehberi//GezilecekYer/20190724104550897_Adana%20Muze%20Kompleksi%20(10).png?format=jpg&quality=50",
-                "https://www.kulturportali.gov.tr/repoKulturPortali/small/SehirRehberi//GezilecekYer/20190724104602600_Adana%20Muze%20Kompleksi%20(11).png?format=jpg&quality=50",
-                "https://www.kulturportali.gov.tr/repoKulturPortali/small/SehirRehberi//GezilecekYer/20190724104615459_Adana%20Muze%20Kompleksi%20(12).png?format=jpg&quality=50",
-                "https://www.kulturportali.gov.tr/repoKulturPortali/small/SehirRehberi//GezilecekYer/20190724104629943_Adana%20Muze%20Kompleksi%20(13).png?format=jpg&quality=50",
-                "https://www.kulturportali.gov.tr/repoKulturPortali/small/SehirRehberi//GezilecekYer/20190724104640786_Adana%20Muze%20Kompleksi%20(14).png?format=jpg&quality=50",
-                "https://www.kulturportali.gov.tr/repoKulturPortali/small/SehirRehberi//GezilecekYer/20190724104652911_Adana%20Muze%20Kompleksi%20(15).png?format=jpg&quality=50"
-            ],
-            coordinates: Coordinates(latitude: 36.995, longitude: 35.3136)
-        ),
-
-        Location(
-            title: "Bebekli Kilise",
-            description: "Tepebağ’da 1880’li yıllarda St...",
-            images: [
-                "https://www.kulturportali.gov.tr/repoKulturPortali/small/27032013/e2dcb4fa-d90b-4f55-8e08-fe1c4071eac8.jpg?format=jpg&quality=50"
-            ],
-            coordinates: Coordinates(latitude: 36.987559, longitude: 35.325906)
-        ),
-
-        Location(
-            title: "Atatürk Evi Müzesi",
-            description: "Geleneksel Adana Evlerinin tipik özelliklerini gösteren Adana Atatürk Evi Müzesi, tescilli taşınmaz...",
-            images: [
-                "https://www.kulturportali.gov.tr/repoKulturPortali/small/SehirRehberi//GezilecekYer/20190726160046948_Ataturk%20Evi%20Muzesi.png?format=jpg&quality=50",
-                "https://www.kulturportali.gov.tr/repoKulturPortali/small/SehirRehberi//GezilecekYer/20190726160159325_Ataturk%20Evi%20Muzesi%202.png?format=jpg&quality=50",
-                "https://www.kulturportali.gov.tr/repoKulturPortali/small/SehirRehberi//GezilecekYer/20190726160215123_Ataturk%20Evi%20Muzesi%203.png?format=jpg&quality=50"
-            ],
-            coordinates: Coordinates(latitude: 36.9886, longitude: 35.3317)
+            coordinates: Coordinates(latitude: 41.008583, longitude: 28.980175)
         )
     ]
 
     let location: Location = .init(
-        title: "Taş Köprü",
+        id: "4", title: "Taş Köprü",
         description: "Adana Taş Köprü Seyhan Nehri üzerindedir. Köprünün ilk kez Roma İmparatoru Hadrianus tarafından yaptırıldığını öne süren kayıtlara rastlanmaktadır. Ancak bölgedeki Roma köprülerinin, Pompeus veya Augustus döneminde yapıldığı şeklinde görüşler de bulunmaktadır. Köprü, İmparatorluğun geniş topraklarındaki hakimiyetin zorlaştığı, dolayısıyla ulaşımın önem kazandığı 4. yüzyılda inşa edilmiştir. Yapı yüzyıllarca Avrupa ile Asya arasında önemli bir köprü olmuştur. Harun Reşit köprüyü bazı eklerle Adana Kalesi'ne birleştirmiştir. IX. yüzyıl başında Harun Reşit’in oğlu olan 7'inci Abbasi Halifesi Memun döneminde onarılan köprünün, III. Ahmet, Kel Hasan Paşa ve Adana Valisi Ziya Paşa tarafından da farklı zamanlarda bakım görmüştür. Son üç onarımının yazıtları mevcuttur. Son onarım 1949 yılında yapılmıştır. Roma köprü konstrüksiyonunun görkemli bir uygulaması olan Adana Köprüsü, Roma köprülerinin karakteristik niteliklerine sahiptir. Doğu-batı doğrultusunda uzanan Taşköprü, günümüzde 300 metre uzunluğa, 14 kemer gözüne ve 5 tahliye kemerine sahiptir. Yaklaşık 12 metre yükseklikteki köprünün ortası, yanlarından 2,5 metre kadar daha yüksektir. Ve ortalama 9,50- 9,70 metre genişliktedir. Taş Köprü dünyanın halen kullanılan en eski köprülerden biri olarak bilinmektedir. Kaynaklar: Adana İl Kültür ve Turizm Müdürlüğü Adana’da Roma Dönemi Köprüsü: Taşköprü, Ç.Ü. Sosyal Bilimler Enstitüsü Dergisi, Cilt 18, Sayı 1, 2009, s.305–322, Yrd. Doç. Dr. Gözde RAMAZANOĞLU Adana Gezilecek Yerler",
         images: [
             "https://www.kulturportali.gov.tr/repoKulturPortali/small/SehirRehberi//GezilecekYer/20190111110947922_THK%20ORHAN%20OZGULBAS%20ADANA%20Seyhan%20Nehri%20Taskopru%20logolu.jpg?format=jpg&quality=50",
@@ -244,7 +146,7 @@ class DeveloperPreview {
 
     let foods: [Food] = [
         Food(
-            title: "Kaynar",
+            id: "5", title: "Kaynar",
             description: "Kaynar, doğum sonrası ziyaretlerde ikram edilen geleneksel bir şerbettir...",
             images: [
                 "https://www.kulturportali.gov.tr/repoKulturPortali/small/18112015/8b14e237-9aa9-482d-ab33-6bd0541a7d99.jpg?format=jpg&quality=50",
@@ -252,41 +154,11 @@ class DeveloperPreview {
                 "https://www.kulturportali.gov.tr/repoKulturPortali/small/SehirRehberi//TurkMutfagi/20190523111200155_adana%20kaynar2.jpg?format=jpg&quality=50",
                 "https://www.kulturportali.gov.tr/repoKulturPortali/small/SehirRehberi//TurkMutfagi/20190523111214208_adana%20kaynar3.jpg?format=jpg&quality=50"
             ]
-        ),
-        Food(
-            title: "Analı Kızlı",
-            description: "İçi kıymalı büyük köfteler (analı) ve içi boş küçük köfteler (kızlı)...",
-            images: [
-                "https://www.kulturportali.gov.tr/repoKulturPortali/small/18112015/42dc06db-9192-46b7-8ccf-728319038c12.jpg?format=jpg&quality=50",
-                "https://www.kulturportali.gov.tr/repoKulturPortali/small/SehirRehberi//TurkMutfagi/20180611103813413_analikizli.jpg?format=jpg&quality=50"
-            ]
-        ),
-        Food(
-            title: "Acılı Ezme",
-            description: "Domates, biber, maydanoz ve sarımsakla yapılan acılı bir mezedir...",
-            images: [
-                "https://www.kulturportali.gov.tr/repoKulturPortali/small/18112015/bad8cbb0-9ab2-4ffa-8bd9-ff1229965de6.jpg?format=jpg&quality=50"
-            ]
-        ),
-        Food(
-            title: "Adana Kebabı",
-            description: "Zırhla kıyılmış koyun eti ve kuyruk yağı karışımı ile hazırlanan kebap...",
-            images: [
-                "https://www.kulturportali.gov.tr/repoKulturPortali/small/SehirRehberi//TurkMutfagi/20201017083536688_adana%20kebabi.jpeg?format=jpg&quality=50",
-                "https://www.kulturportali.gov.tr/repoKulturPortali/small/SehirRehberi//TurkMutfagi/20201017083550814_adana%20kebap.jpeg?format=jpg&quality=50"
-            ]
-        ),
-        Food(
-            title: "İşkembe Dolması",
-            description: "İnce doğranmış iç harçla doldurulan işkembe parçalarının bohça şeklinde dikilip haşlanmasıyla yapılır...",
-            images: [
-                "https://www.kulturportali.gov.tr/repoKulturPortali/small/18112015/f150a3b1-d9c1-4536-ac46-5f938d270bb0.jpg?format=jpg&quality=50"
-            ]
         )
     ]
 
     let food: Food = .init(
-        title: "Kaynar",
+        id: "5", title: "Kaynar",
         description: "Kaynar, doğum sonrası ziyaretlerde ikram edilen geleneksel bir şerbettir...",
         images: [
             "https://www.kulturportali.gov.tr/repoKulturPortali/small/18112015/8b14e237-9aa9-482d-ab33-6bd0541a7d99.jpg?format=jpg&quality=50",

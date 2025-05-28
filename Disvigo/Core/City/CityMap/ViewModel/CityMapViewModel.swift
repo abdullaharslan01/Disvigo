@@ -19,7 +19,7 @@ class CityMapViewModel {
     var sortedLocations: [Location]
     let city: City
     var permissionAlertType: PermissionAlertType?
-    private var locationDistances = [UUID: CLLocationDistance]()
+    private var locationDistances = [String: CLLocationDistance]()
     var focusOnUserState = false
     let locationService = LocationManager()
     var currentPageIndex = 0

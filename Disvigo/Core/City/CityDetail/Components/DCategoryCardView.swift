@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct DCategoryCardView: View {
-    
-    let category:Category
+    let category: Category
+    @Binding var isLoading: Bool
     let size: CGSize
     let action: () -> Void
 
@@ -22,11 +22,18 @@ struct DCategoryCardView: View {
 
                 Color.black.opacity(0.3)
 
-                Text(category.name)
-                    .font(.poppins(.semiBold, size: .title2))
-                    .foregroundColor(.white)
-                    .multilineTextAlignment(.center)
-                    .lineLimit(2)
+                VStack {
+                    Text(category.name)
+                        .font(.poppins(.semiBold, size: .title2))
+                        .foregroundColor(.white)
+                        .multilineTextAlignment(.center)
+                        .lineLimit(4)
+
+                    if isLoading {
+                        ProgressView()
+                            .tint(.white)
+                    }
+                }
             }
             .frame(width: size.width, height: size.height)
             .cornerRadius(16)
@@ -35,22 +42,21 @@ struct DCategoryCardView: View {
                 radius: 3,
                 x: 0,
                 y: 2
-            )
+            ).contextMenu {
+                Button {
+                    action()
+                } label: {
+                    Label(category.name, systemImage: category.systemImageName)
+                }
+            }
         }
         .buttonStyle(.plain)
     }
 }
 
 #Preview {
-    ScrollView(.horizontal) {
-        HStack {
-            ForEach(0 ..< 3) { _ in
-              
-                
-                
-            }
-        }.padding(.horizontal)
-    }.scrollIndicators(.hidden)
-        .scrollTargetBehavior(.viewAligned)
-}
+    HStack {
+        DCategoryCardView(category: .food, isLoading: .constant(true), size: .init(width: 200, height: 300)) {}
 
+    }.padding(.horizontal)
+}

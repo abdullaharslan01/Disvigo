@@ -15,11 +15,10 @@ struct RotationSelectionView: View {
     @State private var showMinSelectionAlert = false
     @State private var showLimitAlert = false
     @State private var previousSelectionCount = 0
-    @State private var isViewAppeared = false // View lifecycle tracking
+    @State private var isViewAppeared = false
 
     @Environment(Router.self) var router
 
-    // MARK: - Constants
 
     private let maxSelectionLimit = 50
     private let minSelectionLimit = 2
@@ -171,7 +170,6 @@ struct RotationSelectionView: View {
         .background(.clear)
         .scrollContentBackground(.hidden)
         .refreshable {
-            // Force refresh selection state
             await refreshSelectionState()
         }
     }
@@ -191,57 +189,32 @@ struct RotationSelectionView: View {
         !selectedItems.isEmpty && selectedItems.count == min(locations.count, maxSelectionLimit)
     }
 
+    // MARK: - Düzeltilmiş Selection Binding
     private var selectionBinding: Binding<Set<Location.ID>> {
         Binding(
             get: {
                 selectedItems
             },
             set: { newValue in
-                // Selection güncellenmesini optimize et
                 if newValue.count <= maxSelectionLimit {
-                    DispatchQueue.main.async {
-                        withAnimation(.easeInOut(duration: 0.15)) {
-                            selectedItems = newValue
-                        }
-                    }
+                    selectedItems = newValue
                 } else {
-                    // Limit aşıldığında eski selection'ı koru ve alert göster
-                    DispatchQueue.main.async {
-                        showLimitAlert = true
-                    }
+                    showLimitAlert = true
                 }
             }
         )
     }
 
+    // MARK: - Düzeltilmiş Setup
     private func setupInitialState() {
         editMode = .active
         isViewAppeared = true
-        
-        // Eğer selection state problemi devam ederse bu kısmı aktif et
-        if !selectedItems.isEmpty {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                let currentSelection = selectedItems
-                withAnimation(.none) {
-                    selectedItems = Set<Location.ID>()
-                }
-                
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
-                    withAnimation(.easeInOut(duration: 0.2)) {
-                        selectedItems = currentSelection
-                    }
-                }
-            }
-        }
     }
 
     private func handleSelectionChange(_ newSelection: Set<Location.ID>) {
         if newSelection.count > maxSelectionLimit {
             let limitedSelection = Set(Array(newSelection).prefix(maxSelectionLimit))
-            
-            DispatchQueue.main.async {
-                selectedItems = limitedSelection
-            }
+            selectedItems = limitedSelection
             showLimitAlert = true
         }
 
@@ -251,16 +224,7 @@ struct RotationSelectionView: View {
         }
     }
 
-    private func updateSelection(_ newValue: Set<Location.ID>) {
-        if newValue.count <= maxSelectionLimit {
-            withAnimation(.easeInOut(duration: 0.2)) {
-                selectedItems = newValue
-            }
-        } else {
-            showLimitAlert = true
-        }
-    }
-
+    // MARK: - Düzeltilmiş Toggle All Selection
     private func toggleAllSelection() {
         withAnimation(.easeInOut(duration: 0.3)) {
             if isAllSelected {
@@ -271,13 +235,7 @@ struct RotationSelectionView: View {
             }
         }
         
-        // Force UI refresh
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-            editMode = .inactive
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
-                editMode = .active
-            }
-        }
+        UIImpactFeedbackGenerator(style: .medium).impactOccurred()
     }
 
     private func createRouteAction() {
@@ -294,7 +252,6 @@ struct RotationSelectionView: View {
     }
     
     // MARK: - Selection State Helpers
-    
     @MainActor
     private func refreshSelectionState() async {
         let currentSelection = selectedItems
@@ -303,7 +260,7 @@ struct RotationSelectionView: View {
             selectedItems = Set<Location.ID>()
         }
         
-        try? await Task.sleep(nanoseconds: 50_000_000) // 0.05 seconds
+        try? await Task.sleep(nanoseconds: 50_000_000)
         
         withAnimation(.easeInOut(duration: 0.2)) {
             selectedItems = currentSelection
@@ -312,22 +269,6 @@ struct RotationSelectionView: View {
 }
 
 #Preview {
-    RotationSelectionView(locations: tempLocations)
+    RotationSelectionView(locations: DeveloperPreview.shared.locations)
         .environment(Router())
-}
-
-// MARK: - Preview Data
-
-private var tempLocations: [Location] {
-    Array(0 ..< 60).map { index in
-        Location(
-            title: "Location \(index + 1)",
-            description: "Test description \(index + 1)",
-            images: [],
-            coordinates: .init(
-                latitude: 37.0 + Double(index) * 0.001,
-                longitude: 35.0 + Double(index) * 0.001
-            )
-        )
-    }
 }

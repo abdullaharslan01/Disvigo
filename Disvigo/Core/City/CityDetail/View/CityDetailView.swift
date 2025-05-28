@@ -1,21 +1,10 @@
-//
-//  CityDetailView.swift
-//  Disvigo
-//
-//  Created by abdullah on 22.05.2025.
-//
-
 import MapKit
 import SwiftUI
 
 struct CityDetailView: View {
     @Environment(Router.self) private var router
-
     @State var vm: CityDetailViewModel
-
-
     @State var position: MapCameraPosition = .automatic
-
     @State var selectedLocation: Location?
 
     init(city: City) {
@@ -28,10 +17,12 @@ struct CityDetailView: View {
             ScrollView {
                 VStack {
                     cityImageView
-
                     cityContentView
                 }
             }
+            .onAppear(perform: {
+                vm.didAppeear = true
+            })
             .navigationBarTitleDisplayMode(.large)
             .ignoresSafeArea(edges: [.top])
             .preferredColorScheme(.dark)
@@ -65,13 +56,13 @@ struct CityDetailView: View {
         .background(.appBackgroundDark)
         .clipShape(UnevenRoundedRectangle(cornerRadii: .init(topLeading: 32, bottomLeading: 0, bottomTrailing: 0, topTrailing: 32)))
         .offset(y: -50)
-        .onAppear {
-            
-            
-            
-            vm.fetchLocations()
+        .alert(isPresented: $vm.errorAlert) {
+            DAlertType.general(title: vm.alert.title, message: vm.alert.message).build()
+        }
+        .task {
+            vm.fecthCity()
+        }.onChange(of: vm.locations.count) { _, _ in
             withAnimation(.easeInOut(duration: 1)) {
-                vm.didAppeear = true
                 position = .region(.init(center: vm.city.coordinates.clLocationCoordinate2D, latitudinalMeters: 5000, longitudinalMeters: 5000))
             }
         }
@@ -108,18 +99,22 @@ struct CityDetailView: View {
         ScrollView(.horizontal) {
             HStack {
                 ForEach(Category.allCases, id: \.id) { category in
-
-                    DCategoryCardView(category: category, size: .init(width: 180, height: 250)) {
-                        switch category {
-                        case .location:
-                            guard !vm.locations.isEmpty else { return }
-                            router.navigate(to: .locationList(vm.locations, vm.city.name))
-                        case .food:
-                            guard !vm.foods.isEmpty else { return }
-                            router.navigate(to: .foodList(vm.foods, vm.city.name))
-                        case .memory:
-                            guard !vm.memories.isEmpty else { return }
-                            router.navigate(to: .memoryList(vm.memories, vm.city.name))
+                    DCategoryCardView(category: category, isLoading: $vm.isLoading, size: .init(width: 180, height: 250)) {
+                        if vm.isLoading {
+                            vm.alert = .init(title: String(localized: "Loading"), message: String(localized: "Please wait while we fetch your data..."))
+                            vm.errorAlert.toggle()
+                        } else {
+                            switch category {
+                            case .location:
+                                guard !vm.locations.isEmpty else { return }
+                                router.navigate(to: .locationList(vm.locations, vm.city.name))
+                            case .food:
+                                guard !vm.foods.isEmpty else { return }
+                                router.navigate(to: .foodList(vm.foods, vm.city.name))
+                            case .memory:
+                                guard !vm.memories.isEmpty else { return }
+                                router.navigate(to: .memoryList(vm.memories, vm.city.name))
+                            }
                         }
                     }
                 }
@@ -128,53 +123,79 @@ struct CityDetailView: View {
             .frame(height: 220)
     }
 
-    var cityMapView: some View {
+    private var cityMap: some View {
         Map(position: $position, selection: $selectedLocation) {
             ForEach(vm.locations) { location in
-
-                Annotation(coordinate: location.coordinates.clLocationCoordinate2D) {
-                    DImageLoaderView(url: location.images[0], contentMode: .fill)
+                Annotation(location.title, coordinate: location.coordinates.clLocationCoordinate2D) {
+                    DImageLoaderView(url: location.images.first ?? "", contentMode: .fill)
                         .clipShape(.circle)
-                        .frame(width: location == selectedLocation ? 60 : 30, height: location == selectedLocation ? 60 : 30)
-                        .transition(.scale.combined(with: .opacity))
+                        .frame(
+                            width: location == selectedLocation ? 60 : 30,
+                            height: location == selectedLocation ? 60 : 30
+                        )
+                        .animation(.easeInOut(duration: 0.3), value: selectedLocation)
                         .contextMenu {
-                            DLabelButtonView(systemImage: AppIcons.locationDetail, title: String(localized: "Go to Detail")) {
+                            Button {
                                 UIImpactFeedbackGenerator(style: .medium).impactOccurred()
-
                                 router.navigate(to: .locationDetail(location))
+                            } label: {
+                                Label(String(localized: "Go to Detail"), systemImage: AppIcons.locationDetail)
                             }
                         }
-
-                } label: {
-                    Text(location.title)
-                }.tag(location)
-
-                UserAnnotation()
-            }
-        }.frame(height: 300)
-            .frame(maxWidth: .infinity)
-            .toolbarBackgroundVisibility(.hidden, for: .navigationBar)
-            .overlay(alignment: .bottom, content: {
-                DLabelButtonView(systemImage: AppIcons.binoculars, title: String(localized: "Explore Locations")) {
-                    router.navigate(to: .cityMap(vm.locations, vm.city))
                 }
-                .padding(.bottom)
-
-            })
-            .padding(.top, 30)
-            .onChange(of: selectedLocation) { _, _ in
-                focusOn(location: selectedLocation)
+                .tag(location)
             }
+
+            UserAnnotation()
+        }
+        .frame(height: 300)
+        .frame(maxWidth: .infinity)
+        .toolbarBackgroundVisibility(.hidden, for: .navigationBar)
+        .overlay(alignment: .bottom) {
+            DLabelButtonView(systemImage: AppIcons.binoculars, title: String(localized: "Explore Locations")) {
+                router.navigate(to: .cityMap(vm.locations, vm.city))
+            }
+            .padding(.bottom, 30)
+        }
+        .onChange(of: selectedLocation) { _, newValue in
+            if let location = newValue {
+                focusOn(location: location)
+            }
+        }
+    }
+
+    var cityMapView: some View {
+        ZStack {
+            Rectangle()
+                .foregroundStyle(.gray.opacity(0.1))
+                .overlay {
+                    if vm.isLoading {
+                        ProgressView(String(localized: "Loading Locations..."))
+                    } else if vm.locations.isEmpty {
+                        DEmptyStateView(type: .custom(title: String(localized: "Location Not Found"), description: String(localized: "We couldn't find any location data for this area. Please check your connection or try another location."), buttonText: nil, icon: AppIcons.map))
+                    }
+                }
+
+            if !vm.locations.isEmpty {
+                cityMap
+            }
+        }
+        .frame(height: 300)
+        .padding(.top,30)
     }
 
     private func focusOn(location: Location?) {
         UIImpactFeedbackGenerator(style: .medium).impactOccurred()
 
-        guard let location = location?.coordinates.clLocationCoordinate2D else { return }
+        guard let location = location else { return }
 
-        withAnimation {
+        let coordinate = location.coordinates.clLocationCoordinate2D
+
+        guard CLLocationCoordinate2DIsValid(coordinate) else { return }
+
+        withAnimation(.easeInOut(duration: 0.5)) {
             position = .region(MKCoordinateRegion(
-                center: location,
+                center: coordinate,
                 latitudinalMeters: 1000,
                 longitudinalMeters: 1000
             ))

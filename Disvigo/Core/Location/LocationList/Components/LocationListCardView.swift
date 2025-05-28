@@ -92,7 +92,7 @@ struct LocationListCardView: View {
 
 #Preview {
     HStack {
-        LocationListCardView(location: .init(title: "Taş Köprü", description: "", images: [], coordinates: .init(latitude: 0, longitude: 0))) {}
+        LocationListCardView(location: .init(id: "2", title: "Taş Köprü", description: "", images: [], coordinates: .init(latitude: 0, longitude: 0))) {}
         LocationListCardView(location: DeveloperPreview.shared.location) {}
     }
 }

@@ -113,7 +113,7 @@ struct LocationCardView: View {
 
 #Preview {
     LocationCardView(
-        location: .init(title: "Gaziantep Kalesi", description: "", images: [], coordinates: .init(latitude: 0, longitude: 0)),
+        location: .init(id: "1", title: "Gaziantep Kalesi", description: "", images: [], coordinates: .init(latitude: 0, longitude: 0)),
         distance: "1km",
         onTapDetail: {}
     ).frame(height: 180).preferredColorScheme(.dark)

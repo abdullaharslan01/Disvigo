@@ -7,10 +7,19 @@
 
 import Foundation
 
-enum EndpointPath: String {
-    case cities = "/turkiye_iller.json"
-}
+enum EndpointPath {
+    case cities
+    case cityDetail(Int)
 
+    var stringValue: String {
+        switch self {
+        case .cities:
+            return "/turkiye_iller.json"
+        case .cityDetail(let id):
+            return "/\(id).json"
+        }
+    }
+}
 
 struct Endpoint {
     static let baseURL = "https://abdullaharslan.com.tr/disvigo"
@@ -18,6 +27,6 @@ struct Endpoint {
     let path: EndpointPath
 
     var url: URL? {
-        URL(string: Endpoint.baseURL + path.rawValue)
+        return URL(string: Endpoint.baseURL + path.stringValue)
     }
 }

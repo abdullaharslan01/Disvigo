@@ -53,7 +53,7 @@ struct CityMapView: View {
             ForEach(vm.locations, id: \.title) { location in
 
                 Annotation(coordinate: location.coordinates.clLocationCoordinate2D) {
-                    DImageLoaderView(url: location.images[0], contentMode: .fill)
+                    DImageLoaderView(url: location.images.first ?? "", contentMode: .fill)
                         .clipShape(.circle)
                         .frame(width: location == selectedLocation ? 70 : 35, height: location == selectedLocation ? 70 : 35)
                         .contextMenu {

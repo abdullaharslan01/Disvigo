@@ -7,6 +7,11 @@
 
 import Foundation
 
+struct DAlertItem {
+    var title: String
+    var message: String
+}
+
 @Observable
 class CityDetailViewModel {
     var showFullDescription = false
@@ -16,6 +21,11 @@ class CityDetailViewModel {
     var locations: [Location] = []
     var foods: [Food] = []
     var memories: [Memory] = []
+    var isLoading: Bool = false
+
+    var alert: DAlertItem = .init(title: "", message: "")
+
+    var errorAlert: Bool = false
 
     let city: City
 
@@ -38,12 +48,28 @@ class CityDetailViewModel {
         return URL(string: baseURL + cityName)
     }
 
-    func fetchLocations() {
+    func fecthCity() {
+        isLoading = true
+
         Task {
-            try? await Task.sleep(for: .seconds(1))
-            locations = DeveloperPreview.shared.locations
-            foods = DeveloperPreview.shared.foods
-            memories = DeveloperPreview.shared.memories
+            do {
+                let result: CityDetail = try await NetworkManager.shared.fetchData(path: .cityDetail(city.id))
+
+                await MainActor.run {
+                    locations = result.locations
+                    foods = result.foods
+                    memories = result.memories
+                }
+
+                print("Locations: \(result.locations.count)")
+                print("Food: \(result.foods.count)")
+                print("Memory: \(result.memories.count)")
+                isLoading = false
+            } catch {
+                alert.message = error.localizedDescription
+                alert.title = String(localized: "Network Error")
+                errorAlert.toggle()
+            }
         }
     }
 }
