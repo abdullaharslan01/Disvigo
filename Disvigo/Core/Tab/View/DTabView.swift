@@ -25,6 +25,11 @@ struct DTabView: View {
                     NavigationStack(path: $router.homePath) {
                         HomeView(namespace: animation, isAllContentWasLoad: $isAllContentWasLoad)
                             .navigationDestination(namespace: animation, router: router, gemine: gemineManager)
+                            .onAppear {
+                                router.toolbarVisibility = .visible
+
+                                gemineManager.gemineViewState = .turkey
+                            }
                     }.toolbarVisibility(router.toolbarVisibility, for: .tabBar)
                         .overlay(alignment: .bottomTrailing, content: {
                             if gemineManager.isVisible == .visible {

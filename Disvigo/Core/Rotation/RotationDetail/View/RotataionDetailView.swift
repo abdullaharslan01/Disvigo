@@ -328,17 +328,16 @@ struct RotataionDetailView: View {
     
     private var viewOnMapButton: some View {
         HStack(alignment: .top) {
-            Button {
+            DIconButtonView(
+                iconButtonType: .custom(AppIcons.xmark),
+                iconColor: .appTextLight,
+                bgColor: .red
+            ) {
                 UIImpactFeedbackGenerator(style: .medium).impactOccurred()
                 router.navigateBack()
-            } label: {
-                Image(systemName: AppIcons.chevronLeft)
-                    .foregroundStyle(.yellow)
-                    .font(.poppins(.medium, size: .title))
-                    .padding(10)
-                    .padding(.horizontal)
-                    .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 16))
-            }.contextMenu {
+            }
+            
+            .contextMenu {
                 Button {
                     UIImpactFeedbackGenerator(style: .medium).impactOccurred()
                     router.navigateBack()
@@ -356,7 +355,7 @@ struct RotataionDetailView: View {
                 .disabled(isThrottled)
                 .opacity(isThrottled ? 0.6 : 1.0)
                 
-                DIconButtonView(iconButtonType: .user, iconColor: .teal, bgMaterial: .ultraThinMaterial) {
+                DIconButtonView(iconButtonType: .user, iconColor: .appGreenPrimary, bgMaterial: .ultraThinMaterial) {
                     UIImpactFeedbackGenerator(style: .medium).impactOccurred()
 
                     vm.locationManager.checkLocationAuthorization()

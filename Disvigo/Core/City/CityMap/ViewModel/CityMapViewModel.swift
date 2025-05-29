@@ -24,6 +24,7 @@ class CityMapViewModel {
     let locationService = LocationManager()
     var currentPageIndex = 0
     var isSorted: Bool = false
+    var sortedAlertMessage:Bool = false
     
     init(city: City, locations: [Location]) {
         self.city = city
@@ -54,7 +55,13 @@ class CityMapViewModel {
     }
     
     func requestForSortLocations() {
-        locationService.sortLocations()
+        if !isSorted {
+            locationService.sortLocations()
+        } else {
+            print("Zaten sıralı çalıştı")
+            
+            sortedAlertMessage = true
+        }
     }
     
     func requestForFocusOnUser() {

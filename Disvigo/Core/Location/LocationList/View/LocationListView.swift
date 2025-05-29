@@ -8,17 +8,13 @@
 import SwiftUI
 
 struct LocationListView: View {
- 
     init(locations: [Location], cityTitle: String) {
         self._vm = State(wrappedValue: LocationListViewModel(locations: locations, cityTitle: cityTitle))
-       
     }
-    
+
     @State var vm: LocationListViewModel
-   
 
     @Environment(Router.self) var router
- 
 
     let columns: [GridItem] = [.init(.flexible()), .init(.flexible())]
 
@@ -48,7 +44,6 @@ struct LocationListView: View {
                             .scrollTransition { view, phase in
                                 view
                                     .scaleEffect(phase.isIdentity ? 1 : 0.7)
-                                    .rotationEffect(.degrees(phase.isIdentity ? 0 :-20))
                             }
                         }
                     }
@@ -56,7 +51,26 @@ struct LocationListView: View {
                 }
             }
         }
+        .toolbar(content: {
+            ToolbarItem(placement: .topBarTrailing) {
+                Button {
+                    router.navigate(to: .rotationSelection(vm.locations))
 
+                } label: {
+                    Image(systemName: AppIcons.map)
+                        .foregroundStyle(.cyan)
+                }
+
+                .contextMenu {
+                    Button {
+                        router.navigate(to: .rotationSelection(vm.locations))
+
+                    } label: {
+                        Label(String(localized: "Create route from selected locations."), systemImage: AppIcons.map)
+                    }
+                }
+            }
+        })
         .searchable(text: $vm.searchText, prompt: String(localized: "Search by location within \(vm.cityTitle)..."))
         .navigationTitle(String(localized: "Explore \(vm.cityTitle)"))
         .onChange(of: vm.filteredLocations.count) { oldValue, newValue in

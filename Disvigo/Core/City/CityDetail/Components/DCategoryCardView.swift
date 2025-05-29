@@ -22,17 +22,15 @@ struct DCategoryCardView: View {
 
                 Color.black.opacity(0.3)
 
-                VStack {
-                    Text(category.name)
-                        .font(.poppins(.semiBold, size: .title2))
-                        .foregroundColor(.white)
-                        .multilineTextAlignment(.center)
-                        .lineLimit(4)
+                Text(category.name)
+                    .font(.poppins(.semiBold, size: .title2))
+                    .foregroundColor(.white)
+                    .multilineTextAlignment(.center)
+                    .lineLimit(4)
 
-                    if isLoading {
-                        ProgressView()
-                            .tint(.white)
-                    }
+                if isLoading {
+                    ProgressView()
+                        .tint(.white)
                 }
             }
             .frame(width: size.width, height: size.height)

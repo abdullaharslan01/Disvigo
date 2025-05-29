@@ -19,7 +19,6 @@ struct RotationSelectionView: View {
 
     @Environment(Router.self) var router
 
-
     private let maxSelectionLimit = 50
     private let minSelectionLimit = 2
 
@@ -169,8 +168,8 @@ struct RotationSelectionView: View {
         .listStyle(.plain)
         .background(.clear)
         .scrollContentBackground(.hidden)
-        .refreshable {
-            await refreshSelectionState()
+        .onAppear {
+            refreshSelectionState()
         }
     }
 
@@ -190,6 +189,7 @@ struct RotationSelectionView: View {
     }
 
     // MARK: - Düzeltilmiş Selection Binding
+
     private var selectionBinding: Binding<Set<Location.ID>> {
         Binding(
             get: {
@@ -206,6 +206,7 @@ struct RotationSelectionView: View {
     }
 
     // MARK: - Düzeltilmiş Setup
+
     private func setupInitialState() {
         editMode = .active
         isViewAppeared = true
@@ -225,6 +226,7 @@ struct RotationSelectionView: View {
     }
 
     // MARK: - Düzeltilmiş Toggle All Selection
+
     private func toggleAllSelection() {
         withAnimation(.easeInOut(duration: 0.3)) {
             if isAllSelected {
@@ -234,7 +236,7 @@ struct RotationSelectionView: View {
                 selectedItems = Set(selectableLocations.map(\.id))
             }
         }
-        
+
         UIImpactFeedbackGenerator(style: .medium).impactOccurred()
     }
 
@@ -250,21 +252,16 @@ struct RotationSelectionView: View {
 
         router.navigate(to: .rotationDetail(selectedLocationList))
     }
-    
+
     // MARK: - Selection State Helpers
+
     @MainActor
-    private func refreshSelectionState() async {
+    private func refreshSelectionState()  {
         let currentSelection = selectedItems
-        
-        withAnimation(.none) {
-            selectedItems = Set<Location.ID>()
-        }
-        
-        try? await Task.sleep(nanoseconds: 50_000_000)
-        
-        withAnimation(.easeInOut(duration: 0.2)) {
-            selectedItems = currentSelection
-        }
+
+        selectedItems = Set<Location.ID>()
+
+        selectedItems = currentSelection
     }
 }
 

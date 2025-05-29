@@ -11,6 +11,8 @@ enum GemineViewState {
     case location(_ location: Location)
     case turkey
     case city(_ city: City)
+    case food(_ food: Food)
+    case memory(_ memory: Memory)
 }
 
 @Observable
@@ -67,76 +69,44 @@ class ChatViewModel {
         return """
         \(basePrompt)
         
-        Conversation Context:
-        \(conversationContext)
+        Respond in the same language as the user's question.
         
-        Current Question: \(userMessage.content)
+        Previous conversation: \(conversationContext)
+        Current question: \(userMessage.content)
         
-        Please provide a helpful, engaging response that:
-        1. Directly answers the user's question
-        2. Is informative yet conversational
-        3. Includes practical tips when relevant
-        4. Uses emojis sparingly but effectively
-        5. Maintains the established conversation tone
-        6. Is concise but complete (2-4 paragraphs max)
+        Provide a helpful, friendly and practical response. Keep it 2-3 paragraphs.
         """
     }
+    
+
     
     private func getBasePrompt(for aiViewState: GemineViewState) -> String {
         switch aiViewState {
         case .location(let location):
-            return """
-            You are an expert local guide for \(location.title). 
-            Location details: \(location.description)
-            
-            Your role: Provide insider knowledge about this location including:
-            - Historical significance and stories
-            - Best visiting times and practical tips
-            - Hidden gems and local secrets
-            - Cultural significance and traditions
-            - Photography spots and experiences
-            
-            Tone: Friendly, knowledgeable, like a passionate local guide.
-            """
+            let shortDescription = String(location.description.prefix(50))
+            return "You are a local guide for \(location.title) in Turkey. Location: \(shortDescription)... Provide info about historical places, tips, hidden gems."
 
         case .turkey:
-            return """
-            You are a comprehensive Turkey travel and culture expert.
-            
-            Your expertise covers:
-            - Turkish history from ancient civilizations to modern times
-            - Regional cultures, traditions, and customs
-            - Cuisine, including regional specialties
-            - Geography, climate, and best travel times
-            - Popular and off-the-beaten-path destinations
-            - Practical travel advice and local etiquette
-            
-            Tone: Warm, enthusiastic, culturally aware, like a knowledgeable Turkish friend.
-            """
+            return "You are a Turkey travel expert. Provide info about Turkish history, culture, cuisine, destinations and travel advice within Turkey."
             
         case .city(let city):
-            return """
-            You are a local city expert for \(city.name).
+            return "You are a city expert for \(city.name), Turkey. Provide info about neighborhoods, places, restaurants, transportation and events in this Turkish city."
             
-            Your knowledge includes:
-            - City neighborhoods and districts
-            - Historical landmarks and modern attractions
-            - Local food scene and restaurant recommendations
-            - Transportation and getting around
-            - Cultural events and entertainment
-            - Shopping areas and local markets
-            - Day trip ideas and nearby attractions
+        case .food(let food):
+            let shortDescription = String(food.description.prefix(50))
+            return "You are a food expert for \(food.title) in Turkey. Description: \(shortDescription)... Provide info about Turkish local food, restaurants, street food and recipes."
             
-            Tone: Urban, savvy, like a longtime resident who loves their city.
-            """
+        case .memory(let memory):
+            let shortDescription = String(memory.description.prefix(50))
+            return "You are a shopping expert for \(memory.title) in Turkey. Description: \(shortDescription)... Provide info about Turkish souvenirs, crafts, markets and shopping tips."
         }
     }
     
     private func buildConversationContext() -> String {
-        let recentMessages = messages.suffix(6)
+        let recentMessages = messages.suffix(4)
         
         if recentMessages.isEmpty {
-            return "This is the start of our conversation."
+            return "Start of conversation."
         }
         
         let context = recentMessages.compactMap { message in
@@ -147,7 +117,7 @@ class ChatViewModel {
             return nil
         }.joined(separator: "\n")
         
-        return context.isEmpty ? "This is the start of our conversation." : context
+        return context.isEmpty ? "Start of conversation." : context
     }
     
     private func removeLoadingMessage() {

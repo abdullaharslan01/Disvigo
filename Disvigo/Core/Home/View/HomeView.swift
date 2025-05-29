@@ -32,57 +32,70 @@ struct HomeView: View {
             if newValue {
                 isAllContentWasLoad = true
             }
-        }.onAppear {
-            router.toolbarVisibility = .visible
-            gemineManager.gemineViewState = .turkey
         }
     }
 
     var contentView: some View {
-        ScrollView {
-            LazyVStack(spacing: 20) {
-                if vm.filteredCities.isEmpty && !vm.citySearchText.isEmpty {
-                    DEmptyStateView(type: .searchNotFound(title: String(localized: "No cities found"))) {
-                        vm.citySearchText = ""
-                    }.transition(.scale.combined(with: .opacity))
-                } else {
-                    ForEach(vm.filteredCities) { city in
+        ScrollViewReader(content: { proxy in
+            ScrollView {
+                LazyVStack(spacing: 20) {
+                    Color.clear
+                        .frame(height: 1)
+                        .id("top")
+                    if vm.filteredCities.isEmpty && !vm.citySearchText.isEmpty {
+                        DEmptyStateView(type: .searchNotFound(title: String(localized: "No cities found"))) {
+                            vm.citySearchText = ""
+                        }.transition(.scale.combined(with: .opacity))
+                    } else {
+                        ForEach(vm.filteredCities) { city in
 
-                        CityRowView(city: city, onTapGesture: {
-                            let impactFeedback = UIImpactFeedbackGenerator(style: .medium)
-                            impactFeedback.impactOccurred()
-                            router.navigate(to: .cityDetail(city))
-                        })
-                        .matchedGeometryEffect(id: city.id, in: namespace)
-                        .transition(.asymmetric(
-                            insertion: .move(edge: .leading).combined(with: .opacity),
-                            removal: .move(edge: .trailing).combined(with: .opacity)
-                        ))
-                        .scrollTransition { view, phase in
-                            view
-                                .scaleEffect(phase.isIdentity ? 1 : 0.9)
-                                .opacity(phase.isIdentity ? 1 : 0.7)
+                            CityRowView(city: city, onTapGesture: {
+                                let impactFeedback = UIImpactFeedbackGenerator(style: .medium)
+                                impactFeedback.impactOccurred()
+                                router.navigate(to: .cityDetail(city))
+                            })
+                            .matchedGeometryEffect(id: city.id, in: namespace)
+                            .transition(.asymmetric(
+                                insertion: .move(edge: .leading).combined(with: .opacity),
+                                removal: .move(edge: .trailing).combined(with: .opacity)
+                            ))
+                            .scrollTransition { view, phase in
+                                view
+                                    .scaleEffect(phase.isIdentity ? 1 : 0.9)
+                                    .opacity(phase.isIdentity ? 1 : 0.7)
+                            }
                         }
                     }
                 }
+                .padding(.horizontal)
+                .animation(.easeInOut(duration: 0.5), value: vm.filteredCities.count)
             }
-            .padding(.horizontal)
-            .animation(.easeInOut(duration: 0.5), value: vm.filteredCities.count)
-        }
-        .refreshable {
-            await vm.refreshCities()
-            let impactFeedback = UIImpactFeedbackGenerator(style: .medium)
-            impactFeedback.impactOccurred()
-        }
-        .searchable(text: $vm.citySearchText, prompt: String(localized: "Search by city..."))
-        .focused($isSearchFocused)
-        .scaleEffect(isSearchFocused ? 1.02 : 1.0)
-        .animation(.easeInOut(duration: 0.2), value: isSearchFocused)
-        .onChange(of: vm.filteredCities.count) { oldValue, newValue in
-            if oldValue != newValue {
-                let impactFeedback = UIImpactFeedbackGenerator(style: .light)
-                impactFeedback.impactOccurred()
+
+            .overlay(alignment: .bottomLeading, content: {
+                DIconButtonView(iconButtonType: .custom(AppIcons.chevronUp), iconColor: .accent, bgMaterial: .ultraThin, width: 50, height: 40) {
+                    UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+
+                    withAnimation {
+                        proxy.scrollTo("top")
+                    }
+
+                }.padding(.horizontal)
+                    .padding(.bottom)
+            })
+            .refreshable {
+                await vm.refreshCities()
+                UIImpactFeedbackGenerator(style: .medium).impactOccurred()
             }
-        }
+            .searchable(text: $vm.citySearchText, prompt: String(localized: "Search by city..."))
+            .focused($isSearchFocused)
+            .scaleEffect(isSearchFocused ? 1.02 : 1.0)
+            .animation(.easeInOut(duration: 0.2), value: isSearchFocused)
+            .onChange(of: vm.filteredCities.count) { oldValue, newValue in
+                if oldValue != newValue {
+                    let impactFeedback = UIImpactFeedbackGenerator(style: .light)
+                    impactFeedback.impactOccurred()
+                }
+            }
+        })
     }
 }

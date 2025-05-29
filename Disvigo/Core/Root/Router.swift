@@ -120,7 +120,7 @@ extension View {
             case .locationList(let locations, let cityName):
                 LocationListView(locations: locations, cityTitle: cityName)
                     .onAppear {
-                        gemine.isVisible = .hidden
+                        gemine.isVisible = .visible
 
                         router.toolbarVisibility = .hidden
                     }
@@ -128,7 +128,7 @@ extension View {
                 FoodDetailView(food: food)
                     .onAppear {
                         gemine.isVisible = .visible
-
+                        gemine.gemineViewState = .food(food)
                         router.toolbarVisibility = .hidden
                     }
             case .foodList(let foods, let cityName):
@@ -141,6 +141,7 @@ extension View {
             case .memoryDetail(let memory):
                 MemoryDetailView(memory: memory).onAppear {
                     gemine.isVisible = .visible
+                    gemine.gemineViewState = .memory(memory)
 
                     router.toolbarVisibility = .hidden
                 }

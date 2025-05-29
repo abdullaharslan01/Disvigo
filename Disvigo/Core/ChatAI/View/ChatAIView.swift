@@ -180,7 +180,6 @@ struct ChatAIView: View {
             .padding(.vertical, 16)
             .background(
                 .appBackgroundDark.opacity(0.6)
-
             )
             .onChange(of: vm.isLoading) { _, newValue in
                 if newValue {
@@ -224,6 +223,12 @@ struct ChatAIView: View {
 
         case .city(let city):
             return String(localized: "🏙️ Welcome! I'm your local expert for \(city.name). Whether you're planning a visit or just curious about this amazing city, I'm here to help. What would you like to discover?")
+            
+        case .food(let food):
+            return String(localized: "🍴 Yummy! I'm your culinary expert for \(food.title). I can tell you about its history, ingredients, preparation methods, and where to find the best versions. What would you like to know about this delicious dish?")
+            
+        case .memory(let memory):
+            return String(localized: "🛍️ Hello! I'm your shopping guide for \(memory.title). I can recommend the best souvenirs, local specialties, and unique items to remember your trip by. What kind of memorable items are you looking for?")
         }
     }
     
@@ -235,6 +240,10 @@ struct ChatAIView: View {
             return "Türkiye"
         case .city(let city):
             return city.name
+        case .food(let food):
+            return food.title
+        case .memory(let memory):
+            return memory.title
         }
     }
     
@@ -246,6 +255,10 @@ struct ChatAIView: View {
             return String(localized: "Country Expert")
         case .city:
             return String(localized: "City Assistant")
+        case .food:
+            return String(localized: "Culinary Expert")
+        case .memory:
+            return String(localized: "Shopping Guide")
         }
     }
 }

@@ -32,6 +32,8 @@ struct DGemineChatButtonView: View {
                 HStack {
                     Button {
                         withAnimation(.spring(response: 0.45, dampingFraction: 0.8)) {
+                            UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+
                             showChat = true
                         }
                     } label: {

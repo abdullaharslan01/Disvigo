@@ -19,8 +19,18 @@ struct LocationMapView: View {
 
     var body: some View {
         Map(position: $position) {
-            Marker(vm.location.title, systemImage: AppIcons.star, coordinate: vm.location.coordinates.clLocationCoordinate2D)
-                .tint(.appGreenPrimary)
+            Annotation(coordinate: vm.location.coordinates.clLocationCoordinate2D) {
+                DImageLoaderView(url: vm.location.images.first ?? "", contentMode: .fill)
+                    .clipShape(.circle)
+                    .frame(width: 40, height: 40)
+                    .phaseAnimator([false, true]) { view, phase in
+                        view
+                            .scaleEffect(phase ? 1.4 : 1)
+                    }
+
+            } label: {
+                Text(vm.location.title)
+            }
 
             UserAnnotation()
         }

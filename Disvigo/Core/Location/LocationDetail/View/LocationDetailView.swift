@@ -36,7 +36,7 @@ struct LocationDetailView: View {
                     .padding(.horizontal)
                 
                 mapSection
-                    .padding(.bottom)
+                    .padding(.bottom,getSafeArea().bottom + 30)
             }
         }.ignoresSafeArea()
     }
@@ -56,7 +56,7 @@ struct LocationDetailView: View {
             Text(vm.location.title)
                 .font(.poppins(.semiBold, size: .largeTitle))
         
-            ExpandableTextView(text: vm.location.description, font: .regular, fontSize: .callout, lineLimit: 4, horizontalPadding: 16)
+            ExpandableTextView(text: vm.location.description, font: .regular, fontSize: .callout, lineLimit: 10, horizontalPadding: 16)
         
         }.frame(maxWidth: .infinity, alignment: .leading)
     }

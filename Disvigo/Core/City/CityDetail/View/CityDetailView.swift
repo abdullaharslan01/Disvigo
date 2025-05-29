@@ -20,9 +20,7 @@ struct CityDetailView: View {
                     cityContentView
                 }
             }
-            .onAppear(perform: {
-                vm.didAppeear = true
-            })
+
             .navigationBarTitleDisplayMode(.large)
             .ignoresSafeArea(edges: [.top])
             .preferredColorScheme(.dark)
@@ -36,21 +34,15 @@ struct CityDetailView: View {
 
     var cityContentView: some View {
         VStack(alignment: .leading, spacing: 10) {
-            if vm.didAppeear {
-                VStack(alignment: .leading, spacing: 25) {
-                    headerTextView
-                        .transition(.flipFromLeft(duration: 0.5))
-                    moreDetailView
-                        .transition(.slide)
-                    descriptionView
-                        .transition(.slide)
-                }.padding()
+            VStack(alignment: .leading, spacing: 25) {
+                headerTextView
+                moreDetailView
+                descriptionView
+            }.padding()
 
-                categoryView
-                    .transition(.slide)
+            categoryView
 
-                cityMapView
-            }
+            cityMapView
         }
         .padding(.top, 5)
         .background(.appBackgroundDark)
@@ -181,7 +173,7 @@ struct CityDetailView: View {
             }
         }
         .frame(height: 300)
-        .padding(.top,30)
+        .padding(.top, 30)
     }
 
     private func focusOn(location: Location?) {

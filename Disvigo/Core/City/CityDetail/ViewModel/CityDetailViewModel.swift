@@ -16,7 +16,6 @@ struct DAlertItem {
 class CityDetailViewModel {
     var showFullDescription = false
     var showSafari = false
-    var didAppeear = false
 
     var locations: [Location] = []
     var foods: [Food] = []
@@ -51,6 +50,7 @@ class CityDetailViewModel {
     func fecthCity() {
         isLoading = true
 
+        print(city.id)
         Task {
             do {
                 let result: CityDetail = try await NetworkManager.shared.fetchData(path: .cityDetail(city.id))
@@ -61,6 +61,14 @@ class CityDetailViewModel {
                     memories = result.memories
                 }
 
+                
+                let url = Endpoint(path: .cityDetail(city.id))
+                
+                
+                print(url.url ?? "")
+                
+                
+                
                 print("Locations: \(result.locations.count)")
                 print("Food: \(result.foods.count)")
                 print("Memory: \(result.memories.count)")

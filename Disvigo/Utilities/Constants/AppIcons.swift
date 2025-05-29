@@ -8,6 +8,8 @@
 import Foundation
 
 enum AppIcons {
+    
+    static let cityDetail = "airplane.departure"
     static let map = "map"
     static let home = "house"
     static let heart = "heart"
@@ -27,6 +29,7 @@ enum AppIcons {
     static let walkIcon = "figure.walk"
     static let sort = "bolt.circle"
     static let chevronLeft = "chevron.left"
+    static let chevronUp = "chevron.up"
     static let paperplaneFill =  "paperplane.fill"
     static let fossil = "fossil.shell"
 

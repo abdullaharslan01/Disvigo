@@ -34,6 +34,8 @@ struct MemoryDetailView: View {
             imageSection
             detailSection
                 .padding(.horizontal)
+                .padding(.bottom,getSafeArea().bottom + 30)
+
         }
         .ignoresSafeArea()
     }
@@ -61,7 +63,7 @@ struct MemoryDetailView: View {
                 text: vm.memory.description,
                 font: .regular,
                 fontSize: .callout,
-                lineLimit: 4,
+                lineLimit: 20,
                 horizontalPadding: 16
             )
         }

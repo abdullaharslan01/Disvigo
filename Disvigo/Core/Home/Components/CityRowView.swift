@@ -28,6 +28,13 @@ struct CityRowView: View {
             .shadow(radius: 10)
             .onAppear { isAppear = true }
             .onDisappear { isAppear = false }
+        }.contextMenu {
+            Button {
+                onTapGesture()
+
+            } label: {
+                Label(String(localized: "Discover \(city.name)"), systemImage: AppIcons.cityDetail)
+            }
         }
     }
 
@@ -69,8 +76,6 @@ struct CityRowView: View {
 }
 
 #Preview {
-    CityRowView(city: DeveloperPreview.shared.city) {
-        
-    }
+    CityRowView(city: DeveloperPreview.shared.city) {}
         .padding(.horizontal)
 }

@@ -38,8 +38,34 @@ struct CityMapView: View {
 
         }.preferredColorScheme(.dark)
             .toolbarVisibility(.hidden, for: .tabBar)
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        vm.requestForSortLocations()
+
+                    } label: {
+                        Image(systemName: AppIcons.sort)
+                            .foregroundStyle(.yellow)
+                    }
+
+                    .contextMenu {
+                        Button {
+                            vm.requestForSortLocations()
+
+                        } label: {
+                            Label(String(localized: "Orders locations by proximity."), systemImage: AppIcons.sort)
+                        }
+                    }
+                }
+            }
             .navigationTitle(vm.city.name)
             .navigationBarTitleDisplayMode(.inline)
+            .alert(String(localized: "Already Sorted"), isPresented: $vm.sortedAlertMessage) {
+                Button("OK") {}
+            } message: {
+                Text(String(localized: "The locations in \(vm.city.name) city are already ordered by proximity to you."))
+            }
+
             .alert(item: $vm.permissionAlertType, content: { type in
                 DAlertType.locationPermission(permissionAlertType: type) {
                     vm.openMapsForPermission()
@@ -136,21 +162,8 @@ struct CityMapView: View {
                     Button {
                         router.navigate(to: .rotationSelection(vm.locations))
 
-
                     } label: {
                         Label(String(localized: "Create route from selected locations."), systemImage: AppIcons.map)
-                    }
-                }
-
-                DIconButtonView(iconButtonType: .custom(AppIcons.sort), iconColor: .yellow, bgMaterial: .ultraThinMaterial) {
-                    vm.requestForSortLocations()
-                }
-                .contextMenu {
-                    Button {
-                        vm.requestForSortLocations()
-
-                    } label: {
-                        Label(String(localized: "Orders locations by proximity."), systemImage: AppIcons.sort)
                     }
                 }
 

@@ -26,6 +26,7 @@ struct FoodDetailView: View {
             imageSection
             detailSection
                 .padding(.horizontal)
+                .padding(.bottom,getSafeArea().bottom + 30)
         }.ignoresSafeArea()
     }
 
@@ -46,9 +47,10 @@ struct FoodDetailView: View {
 
             recipeView
 
-            ExpandableTextView(text: vm.food.description, font: .regular, fontSize: .callout, lineLimit: 4, horizontalPadding: 16)
+            ExpandableTextView(text: vm.food.description, font: .regular, fontSize: .callout, lineLimit: 20, horizontalPadding: 16)
 
         }.frame(maxWidth: .infinity, alignment: .leading)
+           
     }
 
     var recipeView: some View {
