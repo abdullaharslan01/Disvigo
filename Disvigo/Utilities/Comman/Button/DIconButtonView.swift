@@ -7,23 +7,20 @@
 
 import SwiftUI
 
-enum DIconButtonType {
+enum DIconButtonType: Equatable {
     case location
     case user
-    case favorite(Bool)
     case custom(String)
 
     var systemName: String {
         switch self {
         case .location: return AppIcons.focusOnLocation
         case .user: return AppIcons.personCircle
-        case .favorite(let isFilled):
-            return isFilled ? AppIcons.heartFill : AppIcons.heart
         case .custom(let symbolName): return symbolName
         }
     }
 
-    var defaultSize: CGFloat { 44 } 
+    var defaultSize: CGFloat { 44 }
 }
 
 struct DIconButtonView: View {
@@ -52,40 +49,23 @@ struct DIconButtonView: View {
         Button {
             impactFeedback?.impactOccurred()
             action?()
-
         } label: {
-            iconContent
+            Image(systemName: iconButtonType.systemName)
+                .font(fontSize)
+                .foregroundStyle(iconColor)
+                .frame(width: resolvedWidth - (padding * 2), height: resolvedHeight - (padding * 2))
         }
         .frame(width: resolvedWidth, height: resolvedHeight)
-    }
-
-    private var iconContent: some View {
-        Image(systemName: iconButtonType.systemName)
-            .font(fontSize)
-            .foregroundStyle(iconColor)
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .padding(padding)
-            .background {
-                if let material = bgMaterial {
-                    RoundedRectangle(cornerRadius: cornerRadius)
-                        .fill(material)
-                } else {
-                    RoundedRectangle(cornerRadius: cornerRadius)
-                        .fill(bgColor)
-                }
+        .background {
+            if let material = bgMaterial {
+                RoundedRectangle(cornerRadius: cornerRadius)
+                    .fill(material)
+            } else {
+                RoundedRectangle(cornerRadius: cornerRadius)
+                    .fill(bgColor)
             }
-            .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
-            .shadow(radius: shadowRadius)
-            .contentShape(RoundedRectangle(cornerRadius: cornerRadius))
+        }
+        .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
+        .shadow(radius: shadowRadius)
     }
-}
-
-// MARK: - Preview
-
-#Preview {
-    VStack(spacing: 20) {
-        DIconButtonView(iconButtonType: .location, action: {})
-        DIconButtonView(iconButtonType: .favorite(false), action: {})
-    }
-    .padding()
 }

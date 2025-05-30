@@ -15,8 +15,11 @@ struct LocationDetailView: View {
         self._vm = State(wrappedValue: LocationDetailViewModel(location: location))
     }
     
+    @Environment(FavoriteManager.self) var favoriteManager
+
     @Environment(Router.self) var router
-    
+    @State private var isFavorite: Bool = false
+
     @State var mapCameraPosition: MapCameraPosition = .automatic
   
     var body: some View {
@@ -26,6 +29,9 @@ struct LocationDetailView: View {
             contentView
             
         }.preferredColorScheme(.dark)
+            .onAppear {
+                isFavorite = favoriteManager.isLocationFavorite(vm.location)
+            }.ignoresSafeArea()
     }
     
     var contentView: some View {
@@ -36,18 +42,23 @@ struct LocationDetailView: View {
                     .padding(.horizontal)
                 
                 mapSection
-                    .padding(.bottom,getSafeArea().bottom + 30)
+                    .padding(.bottom, getSafeArea().bottom + 30)
             }
-        }.ignoresSafeArea()
+        }
     }
     
     var imageSection: some View {
         DImageCollageView(images: vm.location.images, height: 350)
-            .overlay(alignment: .top) {
-                VStack {
-                    DIconButtonView(iconButtonType: .favorite(vm.isFavorite)) {}.padding(.top, getSafeArea().top == 0 ? 15 : getSafeArea().top)
-                        .padding(.horizontal)
-                }.frame(maxWidth: .infinity, alignment: .trailing)
+            .overlay(alignment: .topTrailing) {
+                FavoriteButtonView(isFavorite: $isFavorite) {
+                    favoriteManager.toggleLocationFavorite(vm.location)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                        let managerState = favoriteManager.isLocationFavorite(vm.location)
+                        if isFavorite != managerState {
+                            isFavorite = managerState
+                        }
+                    }
+                }.padding(.top, getSafeArea().top == 0 ? 15 : getSafeArea().top)
             }
     }
     
@@ -116,5 +127,6 @@ struct LocationDetailView: View {
     NavigationStack {
         LocationDetailView(location: DeveloperPreview.shared.location)
             .environment(Router())
+            .environment(FavoriteManager())
     }
 }

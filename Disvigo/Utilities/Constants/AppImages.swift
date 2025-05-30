@@ -11,6 +11,8 @@ enum AppImages {
     enum Lottie {
         static let splashLoading = "splashLoading"
         static let walkingPerson = "one-person-walking"
+        static let walkingPeople = "people-Walking"
+
     }
     enum Constant {
         static let logoTransparent = "logoTransparent"

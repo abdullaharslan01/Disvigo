@@ -10,6 +10,7 @@ import SwiftUI
 @main
 struct DisvigoApp: App {
     @State var router = Router()
+    @State var favoriteManager = FavoriteManager()
     @State var gemineManager = GemineViewStateController()
 
     var body: some Scene {
@@ -17,6 +18,7 @@ struct DisvigoApp: App {
             RootView()
                 .environment(router)
                 .environment(gemineManager)
+                .environment(favoriteManager)
         }
     }
 }

@@ -34,6 +34,7 @@
 		F57453622DDE0DD40047E989 /* Poppins-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F57453422DDE0DD40047E989 /* Poppins-Thin.ttf */; };
 		F57453632DDE0DD40047E989 /* splashLoading.json in Resources */ = {isa = PBXBuildFile; fileRef = F57453442DDE0DD40047E989 /* splashLoading.json */; };
 		F57453642DDE0DD40047E989 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F57453462DDE0DD40047E989 /* Assets.xcassets */; };
+		F5927BCB2DE9B34F0014D497 /* people-Walking.json in Resources */ = {isa = PBXBuildFile; fileRef = F5927BCA2DE9B34F0014D497 /* people-Walking.json */; };
 		F5BFF5392DDE20F200AEF27D /* DTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5BFF5382DDE20F200AEF27D /* DTabView.swift */; };
 		F5BFF53B2DDE211200AEF27D /* DTabModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5BFF53A2DDE211200AEF27D /* DTabModel.swift */; };
 		F5BFF54E2DDE50D700AEF27D /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5BFF54D2DDE50D700AEF27D /* City.swift */; };
@@ -87,6 +88,7 @@
 		F574534B2DDE0DD40047E989 /* Font+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+Ext.swift"; sourceTree = "<group>"; };
 		F574534E2DDE0DD40047E989 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		F574534F2DDE0DD40047E989 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F5927BCA2DE9B34F0014D497 /* people-Walking.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "people-Walking.json"; sourceTree = "<group>"; };
 		F5BFF5382DDE20F200AEF27D /* DTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DTabView.swift; sourceTree = "<group>"; };
 		F5BFF53A2DDE211200AEF27D /* DTabModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DTabModel.swift; sourceTree = "<group>"; };
 		F5BFF54D2DDE50D700AEF27D /* City.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
@@ -134,6 +136,16 @@
 		F57453662DDE0DF00047E989 /* Comman */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = Comman;
+			sourceTree = "<group>";
+		};
+		F5927B412DE9B1CE0014D497 /* ViewModel */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		F5927BCC2DE9B85C0014D497 /* Persistance */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Persistance;
 			sourceTree = "<group>";
 		};
 		F5BFF53C2DDE2D6700AEF27D /* ViewModel */ = {
@@ -214,6 +226,7 @@
 		F574532C2DDE0DD40047E989 /* Favorite */ = {
 			isa = PBXGroup;
 			children = (
+				F5927B412DE9B1CE0014D497 /* ViewModel */,
 				F574532B2DDE0DD40047E989 /* View */,
 			);
 			path = Favorite;
@@ -308,6 +321,7 @@
 		F57453392DDE0DD40047E989 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
+				F5927BCC2DE9B85C0014D497 /* Persistance */,
 				F5F3385B2DE11CAD00D8345F /* Map */,
 				F5BFF54F2DDE510900AEF27D /* Network */,
 			);
@@ -346,6 +360,7 @@
 		F57453452DDE0DD40047E989 /* Lottie */ = {
 			isa = PBXGroup;
 			children = (
+				F5927BCA2DE9B34F0014D497 /* people-Walking.json */,
 				F5358C432DE4A3C100C2912E /* one-person-walking.json */,
 				F57453442DDE0DD40047E989 /* splashLoading.json */,
 			);
@@ -432,6 +447,8 @@
 				F56321392DE38357004975DE /* Rotation */,
 				F56C3DC32DE5D9F400425480 /* ChatAI */,
 				F57453662DDE0DF00047E989 /* Comman */,
+				F5927B412DE9B1CE0014D497 /* ViewModel */,
+				F5927BCC2DE9B85C0014D497 /* Persistance */,
 				F5BFF53C2DDE2D6700AEF27D /* ViewModel */,
 				F5BFF54F2DDE510900AEF27D /* Network */,
 				F5BFF66A2DDE59AD00AEF27D /* Components */,
@@ -497,6 +514,7 @@
 				F574535C2DDE0DD40047E989 /* Poppins-ExtraBold.ttf in Resources */,
 				F574535D2DDE0DD40047E989 /* Poppins-Italic.ttf in Resources */,
 				F574535E2DDE0DD40047E989 /* Poppins-Light.ttf in Resources */,
+				F5927BCB2DE9B34F0014D497 /* people-Walking.json in Resources */,
 				F574535F2DDE0DD40047E989 /* Poppins-Medium.ttf in Resources */,
 				F57453602DDE0DD40047E989 /* Poppins-Regular.ttf in Resources */,
 				F5358C442DE4A3C100C2912E /* one-person-walking.json in Resources */,

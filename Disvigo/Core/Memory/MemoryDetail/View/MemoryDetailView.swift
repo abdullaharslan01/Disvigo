@@ -11,7 +11,9 @@ import SwiftUI
 struct MemoryDetailView: View {
     @State var vm: MemoryDetailViewModel
     @State private var showMapOptions = false
-    
+    @State private var isFavorite: Bool = false
+    @Environment(FavoriteManager.self) var favoriteManager
+
     init(memory: Memory) {
         self._vm = State(wrappedValue: MemoryDetailViewModel(memory: memory))
     }
@@ -22,10 +24,13 @@ struct MemoryDetailView: View {
             contentView
         }
         .preferredColorScheme(.dark)
+        .onAppear {
+            isFavorite = favoriteManager.isMemoryFavorite(vm.memory)
+        }.ignoresSafeArea()
         .confirmationDialog("Select Map App", isPresented: $showMapOptions) {
             mapSelectionButtons
         } message: {
-            Text(String(localized:"Select Map App to show vendors near you."))
+            Text(String(localized: "Select Map App to show vendors near you."))
         }
     }
     
@@ -34,21 +39,22 @@ struct MemoryDetailView: View {
             imageSection
             detailSection
                 .padding(.horizontal)
-                .padding(.bottom,getSafeArea().bottom + 30)
-
+                .padding(.bottom, getSafeArea().bottom + 30)
         }
-        .ignoresSafeArea()
     }
     
     var imageSection: some View {
         DImageCollageView(images: vm.memory.images, height: 400)
-            .overlay(alignment: .top) {
-                VStack {
-                    DIconButtonView(iconButtonType: .favorite(vm.isFavorite)) {}
-                        .padding(.top, getSafeArea().top == 0 ? 15 : getSafeArea().top)
-                        .padding(.horizontal)
-                }
-                .frame(maxWidth: .infinity, alignment: .trailing)
+            .overlay(alignment: .topTrailing) {
+                FavoriteButtonView(isFavorite: $isFavorite) {
+                    favoriteManager.toggleMemoryFavorite(vm.memory)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                        let managerState = favoriteManager.isMemoryFavorite(vm.memory)
+                        if isFavorite != managerState {
+                            isFavorite = managerState
+                        }
+                    }
+                }.padding(.top, getSafeArea().top == 0 ? 15 : getSafeArea().top)
             }
     }
     

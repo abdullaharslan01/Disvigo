@@ -61,14 +61,10 @@ class CityDetailViewModel {
                     memories = result.memories
                 }
 
-                
                 let url = Endpoint(path: .cityDetail(city.id))
-                
-                
+
                 print(url.url ?? "")
-                
-                
-                
+
                 print("Locations: \(result.locations.count)")
                 print("Food: \(result.foods.count)")
                 print("Memory: \(result.memories.count)")

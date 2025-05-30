@@ -7,6 +7,10 @@ struct CityDetailView: View {
     @State var position: MapCameraPosition = .automatic
     @State var selectedLocation: Location?
 
+    @State private var isFavorite: Bool = false
+
+    @Environment(FavoriteManager.self) var favoriteManager
+
     init(city: City) {
         self._vm = State(wrappedValue: CityDetailViewModel(city: city))
     }
@@ -14,22 +18,34 @@ struct CityDetailView: View {
     var body: some View {
         ZStack {
             Color.appBackgroundDark.ignoresSafeArea()
-            ScrollView {
-                VStack {
-                    cityImageView
-                    cityContentView
-                }
-            }
 
-            .navigationBarTitleDisplayMode(.large)
-            .ignoresSafeArea(edges: [.top])
-            .preferredColorScheme(.dark)
-        }.toolbarVisibility(.visible, for: .tabBar)
+            ScrollView {
+                cityImageView
+                cityContentView
+
+            }
+                .navigationBarTitleDisplayMode(.large)
+        }.preferredColorScheme(.dark)
+            .onAppear {
+                isFavorite = favoriteManager.isCityFavorite(vm.city)
+            }.ignoresSafeArea()
     }
 
     var cityImageView: some View {
         DImageLoaderView(url: vm.city.imageUrl, contentMode: .fill)
             .frame(height: 360)
+            .overlay(alignment: .topTrailing) {
+                FavoriteButtonView(isFavorite: $isFavorite) {
+                    favoriteManager.toggleCityFavorite(vm.city)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                        let managerState = favoriteManager.isCityFavorite(vm.city)
+                        if isFavorite != managerState {
+                            isFavorite = managerState
+                        }
+                    }
+                }.padding(.top, getSafeArea().top == 0 ? 15 : getSafeArea().top)
+                    .zIndex(1)
+            }
     }
 
     var cityContentView: some View {
@@ -200,4 +216,6 @@ struct CityDetailView: View {
         CityDetailView(city: DeveloperPreview.shared.city)
     }
     .environment(Router())
+    .environment(FavoriteManager())
 }
+
