@@ -22,9 +22,8 @@ struct CityDetailView: View {
             ScrollView {
                 cityImageView
                 cityContentView
-
             }
-                .navigationBarTitleDisplayMode(.large)
+
         }.preferredColorScheme(.dark)
             .onAppear {
                 isFavorite = favoriteManager.isCityFavorite(vm.city)
@@ -218,4 +217,3 @@ struct CityDetailView: View {
     .environment(Router())
     .environment(FavoriteManager())
 }
-
