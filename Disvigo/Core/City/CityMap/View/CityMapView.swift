@@ -12,6 +12,8 @@ struct CityMapView: View {
     @Environment(Router.self) var router
     @State var vm: CityMapViewModel
 
+    @Environment(GemineViewStateController.self) private var gemine
+
     @State var position: MapCameraPosition = .automatic
     @State var selectedLocation: Location?
 
@@ -31,6 +33,8 @@ struct CityMapView: View {
                     bottomControls
                 })
                 .onAppear {
+                    gemine.isVisible = .hidden
+
                     focusOnCity()
                 }.onChange(of: vm.focusOnUserState) {
                     focusOnUser()
@@ -258,5 +262,6 @@ extension CityMapView {
     NavigationStack {
         CityMapView(city: DeveloperPreview.shared.city, locations: DeveloperPreview.shared.locations)
             .environment(Router())
+            .environment(GemineViewStateController())
     }
 }

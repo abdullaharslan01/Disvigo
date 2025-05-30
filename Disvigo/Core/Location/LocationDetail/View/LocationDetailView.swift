@@ -16,6 +16,7 @@ struct LocationDetailView: View {
     }
     
     @Environment(FavoriteManager.self) var favoriteManager
+    @Environment(GemineViewStateController.self) private var gemine
 
     @Environment(Router.self) var router
     @State private var isFavorite: Bool = false
@@ -30,6 +31,9 @@ struct LocationDetailView: View {
             
         }.preferredColorScheme(.dark)
             .onAppear {
+                gemine.isVisible = .visible
+                gemine.gemineViewState = .location(vm.location)
+                
                 isFavorite = favoriteManager.isLocationFavorite(vm.location)
             }.ignoresSafeArea()
     }

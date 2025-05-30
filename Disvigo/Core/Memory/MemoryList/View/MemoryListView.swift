@@ -15,6 +15,8 @@ struct MemoryListView: View {
 
     @Environment(Router.self) var router
 
+    @Environment(GemineViewStateController.self) private var gemine
+
     var body: some View {
         ZStack {
             Color.appBackgroundDark.ignoresSafeArea()
@@ -78,6 +80,10 @@ struct MemoryListView: View {
             }
             .animation(.easeInOut(duration: 0.2), value: vm.filteredMemories.isEmpty && !vm.searchText.isEmpty)
         }
+        .onAppear(perform: {
+            gemine.isVisible = .visible
+
+        })
         .searchable(
             text: $vm.searchText,
             placement: .navigationBarDrawer,
@@ -97,4 +103,5 @@ struct MemoryListView: View {
 #Preview {
     MemoryListView(memories: DeveloperPreview.shared.memories, cityName: "Adana")
         .environment(Router())
+        .environment(GemineViewStateController())
 }

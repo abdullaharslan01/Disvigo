@@ -13,6 +13,7 @@ struct LocationListView: View {
     }
 
     @State var vm: LocationListViewModel
+    @Environment(GemineViewStateController.self) private var gemine
 
     @Environment(Router.self) var router
 
@@ -51,6 +52,10 @@ struct LocationListView: View {
                 }
             }
         }
+        .onAppear(perform: {
+            gemine.isVisible = .visible
+
+        })
         .toolbar(content: {
             ToolbarItem(placement: .topBarTrailing) {
                 Button {

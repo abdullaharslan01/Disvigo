@@ -148,6 +148,11 @@
 			path = Persistance;
 			sourceTree = "<group>";
 		};
+		F5927C572DE9D82F0014D497 /* Components */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Components;
+			sourceTree = "<group>";
+		};
 		F5BFF53C2DDE2D6700AEF27D /* ViewModel */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = ViewModel;
@@ -226,6 +231,7 @@
 		F574532C2DDE0DD40047E989 /* Favorite */ = {
 			isa = PBXGroup;
 			children = (
+				F5927C572DE9D82F0014D497 /* Components */,
 				F5927B412DE9B1CE0014D497 /* ViewModel */,
 				F574532B2DDE0DD40047E989 /* View */,
 			);
@@ -449,6 +455,7 @@
 				F57453662DDE0DF00047E989 /* Comman */,
 				F5927B412DE9B1CE0014D497 /* ViewModel */,
 				F5927BCC2DE9B85C0014D497 /* Persistance */,
+				F5927C572DE9D82F0014D497 /* Components */,
 				F5BFF53C2DDE2D6700AEF27D /* ViewModel */,
 				F5BFF54F2DDE510900AEF27D /* Network */,
 				F5BFF66A2DDE59AD00AEF27D /* Components */,

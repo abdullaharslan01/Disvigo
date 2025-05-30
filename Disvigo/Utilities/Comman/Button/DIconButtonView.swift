@@ -20,7 +20,7 @@ enum DIconButtonType: Equatable {
         }
     }
 
-    var defaultSize: CGFloat { 44 }
+    var defaultSize: CGFloat { 55 }
 }
 
 struct DIconButtonView: View {

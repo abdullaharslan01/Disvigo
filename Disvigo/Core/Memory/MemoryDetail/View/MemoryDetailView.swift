@@ -13,7 +13,9 @@ struct MemoryDetailView: View {
     @State private var showMapOptions = false
     @State private var isFavorite: Bool = false
     @Environment(FavoriteManager.self) var favoriteManager
+    @Environment(GemineViewStateController.self) private var gemine
 
+    @Environment(Router.self) var router
     init(memory: Memory) {
         self._vm = State(wrappedValue: MemoryDetailViewModel(memory: memory))
     }
@@ -25,6 +27,12 @@ struct MemoryDetailView: View {
         }
         .preferredColorScheme(.dark)
         .onAppear {
+            
+            gemine.isVisible = .visible
+            gemine.gemineViewState = .memory(vm.memory)
+
+            
+            
             isFavorite = favoriteManager.isMemoryFavorite(vm.memory)
         }.ignoresSafeArea()
         .confirmationDialog("Select Map App", isPresented: $showMapOptions) {
@@ -105,4 +113,7 @@ struct MemoryDetailView: View {
 
 #Preview {
     MemoryDetailView(memory: DeveloperPreview.shared.memories[1])
+        .environment(GemineViewStateController())
+        .environment(Router())
+        .environment(FavoriteManager())
 }

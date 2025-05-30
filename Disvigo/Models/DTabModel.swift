@@ -11,6 +11,7 @@ import Foundation
 enum DTabModel: Hashable, Codable {
     case home
     case favorites
+    case hidden
 
     var title: String {
         switch self {
@@ -18,6 +19,8 @@ enum DTabModel: Hashable, Codable {
             return String(localized: "Home")
         case .favorites:
             return String(localized: "Favorites")
+        case .hidden:
+            return String("")
         }
     }
 
@@ -27,6 +30,8 @@ enum DTabModel: Hashable, Codable {
             return AppIcons.home
         case .favorites:
             return AppIcons.heart
+        case .hidden:
+            return ""
         }
     }
 

@@ -9,6 +9,9 @@ import SwiftUI
 
 struct FoodDetailView: View {
     @State var vm: FoodDetailViewModel
+    @Environment(GemineViewStateController.self) private var gemine
+
+    @Environment(Router.self) private var router
     @State private var isFavorite: Bool = false
     @Environment(FavoriteManager.self) var favoriteManager
 
@@ -22,6 +25,9 @@ struct FoodDetailView: View {
             contentView
         }.preferredColorScheme(.dark)
             .onAppear {
+                gemine.isVisible = .visible
+                gemine.gemineViewState = .food(vm.food)
+
                 isFavorite = favoriteManager.isFoodFavorite(vm.food)
             }.ignoresSafeArea()
     }
@@ -79,4 +85,5 @@ struct FoodDetailView: View {
 #Preview {
     FoodDetailView(food: DeveloperPreview.shared.foods[1])
         .environment(FavoriteManager())
+        .environment(GemineViewStateController())
 }

@@ -79,6 +79,7 @@ class FavoriteManager: NSObject {
         saveContext()
     }
     
+    // MARK: - Location Methods
     func isLocationFavorite(_ location: Location) -> Bool {
         return isFavorite(item: location.id, in: savedLocations, keyPath: \.id)
     }
@@ -93,6 +94,13 @@ class FavoriteManager: NSObject {
         removeFavorite(item: location.id, from: savedLocations, keyPath: \.id)
     }
     
+    // YENİ: Direkt SavedLocation ile çalışan fonksiyon
+    func removeSavedLocation(_ savedLocation: SavedLocation) {
+        guard let context = modelContext else { return }
+        context.delete(savedLocation)
+        saveContext()
+    }
+    
     func toggleLocationFavorite(_ location: Location) {
         if isLocationFavorite(location) {
             removeLocationFavorite(location)
@@ -101,6 +109,7 @@ class FavoriteManager: NSObject {
         }
     }
     
+    // MARK: - Memory Methods
     func isMemoryFavorite(_ memory: Memory) -> Bool {
         return isFavorite(item: memory.id, in: savedMemories, keyPath: \.id)
     }
@@ -115,6 +124,13 @@ class FavoriteManager: NSObject {
         removeFavorite(item: memory.id, from: savedMemories, keyPath: \.id)
     }
     
+    // YENİ: Direkt SavedMemory ile çalışan fonksiyon
+    func removeSavedMemory(_ savedMemory: SavedMemory) {
+        guard let context = modelContext else { return }
+        context.delete(savedMemory)
+        saveContext()
+    }
+    
     func toggleMemoryFavorite(_ memory: Memory) {
         if isMemoryFavorite(memory) {
             removeMemoryFavorite(memory)
@@ -123,6 +139,7 @@ class FavoriteManager: NSObject {
         }
     }
     
+    // MARK: - City Methods
     func isCityFavorite(_ city: City) -> Bool {
         return isFavorite(item: city.id, in: savedCities, keyPath: \.id)
     }
@@ -137,6 +154,13 @@ class FavoriteManager: NSObject {
         removeFavorite(item: city.id, from: savedCities, keyPath: \.id)
     }
     
+    // YENİ: Direkt SavedCity ile çalışan fonksiyon
+    func removeSavedCity(_ savedCity: SavedCity) {
+        guard let context = modelContext else { return }
+        context.delete(savedCity)
+        saveContext()
+    }
+    
     func toggleCityFavorite(_ city: City) {
         print("Favoriye eklendi: \(city.name)")
         
@@ -147,6 +171,7 @@ class FavoriteManager: NSObject {
         }
     }
     
+    // MARK: - Food Methods
     func isFoodFavorite(_ food: Food) -> Bool {
         return isFavorite(item: food.id, in: savedFood, keyPath: \.id)
     }
@@ -159,6 +184,13 @@ class FavoriteManager: NSObject {
 
     func removeFoodFavorite(_ food: Food) {
         removeFavorite(item: food.id, from: savedFood, keyPath: \.id)
+    }
+    
+    // YENİ: Direkt SavedFood ile çalışan fonksiyon
+    func removeSavedFood(_ savedFood: SavedFood) {
+        guard let context = modelContext else { return }
+        context.delete(savedFood)
+        saveContext()
     }
 
     func toggleFoodFavorite(_ food: Food) {

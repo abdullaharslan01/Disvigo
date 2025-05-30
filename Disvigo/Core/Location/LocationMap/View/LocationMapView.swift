@@ -10,7 +10,10 @@ import SwiftUI
 
 struct LocationMapView: View {
     @State var position: MapCameraPosition = .automatic
+    @Environment(GemineViewStateController.self) private var gemine
 
+    @Environment(Router.self) private var router
+    
     @State var vm: LocationMapViewModel
 
     init(location: Location) {
@@ -43,6 +46,10 @@ struct LocationMapView: View {
         .navigationBarTitleDisplayMode(.inline)
         .preferredColorScheme(.dark)
         .onAppear {
+            
+            gemine.isVisible = .hidden
+
+            
             focusOnLocation()
         }
         .overlay(alignment: .bottom) {
@@ -152,5 +159,7 @@ extension LocationMapView {
 #Preview {
     NavigationStack {
         LocationMapView(location: DeveloperPreview.shared.location)
+            .environment(Router())
+            .environment(GemineViewStateController())
     }
 }

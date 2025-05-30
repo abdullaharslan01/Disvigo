@@ -48,7 +48,7 @@ struct FoodListCardView: View {
 
     private var imageView: some View {
         Group {
-            if let image = food.images.randomElement() {
+            if let image = food.images.first {
                 DImageLoaderView(
                     url: image,
                     contentMode: .fill

@@ -16,6 +16,7 @@ struct RotationSelectionView: View {
     @State private var showLimitAlert = false
     @State private var previousSelectionCount = 0
     @State private var isViewAppeared = false
+    @Environment(GemineViewStateController.self) private var gemine
 
     @Environment(Router.self) var router
 
@@ -46,6 +47,8 @@ struct RotationSelectionView: View {
             handleSelectionChange(newSelection)
         }
         .onAppear {
+            gemine.isVisible = .hidden
+
             setupInitialState()
         }
         .onDisappear {
@@ -256,7 +259,7 @@ struct RotationSelectionView: View {
     // MARK: - Selection State Helpers
 
     @MainActor
-    private func refreshSelectionState()  {
+    private func refreshSelectionState() {
         let currentSelection = selectedItems
 
         selectedItems = Set<Location.ID>()
@@ -268,4 +271,5 @@ struct RotationSelectionView: View {
 #Preview {
     RotationSelectionView(locations: DeveloperPreview.shared.locations)
         .environment(Router())
+        .environment(GemineViewStateController())
 }

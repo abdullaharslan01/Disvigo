@@ -59,7 +59,6 @@ enum Destination: Hashable {
 
 @Observable
 class Router {
-    var toolbarVisibility: Visibility = .hidden
 
     var homePath = NavigationPath()
 
@@ -87,86 +86,46 @@ extension View {
             switch destination {
             case .cityDetail(let city):
                 CityDetailView(city: city)
-                    .navigationTransition(.zoom(sourceID: city.id, in: namespace))
-                    .onAppear {
-                        gemine.isVisible = .visible
-                        router.toolbarVisibility = .hidden
-                        gemine.gemineViewState = .city(city)
-                    }
+                    .navigationTransition(.zoom(sourceID: city.id, in: namespace)).toolbarRole(.editor)
+
             case .locationDetail(let location):
                 LocationDetailView(location: location)
-                    .toolbarRole(.editor).onAppear {
-                        gemine.isVisible = .visible
+                    .toolbarRole(.editor)
 
-                        router.toolbarVisibility = .hidden
-                        gemine.gemineViewState = .location(location)
-                    }
             case .locationMap(let location):
                 LocationMapView(location: location)
                     .toolbarRole(.editor)
-                    .onAppear {
-                        gemine.isVisible = .hidden
 
-                        router.toolbarVisibility = .hidden
-                        gemine.isVisible = .hidden
-                    }
             case .cityMap(let locations, let city):
                 CityMapView(city: city, locations: locations)
-                    .onAppear {
-                        gemine.isVisible = .hidden
+                    .toolbarRole(.editor)
 
-                        router.toolbarVisibility = .hidden
-                    }
             case .locationList(let locations, let cityName):
                 LocationListView(locations: locations, cityTitle: cityName)
-                    .onAppear {
-                        gemine.isVisible = .visible
+                    .toolbarRole(.editor)
 
-                        router.toolbarVisibility = .hidden
-                    }
             case .foodDetail(let food):
                 FoodDetailView(food: food)
-                    .onAppear {
-                        gemine.isVisible = .visible
-                        gemine.gemineViewState = .food(food)
-                        router.toolbarVisibility = .hidden
-                    }
+
             case .foodList(let foods, let cityName):
                 FoodListView(foods: foods, cityName: cityName)
-                    .onAppear {
-                        gemine.isVisible = .visible
+                    .toolbarRole(.editor)
 
-                        router.toolbarVisibility = .hidden
-                    }
             case .memoryDetail(let memory):
-                MemoryDetailView(memory: memory).onAppear {
-                    gemine.isVisible = .visible
-                    gemine.gemineViewState = .memory(memory)
+                MemoryDetailView(memory: memory)
+                    .toolbarRole(.editor)
 
-                    router.toolbarVisibility = .hidden
-                }
             case .memoryList(let memories, let cityName):
-                MemoryListView(memories: memories, cityName: cityName).onAppear {
-                    gemine.isVisible = .visible
+                MemoryListView(memories: memories, cityName: cityName)
+                    .toolbarRole(.editor)
 
-                    router.toolbarVisibility = .hidden
-                }
             case .rotationDetail(let locations):
                 RotataionDetailView(stops: locations)
                     .navigationBarBackButtonHidden()
-                    .onAppear {
-                        gemine.isVisible = .hidden
 
-                        router.toolbarVisibility = .hidden
-                    }
             case .rotationSelection(let locations):
                 RotationSelectionView(locations: locations)
                     .navigationBarBackButtonHidden()
-                    .onAppear {
-                        gemine.isVisible = .hidden
-
-                        router.toolbarVisibility = .hidden
-                    }
             }
         }
     }

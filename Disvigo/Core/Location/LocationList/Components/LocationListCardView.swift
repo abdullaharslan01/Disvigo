@@ -48,7 +48,7 @@ struct LocationListCardView: View {
 
     private var imageView: some View {
         Group {
-            if let image = location.images.randomElement() {
+            if let image = location.images.first {
                 DImageLoaderView(
                     url: image,
                     contentMode: .fill

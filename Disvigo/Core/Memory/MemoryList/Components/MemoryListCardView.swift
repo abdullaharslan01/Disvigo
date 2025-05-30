@@ -48,7 +48,7 @@ struct MemoryListCardView: View {
 
     private var imageView: some View {
         Group {
-            if let image = memory.images.randomElement() {
+            if let image = memory.images.first {
                 DImageLoaderView(
                     url: image,
                     contentMode: .fill

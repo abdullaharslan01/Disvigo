@@ -1,8 +1,17 @@
+//
+//  CityDetailView.swift
+//  Disvigo
+//
+//  Created by abdullah on 24.05.2025.
+//
+
+
 import MapKit
 import SwiftUI
 
 struct CityDetailView: View {
     @Environment(Router.self) private var router
+    @Environment(GemineViewStateController.self) private var gemine
     @State var vm: CityDetailViewModel
     @State var position: MapCameraPosition = .automatic
     @State var selectedLocation: Location?
@@ -26,6 +35,10 @@ struct CityDetailView: View {
 
         }.preferredColorScheme(.dark)
             .onAppear {
+                gemine.isVisible = .visible
+                gemine.gemineViewState = .city(vm.city)
+
+                
                 isFavorite = favoriteManager.isCityFavorite(vm.city)
             }.ignoresSafeArea()
     }

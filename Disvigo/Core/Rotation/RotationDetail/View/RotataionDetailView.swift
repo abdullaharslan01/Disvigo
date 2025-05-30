@@ -4,6 +4,8 @@ import SwiftUI
 struct RotataionDetailView: View {
     var stops: [Location]
 
+    @Environment(GemineViewStateController.self) private var gemine
+
     @State var selectedLocation: Location?
     @State var vm = RotationViewModel()
     
@@ -66,6 +68,8 @@ struct RotataionDetailView: View {
                         .stroke(.blue, lineWidth: 4)
                 }
                 .onAppear {
+                    gemine.isVisible = .hidden
+
                     vm.locationManager.requestLocation()
                     updateRoute()
                 }
@@ -470,5 +474,6 @@ extension Array where Element == CLLocationCoordinate2D {
     NavigationStack {
         RotataionDetailView(stops: DeveloperPreview.shared.locations)
             .environment(Router())
+            .environment(GemineViewStateController())
     }
 }

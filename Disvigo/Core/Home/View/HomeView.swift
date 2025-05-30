@@ -21,7 +21,10 @@ struct HomeView: View {
             Color.appBackgroundDark.ignoresSafeArea()
 
             contentView
-        }
+        }.onAppear(perform: {
+            gemineManager.gemineViewState = .turkey
+
+        })
 
         .navigationTitle(String(localized: "Explore Cities"))
         .preferredColorScheme(.dark)

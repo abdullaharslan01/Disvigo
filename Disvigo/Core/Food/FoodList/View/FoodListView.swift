@@ -14,6 +14,7 @@ struct FoodListView: View {
     }
 
     @Environment(Router.self) var router
+    @Environment(GemineViewStateController.self) private var gemine
 
     var body: some View {
         ZStack {
@@ -94,6 +95,10 @@ struct FoodListView: View {
             }
             .animation(.easeInOut(duration: 0.2), value: vm.filteredFoods.isEmpty && !vm.searchText.isEmpty)
         }
+        .onAppear(perform: {
+            gemine.isVisible = .visible
+
+        })
         .searchable(
             text: $vm.searchText,
             placement: .navigationBarDrawer,
