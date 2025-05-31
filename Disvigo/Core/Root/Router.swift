@@ -19,6 +19,7 @@ enum Destination: Hashable {
     case memoryList([Memory], String)
     case rotationDetail([Location])
     case rotationSelection([Location])
+    case visitedDetail(VisitedList)
 
     func hash(into hasher: inout Hasher) {
         switch self {
@@ -53,13 +54,15 @@ enum Destination: Hashable {
             hasher.combine("rotationDetail")
         case .rotationSelection:
             hasher.combine("rotationSelection")
+        case .visitedDetail(let visitedList):
+            hasher.combine(visitedList.id)
+            hasher.combine("visitedDetail")
         }
     }
 }
 
 @Observable
 class Router {
-
     var homePath = NavigationPath()
 
     func navigate(to destination: Destination) {
@@ -126,6 +129,9 @@ extension View {
             case .rotationSelection(let locations):
                 RotationSelectionView(locations: locations)
                     .navigationBarBackButtonHidden()
+
+            case .visitedDetail(let visitedList):
+                VisitedDetailView(visitedList: visitedList)
             }
         }
     }

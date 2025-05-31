@@ -48,9 +48,22 @@ struct DTabView: View {
 
                     }).toolbarVisibility(mainTabBarVisibility, for: .tabBar)
                 }
+                
+                Tab(DTabModel.visited.title, systemImage: DTabModel.visited.icon, value: .visited) {
+                    NavigationStack(path: $router.homePath) {
+                        VisitedView()
+                            .navigationDestination(namespace: animation, router: router, gemine: gemineManager)
+
+                        
+                    }
+                }
+                
+                
             }
             .onChange(of: router.homePath.count) { _, newValue in
                 withAnimation {
+                    print(newValue)
+                    
                     DispatchQueue.main.async {
                         if newValue == 0 {
                             mainTabBarVisibility = .visible

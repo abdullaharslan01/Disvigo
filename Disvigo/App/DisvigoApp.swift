@@ -12,6 +12,7 @@ struct DisvigoApp: App {
     @State var router = Router()
     @State var favoriteManager = FavoriteManager()
     @State var gemineManager = GemineViewStateController()
+    @State var visitedManager = VisitedManager()
 
     var body: some Scene {
         WindowGroup {
@@ -19,6 +20,7 @@ struct DisvigoApp: App {
                 .environment(router)
                 .environment(gemineManager)
                 .environment(favoriteManager)
+                .environment(visitedManager)
         }
     }
 }

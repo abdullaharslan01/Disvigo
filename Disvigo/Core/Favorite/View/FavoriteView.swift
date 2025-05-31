@@ -46,7 +46,7 @@ struct FavoriteView: View {
 
             if isEmpty {
                 emptyStateView
-                    .padding(.bottom)
+                    .padding(.bottom, 50)
             } else {
                 favoritesContent
             }
@@ -224,7 +224,7 @@ extension FavoriteView {
             title: String(localized: "Your Favorites"),
             buttonTitle: String(localized: "Explore Now"),
             message: String(localized: "It looks like you haven't saved any favorites yet.\nExplore places and tap the heart icon to add them here."),
-            textColor: .appTextLight
+            textColor: .appTextLight, buttonBackground: .appGreenPrimary, buttonForeground: .appTextLight
         ) {
             selectedTab = .home
         }

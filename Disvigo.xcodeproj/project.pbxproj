@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F51B2CAC2DEB5FA800A513AB /* VisitedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F51B2CAB2DEB5FA800A513AB /* VisitedList.swift */; };
+		F51B2CAE2DEB617500A513AB /* Color+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = F51B2CAD2DEB617500A513AB /* Color+Ext.swift */; };
+		F51B2CB72DEB9AA100A513AB /* historical.json in Resources */ = {isa = PBXBuildFile; fileRef = F51B2CB62DEB9AA100A513AB /* historical.json */; };
 		F5358C442DE4A3C100C2912E /* one-person-walking.json in Resources */ = {isa = PBXBuildFile; fileRef = F5358C432DE4A3C100C2912E /* one-person-walking.json */; };
 		F56C3DD22DE5DE4100425480 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = F56C3DD12DE5DE4100425480 /* Message.swift */; };
 		F56C3DD42DE5DE7300425480 /* Text+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = F56C3DD32DE5DE7300425480 /* Text+Ext.swift */; };
@@ -62,6 +65,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		F51B2CAB2DEB5FA800A513AB /* VisitedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitedList.swift; sourceTree = "<group>"; };
+		F51B2CAD2DEB617500A513AB /* Color+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Ext.swift"; sourceTree = "<group>"; };
+		F51B2CB62DEB9AA100A513AB /* historical.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = historical.json; sourceTree = "<group>"; };
 		F5358C432DE4A3C100C2912E /* one-person-walking.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "one-person-walking.json"; sourceTree = "<group>"; };
 		F553F69B2DDE06B400E06FEA /* Disvigo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Disvigo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F56C3DD12DE5DE4100425480 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
@@ -103,6 +109,11 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		F51B2C932DEB432000A513AB /* Visited */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Visited;
+			sourceTree = "<group>";
+		};
 		F5358BD82DE4A01000C2912E /* Location */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = Location;
@@ -309,6 +320,7 @@
 		F57453382DDE0DD40047E989 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				F51B2C932DEB432000A513AB /* Visited */,
 				F56C3DC32DE5D9F400425480 /* ChatAI */,
 				F5358C162DE4A02E00C2912E /* City */,
 				F5358C042DE4A02300C2912E /* Memory */,
@@ -344,6 +356,7 @@
 				F5F337AF2DE0F37100D8345F /* Memory.swift */,
 				F56C3DD12DE5DE4100425480 /* Message.swift */,
 				F5E3C8302DE780640077D3BF /* CityDetail.swift */,
+				F51B2CAB2DEB5FA800A513AB /* VisitedList.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -369,6 +382,7 @@
 				F5927BCA2DE9B34F0014D497 /* people-Walking.json */,
 				F5358C432DE4A3C100C2912E /* one-person-walking.json */,
 				F57453442DDE0DD40047E989 /* splashLoading.json */,
+				F51B2CB62DEB9AA100A513AB /* historical.json */,
 			);
 			path = Lottie;
 			sourceTree = "<group>";
@@ -398,6 +412,7 @@
 				F5F338472DE109A600D8345F /* View+Ext.swift */,
 				F5F3384C2DE10E2C00D8345F /* String+Ext.swift */,
 				F56C3DD32DE5DE7300425480 /* Text+Ext.swift */,
+				F51B2CAD2DEB617500A513AB /* Color+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -446,6 +461,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
+				F51B2C932DEB432000A513AB /* Visited */,
 				F5358BD82DE4A01000C2912E /* Location */,
 				F5358BF12DE4A01B00C2912E /* Food */,
 				F5358C042DE4A02300C2912E /* Memory */,
@@ -520,6 +536,7 @@
 				F574535B2DDE0DD40047E989 /* Poppins-Bold.ttf in Resources */,
 				F574535C2DDE0DD40047E989 /* Poppins-ExtraBold.ttf in Resources */,
 				F574535D2DDE0DD40047E989 /* Poppins-Italic.ttf in Resources */,
+				F51B2CB72DEB9AA100A513AB /* historical.json in Resources */,
 				F574535E2DDE0DD40047E989 /* Poppins-Light.ttf in Resources */,
 				F5927BCB2DE9B34F0014D497 /* people-Walking.json in Resources */,
 				F574535F2DDE0DD40047E989 /* Poppins-Medium.ttf in Resources */,
@@ -547,6 +564,8 @@
 				F5F3384D2DE10E2C00D8345F /* String+Ext.swift in Sources */,
 				F56C3E6A2DE5F8AA00425480 /* GemineViewStateController.swift in Sources */,
 				F57453542DDE0DD40047E989 /* RootView.swift in Sources */,
+				F51B2CAE2DEB617500A513AB /* Color+Ext.swift in Sources */,
+				F51B2CAC2DEB5FA800A513AB /* VisitedList.swift in Sources */,
 				F57453552DDE0DD40047E989 /* SplashView.swift in Sources */,
 				F57453562DDE0DD40047E989 /* AppIcons.swift in Sources */,
 				F57453572DDE0DD40047E989 /* AppImages.swift in Sources */,
