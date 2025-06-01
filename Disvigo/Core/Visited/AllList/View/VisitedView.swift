@@ -29,8 +29,9 @@ struct VisitedView: View {
         }
         .preferredColorScheme(.dark)
         .navigationTitle(String(localized: "My Travel Lists"))
-        .fullScreenCover(isPresented: $createListState) {
+        .sheet(isPresented: $createListState) {
             AddListView(isUpdate: false)
+                .presentationDragIndicator(.visible)
         }
         .confirmationDialog(
             String(localized: "Delete List?"),
@@ -64,9 +65,8 @@ struct VisitedView: View {
                 detailButton(for: item)
             }
             .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-                deleteButton(for: item,showText: false)
-                detailButton(for: item,showText: false)
-
+                deleteButton(for: item, showText: false)
+                detailButton(for: item, showText: false)
             }
         }.listStyle(.plain)
             .scrollContentBackground(.hidden)
@@ -82,7 +82,7 @@ struct VisitedView: View {
     
     private var emptyStateView: some View {
         DLottieEmtyView(
-            lottieName: AppImages.Lottie.historical,
+            lottieName: AppImages.Lottie.astronot,
             title: String(localized: "Your Travel Lists Await"),
             buttonTitle: String(localized: "Create First List"),
             message: String(localized: "Organize your adventures! Create lists for different trips, add locations you've visited or want to explore, and track your travel memories all in one place."),
@@ -109,10 +109,10 @@ struct VisitedView: View {
                     in: RoundedRectangle(cornerRadius: 16)
                 )
         }
-        .padding(.bottom)
+        .padding(.bottom,30)
     }
     
-    private func deleteButton(for item: VisitedList,showText:Bool = true) -> some View {
+    private func deleteButton(for item: VisitedList, showText: Bool = true) -> some View {
         Button(role: .destructive) {
             UIImpactFeedbackGenerator(style: .medium).impactOccurred()
 
@@ -131,7 +131,7 @@ struct VisitedView: View {
         .tint(.red)
     }
     
-    private func detailButton(for item: VisitedList,showText:Bool = true) -> some View {
+    private func detailButton(for item: VisitedList, showText: Bool = true) -> some View {
         Button {
             UIImpactFeedbackGenerator(style: .medium).impactOccurred()
 
@@ -148,9 +148,6 @@ struct VisitedView: View {
         }
         .tint(.blue)
     }
-    
-    
-    
     
     private var deleteConfirmationButtons: some View {
         Group {
@@ -177,6 +174,7 @@ struct VisitedView: View {
 
 struct VisitedRowView: View {
     let item: VisitedList
+    var showDetailIcon: Bool = true
     let onTapGesture: () -> Void
 
     var body: some View {
@@ -185,7 +183,10 @@ struct VisitedRowView: View {
                 itemIcon
                 itemTitle
                 Spacer()
-                chevronIcon
+                
+                if showDetailIcon {
+                    chevronIcon
+                }
             }
             .foregroundStyle(.black)
             .padding()

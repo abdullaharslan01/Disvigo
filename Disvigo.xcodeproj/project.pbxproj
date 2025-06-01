@@ -50,6 +50,7 @@
 		F5F338482DE109A600D8345F /* View+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5F338472DE109A600D8345F /* View+Ext.swift */; };
 		F5F3384D2DE10E2C00D8345F /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5F3384C2DE10E2C00D8345F /* String+Ext.swift */; };
 		F5FA45FC2DEC8A1800E08E15 /* UIApplication+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5FA45FB2DEC8A1700E08E15 /* UIApplication+Ext.swift */; };
+		F5FA46022DEC995500E08E15 /* astronot.json in Resources */ = {isa = PBXBuildFile; fileRef = F5FA46012DEC995500E08E15 /* astronot.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -108,6 +109,7 @@
 		F5F338472DE109A600D8345F /* View+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Ext.swift"; sourceTree = "<group>"; };
 		F5F3384C2DE10E2C00D8345F /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
 		F5FA45FB2DEC8A1700E08E15 /* UIApplication+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Ext.swift"; sourceTree = "<group>"; };
+		F5FA46012DEC995500E08E15 /* astronot.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = astronot.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -382,6 +384,7 @@
 			isa = PBXGroup;
 			children = (
 				F5927BCA2DE9B34F0014D497 /* people-Walking.json */,
+				F5FA46012DEC995500E08E15 /* astronot.json */,
 				F5358C432DE4A3C100C2912E /* one-person-walking.json */,
 				F57453442DDE0DD40047E989 /* splashLoading.json */,
 				F51B2CB62DEB9AA100A513AB /* historical.json */,
@@ -549,6 +552,7 @@
 				F57453622DDE0DD40047E989 /* Poppins-Thin.ttf in Resources */,
 				F57453632DDE0DD40047E989 /* splashLoading.json in Resources */,
 				F57453642DDE0DD40047E989 /* Assets.xcassets in Resources */,
+				F5FA46022DEC995500E08E15 /* astronot.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

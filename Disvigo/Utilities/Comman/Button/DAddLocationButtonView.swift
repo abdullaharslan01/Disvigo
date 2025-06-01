@@ -1,14 +1,13 @@
 //
-//  FavoriteButtonView.swift
+//  AddLocationView.swift
 //  Disvigo
 //
-//  Created by abdullah on 30.05.2025.
+//  Created by abdullah on 01.06.2025.
 //
 
 import SwiftUI
 
-struct FavoriteButtonView: View {
-    @Binding var isFavorite: Bool
+struct DAddLocationButtonView: View {
     var onTapGusture: () -> ()
 
     var body: some View {
@@ -17,10 +16,9 @@ struct FavoriteButtonView: View {
 
             onTapGusture()
         } label: {
-            Image(systemName: isFavorite ? AppIcons.heartFill : AppIcons.heart)
-                .symbolEffect(.pulse, isActive: !isFavorite)
+            Image(systemName: AppIcons.plus)
                 .font(.poppins(.medium, size: .title))
-                .foregroundStyle(.red)
+                .foregroundStyle(.appGreenPrimary)
                 .padding()
                 .background(
                     .white, in: RoundedRectangle(cornerRadius: 16)
@@ -30,5 +28,6 @@ struct FavoriteButtonView: View {
 }
 
 #Preview {
-    FavoriteButtonView(isFavorite: .constant(true)) {}
+
+    DAddLocationButtonView {}
 }

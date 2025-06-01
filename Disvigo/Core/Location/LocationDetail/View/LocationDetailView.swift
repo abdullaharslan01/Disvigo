@@ -23,6 +23,7 @@ struct LocationDetailView: View {
 
     @State var mapCameraPosition: MapCameraPosition = .automatic
   
+    @State var addToLocationViewState: Bool = false
     var body: some View {
         ZStack {
             Color.appBackgroundDark.ignoresSafeArea()
@@ -48,20 +49,30 @@ struct LocationDetailView: View {
                 mapSection
                     .padding(.bottom, getSafeArea().bottom + 30)
             }
+        }.sheet(isPresented: $addToLocationViewState) {
+            AddLocationListView(location: vm.location)
+                .presentationDragIndicator(.visible)
         }
     }
     
     var imageSection: some View {
         DImageCollageView(images: vm.location.images, height: 350)
             .overlay(alignment: .topTrailing) {
-                FavoriteButtonView(isFavorite: $isFavorite) {
-                    favoriteManager.toggleLocationFavorite(vm.location)
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                        let managerState = favoriteManager.isLocationFavorite(vm.location)
-                        if isFavorite != managerState {
-                            isFavorite = managerState
+                VStack(spacing:5) {
+                    FavoriteButtonView(isFavorite: $isFavorite) {
+                        favoriteManager.toggleLocationFavorite(vm.location)
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                            let managerState = favoriteManager.isLocationFavorite(vm.location)
+                            if isFavorite != managerState {
+                                isFavorite = managerState
+                            }
                         }
                     }
+                    
+                    DAddLocationButtonView {
+                        addToLocationViewState.toggle()
+                    }
+                    
                 }.padding(.top, getSafeArea().top == 0 ? 15 : getSafeArea().top)
             }
     }

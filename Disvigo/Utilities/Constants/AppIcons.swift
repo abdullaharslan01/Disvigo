@@ -53,4 +53,6 @@ enum AppIcons {
     static let edit = "pencil"
     static let checkedAllList = "checklist.checked"
     static let unCheckedAllList = "checklist.unchecked"
+
+    static let plus = "plus.circle.fill"
 }

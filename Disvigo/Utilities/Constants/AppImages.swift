@@ -13,6 +13,7 @@ enum AppImages {
         static let walkingPerson = "one-person-walking"
         static let walkingPeople = "people-Walking"
         static let historical = "historical"
+        static let astronot = "astronot"
     }
 
     enum Constant {
