@@ -132,6 +132,7 @@ extension View {
 
             case .visitedDetail(let visitedList):
                 VisitedDetailView(visitedList: visitedList)
+                    .toolbarRole(.editor)
             }
         }
     }

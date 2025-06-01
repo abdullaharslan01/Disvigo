@@ -8,9 +8,8 @@
 import Foundation
 
 enum AppIcons {
-    
     static let checkList = "checklist"
-    
+
     static let cityDetail = "airplane.departure"
     static let map = "map"
     static let home = "house"
@@ -33,9 +32,10 @@ enum AppIcons {
     static let chevronLeft = "chevron.left"
     static let chevronRight = "chevron.right"
     static let chevronUp = "chevron.up"
-    static let paperplaneFill =  "paperplane.fill"
+    static let paperplaneFill = "paperplane.fill"
     static let fossil = "fossil.shell"
-
+    static let checkMarkCircle = "checkmark.circle"
+    static let checkMarkCircleFill = "checkmark.circle.fill"
 
     static let binoculars = "binoculars"
     static let locationDetail = "location.magnifyingglass"

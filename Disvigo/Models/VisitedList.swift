@@ -47,8 +47,9 @@ final class VisitedListItem {
     var locationLongitude: Double
     var visitedDate: Date
     var list: VisitedList?
+    var isVisited: Bool
 
-    init(location: Location, visitedDate: Date, list: VisitedList) {
+    init(location: Location, visitedDate: Date = .now, list: VisitedList? = nil, isVisited: Bool = false) {
         self.locationId = location.id
         self.locationTitle = location.title
         self.locationDescriptionText = location.description
@@ -57,6 +58,7 @@ final class VisitedListItem {
         self.locationLongitude = location.coordinates.longitude
         self.visitedDate = visitedDate
         self.list = list
+        self.isVisited = isVisited
     }
 
     var location: Location {

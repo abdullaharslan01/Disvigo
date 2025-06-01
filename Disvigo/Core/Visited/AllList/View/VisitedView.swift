@@ -10,16 +10,10 @@ import SwiftUI
 
 struct VisitedView: View {
     @State private var createListState = false
-    @Environment(VisitedManager.self) private var visitedManager
+    @Environment(FavoriteManager.self) private var visitedManager
     @Environment(Router.self) private var router
 
-//    @State private var items: [VisitedList] = [
-//        .init(name: "İstanbul Hatırası", symbolName: "sailboat", color: .red),
-//        .init(name: "Ege Turu", symbolName: "beach.umbrella", color: .blue),
-//        .init(name: "Kapadokya", symbolName: "airplane.departure", color: .green),
-//        .init(name: "Karadeniz Yaylaları", symbolName: "leaf.fill", color: .purple),
-//        .init(name: "Akdeniz Plajları", symbolName: "sun.max.fill", color: .orange)
-//    ]
+
 
     var body: some View {
         ZStack {
@@ -106,6 +100,6 @@ struct VisitedRowView: View {
 
 #Preview {
     VisitedView()
-        .environment(VisitedManager())
+        .environment(FavoriteManager())
         .environment(Router())
 }

@@ -7,9 +7,8 @@
 
 import SwiftUI
 
-struct RotationSelectionRowView: View {
+struct LocationSelectionRowView: View {
     let location: Location
-    var contexMenuGesture: (() -> ())?
     var body: some View {
         HStack(alignment: .top) {
             DImageLoaderView(url: location.images.first, contentMode: .fill)
@@ -24,15 +23,11 @@ struct RotationSelectionRowView: View {
                     .lineLimit(4)
                     .font(.poppins(.light, size: .caption))
             }
-        }
-        .contextMenu {
-            DLabelButtonView(systemImage: AppIcons.locationDetail, title: String(localized: "Go to Detail")) {
-                contexMenuGesture?()
-            }
-        }
+        }.foregroundStyle(.appTextLight)
+      
     }
 }
 
 #Preview {
-    RotationSelectionRowView(location: DeveloperPreview.shared.location)
+    LocationSelectionRowView(location: DeveloperPreview.shared.location)
 }

@@ -120,15 +120,97 @@ class DeveloperPreview {
 
     let locations: [Location] = [
         .init(
-            id: "4", title: "Taş Köprü",
-            description: "Adana Taş Köprü Seyhan Nehri üzerindedir. Köprünün ilk kez Roma İmparatoru Hadrianus tarafından yaptırıldığını öne süren kayıtlara rastlanmaktadır. Ancak bölgedeki Roma köprülerinin, Pompeus veya Augustus döneminde yapıldığı şeklinde görüşler de bulunmaktadır. Köprü, İmparatorluğun geniş topraklarındaki hakimiyetin zorlaştığı, dolayısıyla ulaşımın önem kazandığı 4. yüzyılda inşa edilmiştir. Yapı yüzyıllarca Avrupa ile Asya arasında önemli bir köprü olmuştur. Harun Reşit köprüyü bazı eklerle Adana Kalesi'ne birleştirmiştir. IX. yüzyıl başında Harun Reşit’in oğlu olan 7'inci Abbasi Halifesi Memun döneminde onarılan köprünün, III. Ahmet, Kel Hasan Paşa ve Adana Valisi Ziya Paşa tarafından da farklı zamanlarda bakım görmüştür. Son üç onarımının yazıtları mevcuttur. Son onarım 1949 yılında yapılmıştır. Roma köprü konstrüksiyonunun görkemli bir uygulaması olan Adana Köprüsü, Roma köprülerinin karakteristik niteliklerine sahiptir. Doğu-batı doğrultusunda uzanan Taşköprü, günümüzde 300 metre uzunluğa, 14 kemer gözüne ve 5 tahliye kemerine sahiptir. Yaklaşık 12 metre yükseklikteki köprünün ortası, yanlarından 2,5 metre kadar daha yüksektir. Ve ortalama 9,50- 9,70 metre genişliktedir. Taş Köprü dünyanın halen kullanılan en eski köprülerden biri olarak bilinmektedir. Kaynaklar: Adana İl Kültür ve Turizm Müdürlüğü Adana’da Roma Dönemi Köprüsü: Taşköprü, Ç.Ü. Sosyal Bilimler Enstitüsü Dergisi, Cilt 18, Sayı 1, 2009, s.305–322, Yrd. Doç. Dr. Gözde RAMAZANOĞLU Adana Gezilecek Yerler",
+            id: "iq9wvsgx",
+            title: "Taş Köprü",
+            description: "Adana Taş Köprü Seyhan Nehri üzerindedir...",
             images: [
                 "https://www.kulturportali.gov.tr/repoKulturPortali/small/SehirRehberi//GezilecekYer/20190111110947922_THK%20ORHAN%20OZGULBAS%20ADANA%20Seyhan%20Nehri%20Taskopru%20logolu.jpg?format=jpg&quality=50",
                 "https://www.kulturportali.gov.tr/repoKulturPortali/small/SehirRehberi//GezilecekYer/20190809151212631_20190111110934849_ADANA%20Tas%20Kopru%20%20Alimurat%20CORUK%20logolu%20p.jpg?format=jpg&quality=50",
                 "https://www.kulturportali.gov.tr/repoKulturPortali/small/SehirRehberi//GezilecekYer/20190809151226959_20190111110947922_THK%20ORHAN%20OZGULBAS%20ADANA%20Seyhan%20Nehri%20Taskopru%20logolu%20p%20.jpg?format=jpg&quality=50",
                 "https://www.kulturportali.gov.tr/repoKulturPortali/small/SehirRehberi//GezilecekYer/20190809151242865_20190111110918906_2%20ADANA%20tas%20kopru%20ERDAL%20YAZICI%20logolu%20p%20.%20jpg.jpg?format=jpg&quality=50"
             ],
-            coordinates: Coordinates(latitude: 41.008583, longitude: 28.980175)
+            coordinates: Coordinates(latitude: 36.986312, longitude: 35.335067)
+        ),
+        .init(
+            id: "hbizndb2",
+            title: "Yılan Kalesi",
+            description: "Toros Dağları’nı aşarak Antakya’ya giden tarihi İpek Yolu üzerinde yer alır...",
+            images: [
+                "https://www.kulturportali.gov.tr/repoKulturPortali/small/27032013/ad180768-682c-4eb8-b29e-e8f4ad31db76.jpg?format=jpg&quality=50"
+            ],
+            coordinates: Coordinates(latitude: 37.0142, longitude: 35.7473)
+        ),
+        .init(
+            id: "cvoqjau8",
+            title: "Büyük Saat Kulesi",
+            description: "1882 yılında tamamlanan kule Adana’nın simgelerindendir...",
+            images: [
+                "https://www.kulturportali.gov.tr/repoKulturPortali/small/26032013/5fcd243f-680f-4f55-a8bd-96666a409483.jpg?format=jpg&quality=50"
+            ],
+            coordinates: Coordinates(latitude: 36.984, longitude: 35.3294)
+        ),
+        .init(
+            id: "u8scuxjg",
+            title: "Varda Köprüsü",
+            description: "99 metre yüksekliğinde, virajlı yapısıyla ünlü...",
+            images: [
+                "https://www.kulturportali.gov.tr/repoKulturPortali/small/SehirRehberi//GezilecekYer/20190711105722848_Varda%20Koprusu%201.jpg?format=jpg&quality=50"
+            ],
+            coordinates: Coordinates(latitude: 37.119994, longitude: 35.000566)
+        ),
+        .init(
+            id: "zxi6izyh",
+            title: "Kapıkaya Kanyonu",
+            description: "Doğa yürüyüşü ve fotoğraf tutkunlarının uğrak noktası...",
+            images: [
+                "https://www.kulturportali.gov.tr/repoKulturPortali/small/SehirRehberi//GezilecekYer/20190529132459711_Kapikanyonu%20Karaisali%20Ilcesi%20(4).JPG?format=jpg&quality=50"
+            ],
+            coordinates: Coordinates(latitude: 37.2404, longitude: 35.049)
+        ),
+        .init(
+            id: "pdlf2ggb",
+            title: "Sabancı Merkez Cami",
+            description: "28 bin kişi kapasiteli, 6 minareli devasa cami...",
+            images: [
+                "https://www.kulturportali.gov.tr/repoKulturPortali/small/27032013/98c02bba-053a-4301-9d97-2670551dda99.jpg?format=jpg&quality=50"
+            ],
+            coordinates: Coordinates(latitude: 36.991553, longitude: 35.334112)
+        ),
+        .init(
+            id: "avqdecvv",
+            title: "Anavarza Ören Yeri",
+            description: "UNESCO geçici listesinde yer alan antik kent...",
+            images: [
+                "https://www.kulturportali.gov.tr/repoKulturPortali/small/SehirRehberi//GezilecekYer/20171003120456539_03_ADANA_CEYHAN_ERDAL%20YAZICI.jpg?format=jpg&quality=50"
+            ],
+            coordinates: Coordinates(latitude: 37.2499, longitude: 35.8958)
+        ),
+        .init(
+            id: "8gtexf0v",
+            title: "Adana Ulu Camii",
+            description: "Selçuklu, Memlük ve Osmanlı izleri taşıyan tarihi cami...",
+            images: [
+                "https://www.kulturportali.gov.tr/repoKulturPortali/small/19032013/66205bcb-d6db-443a-975c-f10d330fd327.jpg?format=jpg&quality=50"
+            ],
+            coordinates: Coordinates(latitude: 36.984992, longitude: 35.330773)
+        ),
+        .init(
+            id: "rx1gmesd",
+            title: "Adana Müzesi",
+            description: "1924'te kurulmuş, bölgenin arkeolojik hazinesini sunan müze.",
+            images: [
+                "https://www.kulturportali.gov.tr/repoKulturPortali/small/SehirRehberi//GezilecekYer/20190724104408634_Adana%20Muze%20Kompleksi%20(2).png?format=jpg&quality=50"
+            ],
+            coordinates: Coordinates(latitude: 36.995, longitude: 35.3136)
+        ),
+        .init(
+            id: "934awzk8",
+            title: "Bebekli Kilise",
+            description: "1880’lerde yapılmış Katolik kilise, tepesinde Meryem Ana heykeliyle bilinir.",
+            images: [
+                "https://www.kulturportali.gov.tr/repoKulturPortali/small/27032013/e2dcb4fa-d90b-4f55-8e08-fe1c4071eac8.jpg?format=jpg&quality=50"
+            ],
+            coordinates: Coordinates(latitude: 36.987559, longitude: 35.325906)
         )
     ]
 

@@ -65,9 +65,6 @@ class CityDetailViewModel {
 
                 print(url.url ?? "")
 
-                print("Locations: \(result.locations.count)")
-                print("Food: \(result.foods.count)")
-                print("Memory: \(result.memories.count)")
                 isLoading = false
             } catch {
                 alert.message = error.localizedDescription

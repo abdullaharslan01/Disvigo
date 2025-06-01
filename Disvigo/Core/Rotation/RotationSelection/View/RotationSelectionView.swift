@@ -56,8 +56,6 @@ struct RotationSelectionView: View {
         }
     }
 
-    // MARK: - Header View
-
     private var headerView: some View {
         HStack {
             closeButton
@@ -97,8 +95,6 @@ struct RotationSelectionView: View {
         }
         return selectedItems.count >= minSelectionLimit ? .appGreenPrimary : .appGreenPrimary.opacity(0.7)
     }
-
-    // MARK: - Content View
 
     private var contentView: some View {
         Group {
@@ -163,9 +159,14 @@ struct RotationSelectionView: View {
 
     private var locationsList: some View {
         List(locations, id: \.id, selection: selectionBinding) { location in
-            RotationSelectionRowView(location: location)
+            LocationSelectionRowView(location: location)
                 .listRowBackground(Color.clear)
                 .listRowSeparator(.hidden)
+                .contextMenu {
+                    DLabelButtonView(systemImage: AppIcons.locationDetail, title: String(localized: "Go to Detail")) {
+                        router.navigate(to: .locationDetail(location))
+                    }
+                }
         }
         .environment(\.editMode, $editMode)
         .listStyle(.plain)
@@ -191,8 +192,6 @@ struct RotationSelectionView: View {
         !selectedItems.isEmpty && selectedItems.count == min(locations.count, maxSelectionLimit)
     }
 
-    // MARK: - Düzeltilmiş Selection Binding
-
     private var selectionBinding: Binding<Set<Location.ID>> {
         Binding(
             get: {
@@ -207,8 +206,6 @@ struct RotationSelectionView: View {
             }
         )
     }
-
-    // MARK: - Düzeltilmiş Setup
 
     private func setupInitialState() {
         editMode = .active
@@ -227,8 +224,6 @@ struct RotationSelectionView: View {
             previousSelectionCount = newSelection.count
         }
     }
-
-    // MARK: - Düzeltilmiş Toggle All Selection
 
     private func toggleAllSelection() {
         withAnimation(.easeInOut(duration: 0.3)) {
@@ -255,8 +250,6 @@ struct RotationSelectionView: View {
 
         router.navigate(to: .rotationDetail(selectedLocationList))
     }
-
-    // MARK: - Selection State Helpers
 
     @MainActor
     private func refreshSelectionState() {

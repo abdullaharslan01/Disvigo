@@ -19,10 +19,11 @@ struct AddListView: View {
     @State private var rotation = 0.0
     let rainbowColors = [Color.yellow, Color.orange, Color.red, Color.purple, Color.blue, Color.green]
     @State private var showAlert = false
+    @State private var successAlert = false
     @State private var alertMessage = ""
     @FocusState private var isNameFieldFocused: Bool?
     
-    @Environment(VisitedManager.self) var visitedManager
+    @Environment(FavoriteManager.self) var visitedManager
     @Environment(\.dismiss) private var dismiss
     
     var body: some View {
@@ -47,6 +48,13 @@ struct AddListView: View {
         .onAppear(perform: setupData)
         .alert(String(localized: "Warning"), isPresented: $showAlert) {
             Button(String(localized: "OK")) {}
+        } message: {
+            Text(alertMessage)
+        }
+        .alert(String(localized: "Successfully added"), isPresented: $successAlert) {
+            Button(String(localized: "OK")) {
+                dismiss()
+            }
         } message: {
             Text(alertMessage)
         }
@@ -90,7 +98,6 @@ struct AddListView: View {
                 .background(.appTextLight, in: .rect(cornerRadius: 6))
                 .foregroundStyle(.appBackgroundDeep)
                 .submitLabel(.done)
-                
         }
     }
     
@@ -114,7 +121,6 @@ struct AddListView: View {
             .frame(maxWidth: .infinity)
             .frame(height: 80)
             .padding()
-            
             .overlay {
                 RoundedRectangle(cornerRadius: 16).stroke()
             }
@@ -205,7 +211,9 @@ struct AddListView: View {
         if result.0 {
             UIImpactFeedbackGenerator(style: .medium).impactOccurred()
 
-            dismiss()
+            alertMessage = result.1
+            successAlert = true
+            
         } else {
             alertMessage = result.1
             showAlert = true
@@ -215,4 +223,5 @@ struct AddListView: View {
 
 #Preview {
     AddListView(isUpdate: false)
+        .environment(FavoriteManager())
 }
