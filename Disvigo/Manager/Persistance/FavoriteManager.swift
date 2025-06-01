@@ -26,7 +26,7 @@ class FavoriteManager: NSObject {
         super.init()
         
         do {
-            let container = try ModelContainer(for: SavedLocation.self, SavedMemory.self, SavedCity.self, SavedFood.self,VisitedList.self,VisitedListItem.self)
+            let container = try ModelContainer(for: SavedLocation.self, SavedMemory.self, SavedCity.self, SavedFood.self, VisitedList.self, VisitedListItem.self)
             modelContainer = container
             modelContext = container.mainContext
             modelContext?.autosaveEnabled = true
@@ -59,13 +59,12 @@ class FavoriteManager: NSObject {
             let visitedDescriptor = FetchDescriptor<VisitedList>(sortBy: [.init(\.addedDate, order: .reverse)])
             visitedLists = try context.fetch(visitedDescriptor)
             
-        
         } catch {
             print("Failed to load favorites: \(error.localizedDescription)")
         }
     }
     
-     func fetchVisitedList() {
+    func fetchVisitedList() {
         guard let context = modelContext else {
             print("Model context is nil.")
             return
@@ -98,7 +97,6 @@ class FavoriteManager: NSObject {
         saveContext()
     }
     
-
     func isLocationFavorite(_ location: Location) -> Bool {
         return isFavorite(item: location.id, in: savedLocations, keyPath: \.id)
     }
@@ -127,7 +125,6 @@ class FavoriteManager: NSObject {
         }
     }
     
-
     func isMemoryFavorite(_ memory: Memory) -> Bool {
         return isFavorite(item: memory.id, in: savedMemories, keyPath: \.id)
     }
@@ -156,7 +153,6 @@ class FavoriteManager: NSObject {
         }
     }
     
-
     func isCityFavorite(_ city: City) -> Bool {
         return isFavorite(item: city.id, in: savedCities, keyPath: \.id)
     }
@@ -187,7 +183,6 @@ class FavoriteManager: NSObject {
         }
     }
     
-
     func isFoodFavorite(_ food: Food) -> Bool {
         return isFavorite(item: food.id, in: savedFood, keyPath: \.id)
     }
@@ -232,7 +227,7 @@ extension FavoriteManager {
     func createList(name: String, symbolName: String, color: Color) -> (Bool, String) {
         guard let context = modelContext else { return (false, String(localized: "System error")) }
             
-        print(name,symbolName)
+        print(name, symbolName)
         let trimmed = name.trimmingCharacters(in: .whitespacesAndNewlines)
         if trimmed.isEmpty { return (false, String(localized: "List name cannot be empty")) }
             
@@ -261,26 +256,25 @@ extension FavoriteManager {
         return (true, String(localized: "List updated successfully"))
     }
     
-    func deleteList(_ list: VisitedList) {
-        guard let context = modelContext else { return }
+    func deleteList(_ list: VisitedList) -> Bool {
+        guard let context = modelContext else { return false }
         context.delete(list)
         save()
+        return true
     }
     
-    func getVisitedList(by id: UUID) -> VisitedList? {
-        guard let context = modelContext else { return nil }
-         
-        do {
-            let descriptor = FetchDescriptor<VisitedList>(
-                predicate: #Predicate { $0.id == id }
-            )
-            return try context.fetch(descriptor).first
-        } catch {
-            print("Error fetching list: \(error)")
-            return nil
+    func removeVisitedItem(visitedList: VisitedList, visitedListItem: VisitedListItem) {
+        guard let context = modelContext else { return }
+
+        if let index = visitedList.visitedItems.firstIndex(where: { $0.id == visitedListItem.id }) {
+            visitedList.visitedItems.remove(at: index)
         }
+        
+        context.delete(visitedListItem)
+        
+        save()
     }
-    
+
     private func save() {
         guard let context = modelContext else { return }
         do {

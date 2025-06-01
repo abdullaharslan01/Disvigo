@@ -39,10 +39,11 @@ struct AddListView: View {
                 Spacer()
             }
             .padding()
-            .onTapGesture {
-                isNameFieldFocused = true
-            }
+           
+        }.onTapGesture {
+            UIApplication.shared.endEditing()
         }
+        
         .navigationBarTitleDisplayMode(.inline)
         .preferredColorScheme(.dark)
         .onAppear(perform: setupData)
@@ -193,7 +194,13 @@ struct AddListView: View {
     }
     
     private func setupData() {
-        guard isUpdate, let list = visitedList else { return }
+        guard isUpdate, let list = visitedList else {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                isNameFieldFocused = true
+            }
+            
+            return
+        }
         listName = list.name
         symbolName = list.symbolName
         color = list.color

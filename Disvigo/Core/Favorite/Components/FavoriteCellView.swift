@@ -167,7 +167,7 @@ extension FavoriteCellView {
                 String(localized: "Remove from favorites"),
                 systemImage: AppIcons.heart
             )
-        }
+        }.tint(.red)
     }
 }
 

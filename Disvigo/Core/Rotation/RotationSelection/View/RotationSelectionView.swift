@@ -106,6 +106,8 @@ struct RotationSelectionView: View {
                 }
             } else {
                 emptyStateView
+                    .padding(.bottom, 50)
+                    .padding(.horizontal)
             }
         }
     }
@@ -162,6 +164,15 @@ struct RotationSelectionView: View {
             LocationSelectionRowView(location: location)
                 .listRowBackground(Color.clear)
                 .listRowSeparator(.hidden)
+                .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                    Button {
+                        UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+                        router.navigate(to: .locationDetail(location))
+                    } label: {
+                        Label(String(localized: "Detail"), systemImage: AppIcons.locationDetail)
+                    }.tint(.blue)
+                }
+
                 .contextMenu {
                     DLabelButtonView(systemImage: AppIcons.locationDetail, title: String(localized: "Go to Detail")) {
                         router.navigate(to: .locationDetail(location))
@@ -182,7 +193,10 @@ struct RotationSelectionView: View {
             lottieName: AppImages.Lottie.walkingPerson,
             title: "Unable to create route",
             buttonTitle: "Explore Now",
-            message: "You need at least two cities to generate a route. You can do this by adding at least two cities to your favorites."
+            message: "You need at least two cities to generate a route. You can do this by adding at least two cities to your favorites.",
+            textColor: .appTextLight,
+            buttonBackground: .appGreenPrimary,
+            buttonForeground: .appTextLight
         ) {
             router.navigateBack()
         }

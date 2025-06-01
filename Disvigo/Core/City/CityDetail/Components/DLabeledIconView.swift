@@ -36,6 +36,7 @@ struct DLabeledIconView: View {
             Text(title)
                 .font(textFont)
                 .lineLimit(1)
+                .textSelection(.enabled)
         }
         .foregroundStyle(foregroundStyle)
     }

@@ -9,7 +9,7 @@ import Foundation
 
 enum AppIcons {
     static let checkList = "checklist"
-
+    static let trash = "trash"
     static let cityDetail = "airplane.departure"
     static let map = "map"
     static let home = "house"

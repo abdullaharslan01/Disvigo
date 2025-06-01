@@ -92,6 +92,7 @@ struct CityDetailView: View {
         Text(vm.city.name)
             .font(.poppins(.semiBold, size: .largeTitle))
             .fontWeight(.bold)
+            .textSelection(.enabled)
     }
 
     var moreDetailView: some View {

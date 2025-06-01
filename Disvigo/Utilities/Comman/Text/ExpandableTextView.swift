@@ -20,6 +20,7 @@ struct ExpandableTextView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
             Text(text)
+                .textSelection(.enabled)
                 .font(.poppins(font, size: fontSize))
                 .lineLimit(isExpanded ? nil : lineLimit)
                 .frame(maxWidth: .infinity, alignment: .leading)

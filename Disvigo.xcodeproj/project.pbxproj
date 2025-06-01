@@ -49,6 +49,7 @@
 		F5F337B02DE0F37100D8345F /* Memory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5F337AF2DE0F37100D8345F /* Memory.swift */; };
 		F5F338482DE109A600D8345F /* View+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5F338472DE109A600D8345F /* View+Ext.swift */; };
 		F5F3384D2DE10E2C00D8345F /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5F3384C2DE10E2C00D8345F /* String+Ext.swift */; };
+		F5FA45FC2DEC8A1800E08E15 /* UIApplication+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5FA45FB2DEC8A1700E08E15 /* UIApplication+Ext.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -106,6 +107,7 @@
 		F5F337AF2DE0F37100D8345F /* Memory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Memory.swift; sourceTree = "<group>"; };
 		F5F338472DE109A600D8345F /* View+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Ext.swift"; sourceTree = "<group>"; };
 		F5F3384C2DE10E2C00D8345F /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
+		F5FA45FB2DEC8A1700E08E15 /* UIApplication+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Ext.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -413,6 +415,7 @@
 				F5F3384C2DE10E2C00D8345F /* String+Ext.swift */,
 				F56C3DD32DE5DE7300425480 /* Text+Ext.swift */,
 				F51B2CAD2DEB617500A513AB /* Color+Ext.swift */,
+				F5FA45FB2DEC8A1700E08E15 /* UIApplication+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -569,6 +572,7 @@
 				F57453552DDE0DD40047E989 /* SplashView.swift in Sources */,
 				F57453562DDE0DD40047E989 /* AppIcons.swift in Sources */,
 				F57453572DDE0DD40047E989 /* AppImages.swift in Sources */,
+				F5FA45FC2DEC8A1800E08E15 /* UIApplication+Ext.swift in Sources */,
 				F57453582DDE0DD40047E989 /* Font+Ext.swift in Sources */,
 				F56C3DD42DE5DE7300425480 /* Text+Ext.swift in Sources */,
 				F5F337AE2DE0F35500D8345F /* Food.swift in Sources */,

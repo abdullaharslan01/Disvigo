@@ -19,7 +19,7 @@ class HomeViewModel {
     var filteredCities: [City] = []
 
     var isAllContentWasLoad = false
-    var splashScreenAnimationTime = 0
+    var splashScreenAnimationTime = 3
 
     @MainActor
     func fetchAllCities() {
