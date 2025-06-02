@@ -89,7 +89,7 @@ extension View {
             switch destination {
             case .cityDetail(let city):
                 CityDetailView(city: city)
-                    .navigationTransition(.zoom(sourceID: city.id, in: namespace)).toolbarRole(.editor)
+                    .toolbarRole(.editor)
 
             case .locationDetail(let location):
                 LocationDetailView(location: location)
@@ -109,6 +109,7 @@ extension View {
 
             case .foodDetail(let food):
                 FoodDetailView(food: food)
+                    .toolbarRole(.editor)
 
             case .foodList(let foods, let cityName):
                 FoodListView(foods: foods, cityName: cityName)

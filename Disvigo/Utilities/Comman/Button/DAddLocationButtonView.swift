@@ -22,7 +22,7 @@ struct DAddLocationButtonView: View {
                 .padding()
                 .background(
                     .white, in: RoundedRectangle(cornerRadius: 16)
-                ).padding()
+                )
         }
     }
 }

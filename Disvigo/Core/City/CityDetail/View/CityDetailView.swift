@@ -40,7 +40,9 @@ struct CityDetailView: View {
 
                 
                 isFavorite = favoriteManager.isCityFavorite(vm.city)
-            }.ignoresSafeArea()
+            }
+            .navigationTitle(vm.city.name)
+            .navigationBarTitleDisplayMode(.inline)
     }
 
     var cityImageView: some View {
@@ -55,8 +57,10 @@ struct CityDetailView: View {
                             isFavorite = managerState
                         }
                     }
-                }.padding(.top, getSafeArea().top == 0 ? 15 : getSafeArea().top)
-                    .zIndex(1)
+                }
+                .padding(.horizontal)
+                .padding(.top)
+                    
             }
     }
 
@@ -171,7 +175,6 @@ struct CityDetailView: View {
         }
         .frame(height: 300)
         .frame(maxWidth: .infinity)
-        .toolbarBackgroundVisibility(.hidden, for: .navigationBar)
         .overlay(alignment: .bottom) {
             DLabelButtonView(systemImage: AppIcons.binoculars, title: String(localized: "Explore Locations")) {
                 router.navigate(to: .cityMap(vm.locations, vm.city))

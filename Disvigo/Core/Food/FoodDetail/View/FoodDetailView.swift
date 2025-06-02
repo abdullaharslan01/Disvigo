@@ -29,7 +29,8 @@ struct FoodDetailView: View {
                 gemine.gemineViewState = .food(vm.food)
 
                 isFavorite = favoriteManager.isFoodFavorite(vm.food)
-            }.ignoresSafeArea()
+            }.navigationTitle(vm.food.title)
+            .navigationBarTitleDisplayMode(.inline)
     }
 
     var contentView: some View {
@@ -52,7 +53,8 @@ struct FoodDetailView: View {
                             isFavorite = managerState
                         }
                     }
-                }.padding(.top, getSafeArea().top == 0 ? 15 : getSafeArea().top)
+                }.padding(.top)
+                    .padding(.horizontal)
             }
     }
 

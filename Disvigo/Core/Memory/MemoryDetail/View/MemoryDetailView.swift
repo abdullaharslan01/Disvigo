@@ -26,6 +26,8 @@ struct MemoryDetailView: View {
             contentView
         }
         .preferredColorScheme(.dark)
+        .navigationTitle(vm.memory.title)
+        .navigationBarTitleDisplayMode(.inline)
         .onAppear {
             
             gemine.isVisible = .visible
@@ -34,7 +36,7 @@ struct MemoryDetailView: View {
             
             
             isFavorite = favoriteManager.isMemoryFavorite(vm.memory)
-        }.ignoresSafeArea()
+        }
         .confirmationDialog("Select Map App", isPresented: $showMapOptions) {
             mapSelectionButtons
         } message: {
@@ -62,7 +64,8 @@ struct MemoryDetailView: View {
                             isFavorite = managerState
                         }
                     }
-                }.padding(.top, getSafeArea().top == 0 ? 15 : getSafeArea().top)
+                }.padding(.top)
+                    .padding(.horizontal)
             }
     }
     

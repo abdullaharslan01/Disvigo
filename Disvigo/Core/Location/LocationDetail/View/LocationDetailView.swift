@@ -36,7 +36,8 @@ struct LocationDetailView: View {
                 gemine.gemineViewState = .location(vm.location)
                 
                 isFavorite = favoriteManager.isLocationFavorite(vm.location)
-            }.ignoresSafeArea()
+            }.navigationTitle(vm.location.title)
+            .navigationBarTitleDisplayMode(.inline)
     }
     
     var contentView: some View {
@@ -58,7 +59,7 @@ struct LocationDetailView: View {
     var imageSection: some View {
         DImageCollageView(images: vm.location.images, height: 350)
             .overlay(alignment: .topTrailing) {
-                VStack(spacing:5) {
+                VStack(spacing: 8) {
                     FavoriteButtonView(isFavorite: $isFavorite) {
                         favoriteManager.toggleLocationFavorite(vm.location)
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
@@ -73,7 +74,8 @@ struct LocationDetailView: View {
                         addToLocationViewState.toggle()
                     }
                     
-                }.padding(.top, getSafeArea().top == 0 ? 15 : getSafeArea().top)
+                }.padding(.top)
+                    .padding(.horizontal)
             }
     }
     
@@ -102,7 +104,6 @@ struct LocationDetailView: View {
         }
         .onAppear(perform: startRotation)
         .onDisappear(perform: stopRotation)
-        .toolbarBackground(.hidden, for: .navigationBar)
     }
     
     private func startRotation() {

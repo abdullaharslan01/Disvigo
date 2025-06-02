@@ -143,7 +143,6 @@ struct RotataionDetailView: View {
             }
         }
         .ignoresSafeArea(edges: [.bottom])
-        .toolbarBackgroundVisibility(.hidden, for: .navigationBar)
         .alert(String(localized: "Rate Limit Exceeded"),
                isPresented: $showThrottlingAlert,
                actions: {
