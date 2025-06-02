@@ -15,6 +15,7 @@ struct LocationListView: View {
     @State var vm: LocationListViewModel
     @Environment(GemineViewStateController.self) private var gemine
 
+    @State var addLocationsList: Bool = false
     @Environment(Router.self) var router
 
     let columns: [GridItem] = [.init(.flexible()), .init(.flexible())]
@@ -51,14 +52,38 @@ struct LocationListView: View {
                     .padding(.horizontal)
                 }
             }
-        }
+        }.sheet(isPresented: $addLocationsList, content: {
+            SelectLocationToListView(locations: vm.locations)
+                .presentationDragIndicator(.visible)
+        })
         .onAppear(perform: {
             gemine.isVisible = .visible
 
         })
         .toolbar(content: {
-            ToolbarItem(placement: .topBarTrailing) {
+            ToolbarItemGroup(placement: .topBarTrailing) {
                 Button {
+                    UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+
+                    addLocationsList.toggle()
+
+                } label: {
+                    Image(systemName: AppIcons.plus)
+                        .foregroundStyle(.appGreenLight)
+                }.contextMenu {
+                    Button {
+                        UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+
+                        addLocationsList.toggle()
+
+                    } label: {
+                        Label(String(localized: "You can add the locations you choose to your list."), systemImage: AppIcons.map)
+                    }
+                }
+
+                Button {
+                    UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+
                     router.navigate(to: .rotationSelection(vm.locations))
 
                 } label: {
@@ -68,6 +93,8 @@ struct LocationListView: View {
 
                 .contextMenu {
                     Button {
+                        UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+
                         router.navigate(to: .rotationSelection(vm.locations))
 
                     } label: {

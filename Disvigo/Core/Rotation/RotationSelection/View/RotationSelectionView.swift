@@ -11,13 +11,13 @@ struct RotationSelectionView: View {
     var locations: [Location]
 
     @State private var selectedItems = Set<Location.ID>()
-    @State private var editMode: EditMode = .active
     @State private var showMinSelectionAlert = false
     @State private var showLimitAlert = false
     @State private var previousSelectionCount = 0
     @State private var isViewAppeared = false
-    @Environment(GemineViewStateController.self) private var gemine
+    @State private var rotations: [Location.ID: Double] = [:]
 
+    @Environment(GemineViewStateController.self) private var gemine
     @Environment(Router.self) var router
 
     private let maxSelectionLimit = 50
@@ -28,8 +28,25 @@ struct RotationSelectionView: View {
             Color.appTextSecondary.opacity(0.4).ignoresSafeArea()
 
             VStack(spacing: 25) {
-                headerView
                 contentView
+            }
+        }
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button(String(localized: "Cancel")) {
+                    UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+                    router.navigateBack()
+                }
+                .foregroundColor(.appTextLight)
+            }
+
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button(String(localized: "Create a route")) {
+                    UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+                    createRouteAction()
+                }
+                .foregroundColor(!selectedItems.isEmpty ? .appGreenPrimary : .gray)
+                .disabled(selectedItems.isEmpty)
             }
         }
         .preferredColorScheme(.dark)
@@ -43,57 +60,16 @@ struct RotationSelectionView: View {
         } message: {
             Text("You can select up to \(maxSelectionLimit) locations only.")
         }
-        .onChange(of: selectedItems) { _, newSelection in
-            handleSelectionChange(newSelection)
+        .onChange(of: selectedItems) { oldValue, newSelection in
+            handleSelectionChange(oldValue: oldValue, newSelection: newSelection)
         }
         .onAppear {
             gemine.isVisible = .hidden
-
             setupInitialState()
         }
         .onDisappear {
             isViewAppeared = false
         }
-    }
-
-    private var headerView: some View {
-        HStack {
-            closeButton
-            Spacer()
-            createRouteButton
-        }
-        .padding(.horizontal, 30)
-        .padding(.top, 30)
-    }
-
-    private var closeButton: some View {
-        DIconButtonView(
-            iconButtonType: .custom(AppIcons.xmark),
-            iconColor: .appTextLight,
-            bgColor: .red
-        ) {
-            UIImpactFeedbackGenerator(style: .medium).impactOccurred()
-            router.navigateBack()
-        }
-    }
-
-    private var createRouteButton: some View {
-        Button(action: createRouteAction) {
-            Label("Create a route", systemImage: AppIcons.personWalking)
-                .padding()
-                .symbolEffect(.pulse, isActive: !locations.isEmpty && selectedItems.count >= minSelectionLimit)
-                .background(buttonBackgroundColor, in: RoundedRectangle(cornerRadius: 16))
-                .foregroundStyle(.appTextLight)
-                .font(.poppins(.medium, size: .callout))
-        }
-        .disabled(locations.isEmpty)
-    }
-
-    private var buttonBackgroundColor: Color {
-        if locations.isEmpty {
-            return .appGreenPrimary.opacity(0.7)
-        }
-        return selectedItems.count >= minSelectionLimit ? .appGreenPrimary : .appGreenPrimary.opacity(0.7)
     }
 
     private var contentView: some View {
@@ -135,11 +111,7 @@ struct RotationSelectionView: View {
     }
 
     private var selectAllButton: some View {
-        DIconButtonView(
-            iconButtonType: .custom(isAllSelected ? AppIcons.unCheckedAllList : AppIcons.checkedAllList),
-            fontSize: .body
-        ) {
-            UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
+        DSelectAllButton(isAllSelected: isAllSelected) {
             toggleAllSelection()
         }
     }
@@ -149,6 +121,7 @@ struct RotationSelectionView: View {
             Text("\(selectedItems.count)")
                 .frame(width: 30)
                 .contentTransition(.numericText(countsDown: selectedItems.count < previousSelectionCount))
+                .animation(.easeInOut(duration: 0.3), value: selectedItems.count)
 
             Text("/")
 
@@ -160,31 +133,39 @@ struct RotationSelectionView: View {
     }
 
     private var locationsList: some View {
-        List(locations, id: \.id, selection: selectionBinding) { location in
-            LocationSelectionRowView(location: location)
-                .listRowBackground(Color.clear)
-                .listRowSeparator(.hidden)
-                .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-                    Button {
-                        UIImpactFeedbackGenerator(style: .medium).impactOccurred()
-                        router.navigate(to: .locationDetail(location))
-                    } label: {
-                        Label(String(localized: "Detail"), systemImage: AppIcons.locationDetail)
-                    }.tint(.blue)
+        List(locations, id: \.id) { location in
+            LocationRowWithCheckbox(
+                location: location,
+                isSelected: selectedItems.contains(location.id),
+                rotation: rotations[location.id] ?? 0
+            ) {
+                toggleSelection(for: location.id)
+            }
+            .listRowBackground(Color.clear)
+            .listRowSeparator(.hidden)
+            .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                Button {
+                    UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+                    router.navigate(to: .locationDetail(location))
+                } label: {
+                    Label(String(localized: "Detail"), systemImage: AppIcons.locationDetail)
+                }.tint(.blue)
+            }
+            .contextMenu {
+                DLabelButtonView(systemImage: AppIcons.locationDetail, title: String(localized: "Go to Detail")) {
+                    router.navigate(to: .locationDetail(location))
                 }
-
-                .contextMenu {
-                    DLabelButtonView(systemImage: AppIcons.locationDetail, title: String(localized: "Go to Detail")) {
-                        router.navigate(to: .locationDetail(location))
-                    }
-                }
+            }
         }
-        .environment(\.editMode, $editMode)
         .listStyle(.plain)
         .background(.clear)
         .scrollContentBackground(.hidden)
         .onAppear {
-            refreshSelectionState()
+            for location in locations {
+                if rotations[location.id] == nil {
+                    rotations[location.id] = 0
+                }
+            }
         }
     }
 
@@ -206,37 +187,48 @@ struct RotationSelectionView: View {
         !selectedItems.isEmpty && selectedItems.count == min(locations.count, maxSelectionLimit)
     }
 
-    private var selectionBinding: Binding<Set<Location.ID>> {
-        Binding(
-            get: {
-                selectedItems
-            },
-            set: { newValue in
-                if newValue.count <= maxSelectionLimit {
-                    selectedItems = newValue
-                } else {
-                    showLimitAlert = true
-                }
-            }
-        )
-    }
-
     private func setupInitialState() {
-        editMode = .active
         isViewAppeared = true
+        previousSelectionCount = selectedItems.count
+
+        // Initialize rotations
+        for location in locations {
+            rotations[location.id] = 0
+        }
     }
 
-    private func handleSelectionChange(_ newSelection: Set<Location.ID>) {
+    private func handleSelectionChange(oldValue: Set<Location.ID>, newSelection: Set<Location.ID>) {
+        // Update previous count for countdown animation
+        previousSelectionCount = oldValue.count
+
         if newSelection.count > maxSelectionLimit {
             let limitedSelection = Set(Array(newSelection).prefix(maxSelectionLimit))
             selectedItems = limitedSelection
             showLimitAlert = true
         }
 
-        if newSelection.count != previousSelectionCount {
+        if newSelection.count != oldValue.count {
             UIImpactFeedbackGenerator(style: .light).impactOccurred()
-            previousSelectionCount = newSelection.count
         }
+    }
+
+    private func toggleSelection(for locationId: Location.ID) {
+        withAnimation(.easeInOut(duration: 0.5)) {
+            if selectedItems.contains(locationId) {
+                selectedItems.remove(locationId)
+            } else {
+                if selectedItems.count < maxSelectionLimit {
+                    selectedItems.insert(locationId)
+                } else {
+                    showLimitAlert = true
+                    return
+                }
+            }
+
+            rotations[locationId] = (rotations[locationId] ?? 0) + 360
+        }
+
+        UIImpactFeedbackGenerator(style: .medium).impactOccurred()
     }
 
     private func toggleAllSelection() {
@@ -246,6 +238,10 @@ struct RotationSelectionView: View {
             } else {
                 let selectableLocations = locations.prefix(maxSelectionLimit)
                 selectedItems = Set(selectableLocations.map(\.id))
+
+                for location in selectableLocations {
+                    rotations[location.id] = (rotations[location.id] ?? 0) + 360
+                }
             }
         }
 
@@ -264,19 +260,12 @@ struct RotationSelectionView: View {
 
         router.navigate(to: .rotationDetail(selectedLocationList))
     }
-
-    @MainActor
-    private func refreshSelectionState() {
-        let currentSelection = selectedItems
-
-        selectedItems = Set<Location.ID>()
-
-        selectedItems = currentSelection
-    }
 }
 
 #Preview {
-    RotationSelectionView(locations: DeveloperPreview.shared.locations)
-        .environment(Router())
-        .environment(GemineViewStateController())
+    NavigationStack {
+        RotationSelectionView(locations: DeveloperPreview.shared.locations)
+            .environment(Router())
+            .environment(GemineViewStateController())
+    }
 }

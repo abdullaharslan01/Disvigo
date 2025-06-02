@@ -13,6 +13,7 @@ struct CityMapView: View {
     @State var vm: CityMapViewModel
 
     @Environment(GemineViewStateController.self) private var gemine
+    @State var addLocationsList: Bool = false
 
     @State var position: MapCameraPosition = .automatic
     @State var selectedLocation: Location?
@@ -42,8 +43,31 @@ struct CityMapView: View {
 
         }.preferredColorScheme(.dark)
             .toolbarVisibility(.hidden, for: .tabBar)
+            .sheet(isPresented: $addLocationsList, content: {
+                SelectLocationToListView(locations: vm.locations)
+                    .presentationDragIndicator(.visible)
+            })
             .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
+                ToolbarItemGroup(placement: .topBarTrailing) {
+                    Button {
+                        UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+
+                        addLocationsList.toggle()
+
+                    } label: {
+                        Image(systemName: AppIcons.plus)
+                            .foregroundStyle(.appGreenLight)
+                    }.contextMenu {
+                        Button {
+                            UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+
+                            addLocationsList.toggle()
+
+                        } label: {
+                            Label(String(localized: "You can add the locations you choose to your list."), systemImage: AppIcons.map)
+                        }
+                    }
+
                     Button {
                         vm.requestForSortLocations()
 

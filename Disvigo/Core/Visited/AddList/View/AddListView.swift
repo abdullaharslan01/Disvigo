@@ -27,60 +27,49 @@ struct AddListView: View {
     @Environment(\.dismiss) private var dismiss
     
     var body: some View {
-        ZStack {
-            Color.appBackgroundDark.ignoresSafeArea()
+        NavigationStack {
+            ZStack {
+                Color.appBackgroundDark.ignoresSafeArea()
 
-            VStack(spacing: 30) {
-                headerSection
-                nameSection
-                selectionSection
-                saveButton
+                VStack(spacing: 30) {
+                    nameSection
+                    selectionSection
+                    saveButton
+                    
+                    Spacer()
+                }
+                .padding()
                 
-                Spacer()
+            }.onTapGesture {
+                UIApplication.shared.endEditing()
             }
-            .padding()
-           
-        }.onTapGesture {
-            UIApplication.shared.endEditing()
-        }
-        
-        .navigationBarTitleDisplayMode(.inline)
-        .preferredColorScheme(.dark)
-        .onAppear(perform: setupData)
-        .alert(String(localized: "Warning"), isPresented: $showAlert) {
-            Button(String(localized: "OK")) {}
-        } message: {
-            Text(alertMessage)
-        }
-        .alert(String(localized: "Successfully added"), isPresented: $successAlert) {
-            Button(String(localized: "OK")) {
-                dismiss()
+            .navigationTitle(isUpdate ? String(localized: "Edit Adventure") : String(localized: "New Adventure"))
+            .toolbar(content: {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button(String(localized: "Cancel")) {
+                        UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+                        dismiss()
+                    }.foregroundColor(.appTextLight)
+                }
+            })
+            .navigationBarTitleDisplayMode(.inline)
+            .preferredColorScheme(.dark)
+            .onAppear(perform: setupData)
+            .alert(String(localized: "Warning"), isPresented: $showAlert) {
+                Button(String(localized: "OK")) {}
+            } message: {
+                Text(alertMessage)
             }
-        } message: {
-            Text(alertMessage)
-        }
-        .fullScreenCover(isPresented: $showIconPicker) {
-            IconPickerView(selectedIcon: $symbolName)
-        }
-    }
-    
-    private var headerSection: some View {
-        ZStack {
-            closeButton.frame(maxWidth: .infinity, alignment: .leading)
-            
-            Text(isUpdate ? String(localized: "Edit Adventure") : String(localized: "New Adventure"))
-                .font(.poppins(.semiBold, size: .title))
-        }
-    }
-    
-    private var closeButton: some View {
-        DIconButtonView(
-            iconButtonType: .custom(AppIcons.xmark),
-            iconColor: .appTextLight,
-            bgColor: .red
-        ) {
-            UIImpactFeedbackGenerator(style: .medium).impactOccurred()
-            dismiss()
+            .alert(String(localized: "Successfully added"), isPresented: $successAlert) {
+                Button(String(localized: "OK")) {
+                    dismiss()
+                }
+            } message: {
+                Text(alertMessage)
+            }
+            .fullScreenCover(isPresented: $showIconPicker) {
+                IconPickerView(selectedIcon: $symbolName)
+            }
         }
     }
     

@@ -24,9 +24,7 @@ struct VisitedDetailView: View {
                 mainContentView
             }
         }
-        .onAppear {
-              setupDeveloperPreview()
-        }
+     
         .navigationTitle(visitedList.name)
         .navigationBarTitleDisplayMode(.inline)
         .preferredColorScheme(.dark)
@@ -65,8 +63,9 @@ struct VisitedDetailView: View {
                 }
             }
         }
-        .fullScreenCover(isPresented: $editListState) {
+        .sheet(isPresented: $editListState) {
             AddListView(isUpdate: true, visitedList: visitedList)
+                .presentationDragIndicator(.visible)
         }
     }
     
@@ -209,8 +208,6 @@ extension VisitedDetailView {
         }.tint(.red)
     }
     
-    // MARK: - Empty State View
-
     private var emptyStateView: some View {
         DLottieEmtyView(
             lottieName: AppImages.Lottie.walkingPerson,
@@ -227,8 +224,6 @@ extension VisitedDetailView {
         .padding(.horizontal)
     }
 }
-
-// MARK: - Actions
 
 extension VisitedDetailView {
     private func toggleAllSelection() {
@@ -263,14 +258,6 @@ extension VisitedDetailView {
         withAnimation {
             for index in offsets {
                 visitedList.visitedItems.remove(at: index)
-            }
-        }
-    }
-    
-    private func setupDeveloperPreview() {
-        if let firstList = visitedManager.visitedLists.first, firstList.visitedItems.isEmpty {
-            for location in DeveloperPreview.shared.locations {
-                firstList.visitedItems.append(.init(location: location))
             }
         }
     }
