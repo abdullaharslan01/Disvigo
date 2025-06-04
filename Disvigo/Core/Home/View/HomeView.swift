@@ -12,9 +12,10 @@ struct HomeView: View {
     let namespace: Namespace.ID
     @Binding var isAllContentWasLoad: Bool
     @FocusState private var isSearchFocused: Bool
-
     @Environment(Router.self) private var router
     @Environment(GemineViewStateController.self) private var gemineManager
+    @Binding var tabBarVisibility: Bool
+    @Binding var tabbarHeight: CGFloat
 
     var body: some View {
         ZStack {
@@ -25,7 +26,6 @@ struct HomeView: View {
             gemineManager.gemineViewState = .turkey
 
         })
-
         .navigationTitle(String(localized: "Explore Cities"))
         .preferredColorScheme(.dark)
         .task {
@@ -33,7 +33,8 @@ struct HomeView: View {
         }
         .onChange(of: vm.isAllContentWasLoad) { _, newValue in
             if newValue {
-                isAllContentWasLoad = true
+                isAllContentWasLoad = newValue
+                tabBarVisibility = true
             }
         }
     }
@@ -48,7 +49,8 @@ struct HomeView: View {
                     if vm.filteredCities.isEmpty && !vm.citySearchText.isEmpty {
                         DEmptyStateView(type: .searchNotFound(title: String(localized: "No cities found"))) {
                             vm.citySearchText = ""
-                        }.transition(.scale.combined(with: .opacity))
+                        }
+                        .transition(.scale.combined(with: .opacity))
                     } else {
                         ForEach(vm.filteredCities) { city in
 
@@ -72,6 +74,7 @@ struct HomeView: View {
                 }
                 .padding(.horizontal)
                 .animation(.easeInOut(duration: 0.5), value: vm.filteredCities.count)
+                .padding(.bottom, tabbarHeight)
             }
 
             .overlay(alignment: .bottomLeading, content: {
@@ -83,7 +86,7 @@ struct HomeView: View {
                     }
 
                 }.padding(.horizontal)
-                    .padding(.bottom)
+                    .padding(.bottom, tabbarHeight)
             })
             .refreshable {
                 await vm.refreshCities()
@@ -91,8 +94,6 @@ struct HomeView: View {
             }
             .searchable(text: $vm.citySearchText, prompt: String(localized: "Search by city..."))
             .focused($isSearchFocused)
-            .scaleEffect(isSearchFocused ? 1.02 : 1.0)
-            .animation(.easeInOut(duration: 0.2), value: isSearchFocused)
             .onChange(of: vm.filteredCities.count) { oldValue, newValue in
                 if oldValue != newValue {
                     let impactFeedback = UIImpactFeedbackGenerator(style: .light)

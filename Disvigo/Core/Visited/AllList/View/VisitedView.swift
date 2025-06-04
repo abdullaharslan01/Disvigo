@@ -16,6 +16,7 @@ struct VisitedView: View {
     
     @Environment(FavoriteManager.self) private var visitedManager
     @Environment(Router.self) private var router
+    @Binding var tabbarHeight: CGFloat
 
     var body: some View {
         ZStack {
@@ -23,12 +24,20 @@ struct VisitedView: View {
             
             if visitedManager.visitedLists.isEmpty {
                 emptyStateView
+                    .padding(.bottom, tabbarHeight + 50)
             } else {
                 mainContentView
             }
         }
         .preferredColorScheme(.dark)
         .navigationTitle(String(localized: "My Travel Lists"))
+        .toolbar(content: {
+            ToolbarItem(placement: .topBarTrailing) {
+                Button(String(localized: "New List")) {
+                    createListState.toggle()
+                }
+            }
+        })
         .sheet(isPresented: $createListState) {
             AddListView(isUpdate: false)
                 .presentationDragIndicator(.visible)
@@ -53,31 +62,33 @@ struct VisitedView: View {
     }
     
     private var mainContentView: some View {
-        List(visitedManager.visitedLists) { item in
-            VisitedRowView(item: item) {
-                UIImpactFeedbackGenerator(style: .medium).impactOccurred()
-                router.navigate(to: .visitedDetail(item))
+        List {
+            ForEach(visitedManager.visitedLists) { item in
+                
+                VisitedRowView(item: item) {
+                    UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+                    router.navigate(to: .visitedDetail(item))
+                }
+                .listRowBackground(Color.clear)
+                .listRowSeparator(.hidden)
+                .contextMenu {
+                    deleteButton(for: item)
+                    detailButton(for: item)
+                }
+                .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                    deleteButton(for: item, showText: false)
+                    detailButton(for: item, showText: false)
+                }
             }
-            .listRowBackground(Color.clear)
-            .listRowSeparator(.hidden)
-            .contextMenu {
-                deleteButton(for: item)
-                detailButton(for: item)
-            }
-            .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-                deleteButton(for: item, showText: false)
-                detailButton(for: item, showText: false)
-            }
-        }.listStyle(.plain)
-            .scrollContentBackground(.hidden)
+               
+            Color.clear.frame(height: tabbarHeight)
+        }.scrollContentBackground(.hidden)
             .background(.clear)
             .refreshable {
                 visitedManager.fetchVisitedList()
             }
             .padding(.top, 40)
-            .safeAreaInset(edge: .bottom) {
-                addNewListButton
-            }
+            .listStyle(.plain)
     }
     
     private var emptyStateView: some View {
@@ -92,7 +103,6 @@ struct VisitedView: View {
         ) {
             createListState = true
         }
-        .padding(.bottom, 50)
     }
     
     private var addNewListButton: some View {
@@ -109,7 +119,7 @@ struct VisitedView: View {
                     in: RoundedRectangle(cornerRadius: 16)
                 )
         }
-        .padding(.bottom,30)
+        .padding(.bottom, 30)
     }
     
     private func deleteButton(for item: VisitedList, showText: Bool = true) -> some View {
@@ -232,7 +242,7 @@ struct ScaleButtonStyle: ButtonStyle {
 
 #Preview {
     NavigationView {
-        VisitedView()
+        VisitedView(tabbarHeight: .constant(100))
             .environment(FavoriteManager())
             .environment(Router())
     }

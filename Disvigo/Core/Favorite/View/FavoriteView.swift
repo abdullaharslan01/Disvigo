@@ -33,11 +33,12 @@ enum FavoriSection: CaseIterable {
 }
 
 struct FavoriteView: View {
-    @Binding var selectedTab: DTabModel
+    @Binding var currentTab: TabType
 
     @Environment(FavoriteManager.self) var favoriteManager
     @Environment(Router.self) var router
     @Environment(GemineViewStateController.self) private var gemine
+    @Binding var tabbarHeight:CGFloat
 
     let sectionCellWidth: CGFloat = 200
     var body: some View {
@@ -46,14 +47,15 @@ struct FavoriteView: View {
 
             if isEmpty {
                 emptyStateView
-                    .padding(.bottom, 50)
+                    .padding(.bottom, tabbarHeight )
+
             } else {
                 favoritesContent
             }
+            
         }
         .onAppear(perform: {
             gemine.gemineViewState = .turkey
-
         })
 
         .navigationTitle(String(localized: "Favorites"))
@@ -117,6 +119,7 @@ extension FavoriteView {
                 }
             }
             .padding(.vertical)
+            .padding(.bottom, tabbarHeight)
         }
     }
 
@@ -226,14 +229,14 @@ extension FavoriteView {
             message: String(localized: "It looks like you haven't saved any favorites yet.\nExplore places and tap the heart icon to add them here."),
             textColor: .appTextLight, buttonBackground: .appGreenPrimary, buttonForeground: .appTextLight
         ) {
-            selectedTab = .home
+            currentTab = .home
         }
     }
 }
 
 #Preview {
     NavigationStack {
-        FavoriteView(selectedTab: .constant(.favorites))
+        FavoriteView(currentTab: .constant(.home), tabbarHeight: .constant(100))
             .environment(FavoriteManager())
             .environment(Router())
             .environment(GemineViewStateController())

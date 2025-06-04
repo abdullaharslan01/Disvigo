@@ -64,6 +64,8 @@ enum Destination: Hashable {
 @Observable
 class Router {
     var homePath = NavigationPath()
+    
+   
 
     func navigate(to destination: Destination) {
         homePath.append(destination)

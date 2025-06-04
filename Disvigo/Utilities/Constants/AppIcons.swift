@@ -13,6 +13,7 @@ enum AppIcons {
     static let cityDetail = "airplane.departure"
     static let map = "map"
     static let home = "house"
+    static let homeFill = "house.fill"
     static let heart = "heart"
     static let heartFill = "heart.fill"
     static let location = "location"
