@@ -35,7 +35,6 @@ class ChatViewModel {
         isLoading = true
         textInput = ""
         
-        // Add loading message
         let loadingMessage = Message(content: "", isFromUser: false, isLoading: true)
         messages.append(loadingMessage)
         
@@ -50,10 +49,8 @@ class ChatViewModel {
             let question = buildContextualQuestion(userMessage: userMessage, aiViewState: aiViewState)
             let response = try await GeminiAIManager.shared.sendLocationMessage(textInput: question)
             
-            // Remove loading message
             removeLoadingMessage()
             
-            // Add AI response
             messages.append(response)
             isLoading = false
             
@@ -67,18 +64,9 @@ class ChatViewModel {
         let basePrompt = getBasePrompt(for: aiViewState)
         
         return """
-        \(basePrompt)
-        
-        Respond in the same language as the user's question.
-        
-        Previous conversation: \(conversationContext)
-        Current question: \(userMessage.content)
-        
-        Provide a helpful, friendly and practical response. Keep it 2-3 paragraphs.
+        Respond in the same language as the user's question. \(basePrompt) Previous conversation: \(conversationContext) Current question: \(userMessage.content). Provide a helpful, friendly and practical response. Keep it 2-3 paragraphs.
         """
     }
-    
-
     
     private func getBasePrompt(for aiViewState: GemineViewState) -> String {
         switch aiViewState {
@@ -167,7 +155,6 @@ class ChatViewModel {
         messages.filter { !$0.isFromUser && !$0.isLoading }.count
     }
 }
-
 
 extension Message {
     var wordCount: Int {

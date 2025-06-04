@@ -7,12 +7,38 @@
 
 import SwiftUI
 
+@Observable
+final class KeyboardResponder {
+    var keyboardHeight: CGFloat = 0
+
+    private var cancellables: [Any] = []
+
+    init() {
+        NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification,
+                                               object: nil, queue: .main)
+        { [weak self] notification in
+            let height = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect)?.height ?? 0
+            self?.keyboardHeight = height
+        }
+
+        NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification,
+                                               object: nil, queue: .main)
+        { [weak self] _ in
+            self?.keyboardHeight = 0
+        }
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+}
+
 struct ChatAIView: View {
     @Binding var aiViewState: GemineViewState
     let namespace: Namespace.ID
     @Binding var close: Bool
-
-    @FocusState var messageFocused: Bool
+    @State private var keyboard = KeyboardResponder()
+    @FocusState private var messageFocused: Bool
     
     @State var vm = ChatViewModel()
     
@@ -27,12 +53,17 @@ struct ChatAIView: View {
                 messagesView
                 
                 inputArea
-            }
+            }.padding(.bottom, keyboard.keyboardHeight == 0 ? 0 : keyboard.keyboardHeight - 40)
+                .animation(.easeOut(duration: 0.25), value: keyboard.keyboardHeight)
         }
+       
         .onAppear {
             vm.welcomeMessage(welComeText)
         }
         .animation(.easeInOut(duration: 0.8), value: vm.messages.count)
+        .onTapGesture {
+            messageFocused = false
+        }
     }
     
     private var headerView: some View {
@@ -79,6 +110,7 @@ struct ChatAIView: View {
             bgColor: .red, padding: 8
         ) {
             UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+            messageFocused = false
             withAnimation(.spring(response: 0.5, dampingFraction: 0.8)) {
                 close.toggle()
             }
@@ -133,17 +165,29 @@ struct ChatAIView: View {
                         TypingIndicatorView()
                             .transition(.opacity.combined(with: .scale))
                     }
+                    
+                    if messageFocused {
+                        Spacer()
+                            .frame(height: 100)
+                    }
                 }
                 .padding(.horizontal, 20)
                 .padding(.vertical, 16)
             }
-            .scrollDismissesKeyboard(.interactively)
+            .scrollDismissesKeyboard(.immediately)
             .onChange(of: vm.messages) { _, _ in
                 scrollToBottom(proxy: proxy)
             }
             .onChange(of: vm.isLoading) { _, newValue in
                 if newValue {
                     scrollToBottom(proxy: proxy)
+                }
+            }
+            .onChange(of: messageFocused) { _, isFocused in
+                if isFocused {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                        scrollToBottom(proxy: proxy)
+                    }
                 }
             }
         }
@@ -186,23 +230,16 @@ struct ChatAIView: View {
                     messageFocused = false
                 }
             }
-            .toolbar {
-                ToolbarItem(placement: .keyboard) {
-                    Button {
-                        messageFocused = false
-                    } label: {
-                        Text(String(localized: "Done"))
-                            .font(.poppins(.semiBold, size: .body))
-                            .foregroundColor(.chatPrimary)
-                    }
-                    .frame(maxWidth: .infinity, alignment: .trailing)
-                }
-            }
         }
     }
     
     private func sendMessage() {
+        guard !vm.textInput.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty && !vm.isLoading else {
+            return
+        }
+        
         UIImpactFeedbackGenerator(style: .light).impactOccurred()
+        messageFocused = false
         vm.sendMessageWith(aiViewState: aiViewState)
     }
     
