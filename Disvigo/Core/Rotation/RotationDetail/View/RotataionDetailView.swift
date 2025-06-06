@@ -143,6 +143,7 @@ struct RotataionDetailView: View {
             }
         }
         .ignoresSafeArea(edges: [.bottom])
+        .navigationTitle(String(localized: "Smart Route"))
         .alert(String(localized: "Rate Limit Exceeded"),
                isPresented: $showThrottlingAlert,
                actions: {
@@ -330,41 +331,21 @@ struct RotataionDetailView: View {
     }
     
     private var viewOnMapButton: some View {
-        HStack(alignment: .top) {
-            DIconButtonView(
-                iconButtonType: .custom(AppIcons.xmark),
-                iconColor: .appTextLight,
-                bgColor: .red
-            ) {
+        VStack(alignment: .trailing, spacing: 20) {
+            DLabelButtonView(systemImage: AppIcons.locationSquare, title: String(localized: "Get Directions")) {
                 UIImpactFeedbackGenerator(style: .medium).impactOccurred()
-                router.navigateBack()
+                showMapSelectionSheet.toggle()
             }
-            
-            .contextMenu {
-                Button {
-                    UIImpactFeedbackGenerator(style: .medium).impactOccurred()
-                    router.navigateBack()
-                } label: {
-                    Text(String(localized: "Back"))
-                }
-            }
-            
-            Spacer()
-            VStack(alignment: .trailing, spacing: 20) {
-                DLabelButtonView(systemImage: AppIcons.locationSquare, title: String(localized: "Get Directions")) {
-                    UIImpactFeedbackGenerator(style: .medium).impactOccurred()
-                    showMapSelectionSheet.toggle()
-                }
-                .disabled(isThrottled)
-                .opacity(isThrottled ? 0.6 : 1.0)
+            .disabled(isThrottled)
+            .opacity(isThrottled ? 0.6 : 1.0)
                 
-                DIconButtonView(iconButtonType: .user, iconColor: .appGreenPrimary, bgMaterial: .ultraThinMaterial) {
-                    UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+            DIconButtonView(iconButtonType: .user, iconColor: .appGreenPrimary, bgMaterial: .ultraThinMaterial) {
+                UIImpactFeedbackGenerator(style: .medium).impactOccurred()
 
-                    vm.locationManager.checkLocationAuthorization()
-                }
+                vm.locationManager.checkLocationAuthorization()
             }
-        }.onChange(of: vm.focusOnUserStatus) { _, _ in
+        }.frame(maxWidth: .infinity, alignment: .trailing)
+        .onChange(of: vm.focusOnUserStatus) { _, _ in
            
             guard let userLocation = vm.locationManager.userLocation else { return }
                 

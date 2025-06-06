@@ -82,6 +82,10 @@ struct VisitedView: View {
             }
                
             Color.clear.frame(height: tabbarHeight)
+                .listRowBackground(Color.clear)
+                .listRowSeparator(.hidden)
+
+
         }.scrollContentBackground(.hidden)
             .background(.clear)
             .refreshable {

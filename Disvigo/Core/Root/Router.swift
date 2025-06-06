@@ -127,7 +127,7 @@ extension View {
 
             case .rotationDetail(let locations):
                 RotataionDetailView(stops: locations)
-                    .navigationBarBackButtonHidden()
+                    .toolbarRole(.editor)
 
             case .rotationSelection(let locations):
                 RotationSelectionView(locations: locations)

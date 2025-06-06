@@ -143,7 +143,9 @@ struct AddListView: View {
                                     .rotationEffect(.degrees(rotation))
                                     .animation(.linear(duration: 2).repeatForever(autoreverses: false), value: rotation)
                                     .onAppear {
-                                        rotation = 360
+                                        if rotation == 0 {
+                                            rotation = 360
+                                        }
                                     }
                             )
                     )

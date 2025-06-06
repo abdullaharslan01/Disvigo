@@ -64,7 +64,7 @@ struct DTabBarMenuView: View {
             }
         }
         .padding(.bottom, getSafeArea().bottom == 0 ? 5 : getSafeArea().bottom )
-        .background(.appTabBackground)
+        .background(.appBackgroundDeep)
         .clipShape(RoundedRectangle(cornerRadius: 12))
         .shadow(color: .black.opacity(0.1), radius: 8, x: 0, y: -2)
     }

@@ -78,15 +78,18 @@ struct HomeView: View {
             }
 
             .overlay(alignment: .bottomLeading, content: {
-                DIconButtonView(iconButtonType: .custom(AppIcons.chevronUp), iconColor: .accent, bgMaterial: .ultraThin, width: 50, height: 40) {
-                    UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+                if vm.filteredCities.count > 2 {
+                    DIconButtonView(iconButtonType: .custom(AppIcons.chevronUp), iconColor: .accent, bgMaterial: .ultraThin, width: 50, height: 40) {
+                        UIImpactFeedbackGenerator(style: .medium).impactOccurred()
 
-                    withAnimation {
-                        proxy.scrollTo("top")
-                    }
+                        withAnimation {
+                            proxy.scrollTo("top")
+                        }
 
-                }.padding(.horizontal)
-                    .padding(.bottom, tabbarHeight)
+                    }.padding(.horizontal)
+                        .padding(.bottom, tabbarHeight)
+                }
+
             })
             .refreshable {
                 await vm.refreshCities()
