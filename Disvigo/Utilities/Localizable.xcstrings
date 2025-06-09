@@ -1,0 +1,1655 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "" : {
+
+    },
+    "/" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "/"
+          }
+        }
+      }
+    },
+    "%@ Flavors" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ Lezzetleri "
+          }
+        }
+      }
+    },
+    "%@ km" : {
+      "comment" : "Distance in kilometers",
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ km "
+          }
+        }
+      }
+    },
+    "%@ Memories" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ Hatıraları"
+          }
+        }
+      }
+    },
+    "%lld" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld"
+          }
+        }
+      }
+    },
+    "%lld locations have been added to your list." : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld lokasyon başarıyla listenize eklendi."
+          }
+        }
+      }
+    },
+    "%lld locations have been successfully added to your list." : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld lokasyonları başarıyla listenize eklendi."
+          }
+        }
+      }
+    },
+    "%lld m" : {
+      "comment" : "Distance in meters",
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : " %lld m"
+          }
+        }
+      }
+    },
+    "%lld." : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld."
+          }
+        }
+      }
+    },
+    "🇹🇷 Merhaba! I'm here to share the wonders of Türkiye with you. From ancient history to modern culture, stunning landscapes to delicious cuisine - what aspect of this beautiful country interests you most?" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🇹🇷 Merhaba! Türkiye’nin harikalarını seninle paylaşmak için buradayım. Kadim tarihinden modern kültürüne, büyüleyici manzaralarından leziz mutfağına kadar… Bu güzel ülkenin seni en çok cezbeden yönü hangisi?"
+          }
+        }
+      }
+    },
+    "🍴 Yummy! I'm your culinary expert for %@. I can tell you about its history, ingredients, preparation methods, and where to find the best versions. What would you like to know about this delicious dish?" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🍴 Nefis! %@ konusunda senin mutfak uzmanınım. Bu yemeğin tarihini, malzemelerini, nasıl hazırlandığını ve en iyi nerede tadabileceğini sana anlatabilirim. Bu lezzetli yemek hakkında ne öğrenmek istersin?"
+          }
+        }
+      }
+    },
+    "🏙️ Welcome! I'm your local expert for %@. Whether you're planning a visit or just curious about this amazing city, I'm here to help. What would you like to discover?" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🏙️ Hoş geldin! %@ hakkında sana rehberlik edecek yerel uzman benim. İster bir ziyaret planlıyor ol ister sadece bu harika şehir hakkında meraklı ol, sana yardımcı olmak için buradayım. Neyi keşfetmek istersin?"
+          }
+        }
+      }
+    },
+    "👋 Hello! I'm your personal guide for %@. I can help you discover hidden gems, share fascinating stories, and answer any questions you have. What would you like to explore first?" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "👋 Merhaba! %@ için senin kişisel rehberinim. Sana gizli kalmış güzellikleri gösterebilir, ilginç hikâyeler paylaşabilir ve merak ettiğin her soruyu yanıtlayabilirim. Önce neyi keşfetmek istersin?"
+          }
+        }
+      }
+    },
+    "🛍️ Hello! I'm your shopping guide for %@. I can recommend the best souvenirs, local specialties, and unique items to remember your trip by. What kind of memorable items are you looking for?" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🛍️ Merhaba! %@ için senin alışveriş rehberinim. Sana en güzel hediyelikleri, yöresel lezzetleri ve seyahatini unutulmaz kılacak özel ürünleri önerebilirim. Ne tür hatıralık eşyalar arıyorsun?"
+          }
+        }
+      }
+    },
+    "A list with this name already exists" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bu isimde bir liste zaten mevcut"
+          }
+        }
+      }
+    },
+    "Add New List" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yeni Liste Ekle"
+          }
+        }
+      }
+    },
+    "Add to List" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : " Listeye Ekle"
+          }
+        }
+      }
+    },
+    "Adventure Name" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gezi Adı"
+          }
+        }
+      }
+    },
+    "All locations in this list will be deleted. This action cannot be undone." : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : " Bu listedeki tüm lokasyonlar silinecek. Bu işlem geri alınamaz."
+          }
+        }
+      }
+    },
+    "Allow" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "İzin Ver"
+          }
+        }
+      }
+    },
+    "Allow access to your location to show your position on the map?" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Haritada konumunuzu gösterebilmek için konum erişimine izin verilsin mi?"
+          }
+        }
+      }
+    },
+    "Already Exists" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zaten Mevcut"
+          }
+        }
+      }
+    },
+    "Already Sorted" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zaten Sıralandı"
+          }
+        }
+      }
+    },
+    "An unknown error occurred." : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bilinmeyen bir hata oluştu."
+          }
+        }
+      }
+    },
+    "Apple Maps" : {
+      "comment" : "Apple Maps option",
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple Haritalar"
+          }
+        }
+      }
+    },
+    "Ask about %@..." : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ hakkında sor…"
+          }
+        }
+      }
+    },
+    "Browse Cities" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Şehirleri Keşfet"
+          }
+        }
+      }
+    },
+    "Calculating Route" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rota Hesaplanıyor"
+          }
+        }
+      }
+    },
+    "Cancel" : {
+      "comment" : "Cancel button title",
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "İptal"
+          }
+        }
+      }
+    },
+    "Centers on your position." : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Konumunuza odaklanır."
+          }
+        }
+      }
+    },
+    "Choose a List" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bir Liste Seçin"
+          }
+        }
+      }
+    },
+    "Choose a map app for directions" : {
+      "comment" : "Message for map selection dialog",
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yol tarifi için bir harita uygulaması seçin"
+          }
+        }
+      }
+    },
+    "Choose an Icon" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bir Simge Seçin"
+          }
+        }
+      }
+    },
+    "Choose Icon" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Simge Seç"
+          }
+        }
+      }
+    },
+    "City Assistant" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Şehir Asistanı"
+          }
+        }
+      }
+    },
+    "Clear" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Temizle"
+          }
+        }
+      }
+    },
+    "Copied to clipboard" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Panoya kopyalandı"
+          }
+        }
+      }
+    },
+    "Copy" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kopyala"
+          }
+        }
+      }
+    },
+    "Country Expert" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ülke Rehberi"
+          }
+        }
+      }
+    },
+    "Create a route" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rota Oluştur"
+          }
+        }
+      }
+    },
+    "Create First List" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "İlk Listeyi Oluştur"
+          }
+        }
+      }
+    },
+    "Create List" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Liste Oluştur"
+          }
+        }
+      }
+    },
+    "Create route from selected locations." : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seçilen lokasyonlardan rota oluştur."
+          }
+        }
+      }
+    },
+    "Culinary Expert" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mutfak Rehberi"
+          }
+        }
+      }
+    },
+    "Delete" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sil"
+          }
+        }
+      }
+    },
+    "Delete List?" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Liste silinsin mi?"
+          }
+        }
+      }
+    },
+    "Delete the %@ list" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : " %@ listesini sil"
+          }
+        }
+      }
+    },
+    "Detail" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Detay"
+          }
+        }
+      }
+    },
+    "Discover %@" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@Keşfet"
+          }
+        }
+      }
+    },
+    "Discover Navigate Go" : {
+      "comment" : "Splash screen motto text",
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Discover Navigate Go"
+          }
+        }
+      }
+    },
+    "Discovery Points" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Keşif Noktaları"
+          }
+        }
+      }
+    },
+    "DISVIG" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "DISVIG"
+          }
+        }
+      }
+    },
+    "Dive into the details of %@" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@’nın detaylarına göz at"
+          }
+        }
+      }
+    },
+    "Edit" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Düzenle"
+          }
+        }
+      }
+    },
+    "Edit Adventure" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Geziyi Düzenle"
+          }
+        }
+      }
+    },
+    "Edit list" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Listeyi Düzenle"
+          }
+        }
+      }
+    },
+    "Enter name" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "İsim girin"
+          }
+        }
+      }
+    },
+    "Estimated Time" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tahmini Süre"
+          }
+        }
+      }
+    },
+    "Explore %@" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@Keşfet"
+          }
+        }
+      }
+    },
+    "Explore Cities" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Şehirleri Keşfet"
+          }
+        }
+      }
+    },
+    "Explore Locations" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lokasyonları Keşfet"
+          }
+        }
+      }
+    },
+    "Explore Now" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hemen Keşfet"
+          }
+        }
+      }
+    },
+    "Failed to decode data." : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Veri çözümlenemedi."
+          }
+        }
+      }
+    },
+    "Farthest from you." : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Size en uzak olan"
+          }
+        }
+      }
+    },
+    "Favorites" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Favoriler"
+          }
+        }
+      }
+    },
+    "Get Directions" : {
+      "comment" : "Button title for getting directions",
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yol Tarifi Al"
+          }
+        }
+      }
+    },
+    "Go to Detail" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Detaylara Git"
+          }
+        }
+      }
+    },
+    "Google Maps" : {
+      "comment" : "Google Maps option",
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Google Haritalar"
+          }
+        }
+      }
+    },
+    "Home" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ana Sayfa"
+          }
+        }
+      }
+    },
+    "I apologize, but I'm having trouble connecting right now. Could you please try asking again?" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Üzgünüm, şu anda bağlantı kurmakta zorlanıyorum. Lütfen tekrar dener misiniz?"
+          }
+        }
+      }
+    },
+    "I seem to be experiencing some technical difficulties. Please give me another chance to help you!" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Görünüşe göre bazı teknik sorunlar yaşıyorum. Size yardımcı olabilmem için lütfen bana bir şans daha verin!"
+          }
+        }
+      }
+    },
+    "Image is loading..." : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : " Görsel yükleniyor…"
+          }
+        }
+      }
+    },
+    "Image not found" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Görsel bulunamadı"
+          }
+        }
+      }
+    },
+    "Invalid server response." : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sunucudan geçersiz yanıt alındı."
+          }
+        }
+      }
+    },
+    "Invalid URL." : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Geçersiz URL"
+          }
+        }
+      }
+    },
+    "It looks like you haven't saved any favorites yet.\nExplore places and tap the heart icon to add them here." : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Henüz herhangi bir favori kaydetmemişsiniz gibi görünüyor."
+          }
+        }
+      }
+    },
+    "Journey Memories" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : " Gezi Hatıraları"
+          }
+        }
+      }
+    },
+    "Learn More" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Daha Fazla Bilgi Al"
+          }
+        }
+      }
+    },
+    "List created successfully" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Liste başarıyla oluşturuldu"
+          }
+        }
+      }
+    },
+    "List Deleted" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Liste silindi"
+          }
+        }
+      }
+    },
+    "List name cannot be empty" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Liste adı boş olamaz"
+          }
+        }
+      }
+    },
+    "List updated successfully" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Liste başarıyla güncellendi"
+          }
+        }
+      }
+    },
+    "Loading" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yükleniyor"
+          }
+        }
+      }
+    },
+    "Loading Locations..." : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : " Lokasyonlar yükleniyor…"
+          }
+        }
+      }
+    },
+    "Local Cuisine" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yöresel Yemekler"
+          }
+        }
+      }
+    },
+    "Location Access" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Konum Erişimi"
+          }
+        }
+      }
+    },
+    "Location Guide" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lokasyon Rehberi"
+          }
+        }
+      }
+    },
+    "Location has been successfully added to your list." : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lokasyon listenize başarıyla eklendi."
+          }
+        }
+      }
+    },
+    "Location Not Found" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : " Lokasyon Bulunamadı"
+          }
+        }
+      }
+    },
+    "Markdown error: %@" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Biçimlendirme hatası: %@"
+          }
+        }
+      }
+    },
+    "My Travel Lists" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seyahat Listelerim"
+          }
+        }
+      }
+    },
+    "Nearest to you." : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : " Size en yakın olan"
+          }
+        }
+      }
+    },
+    "Network Error" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ağ Hatası"
+          }
+        }
+      }
+    },
+    "New Adventure" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yeni Gezi"
+          }
+        }
+      }
+    },
+    "New List" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yeni Liste"
+          }
+        }
+      }
+    },
+    "No cities found" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : " Şehir bulunamadı"
+          }
+        }
+      }
+    },
+    "No dish found with %@" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ ile eşleşen yemek bulunamadı"
+          }
+        }
+      }
+    },
+    "No Locations Added Yet" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Henüz hiçbir lokasyon eklenmedi"
+          }
+        }
+      }
+    },
+    "No locations found in %@" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ içinde lokasyon bulunamadı"
+          }
+        }
+      }
+    },
+    "No Locations Selected" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hiçbir lokasyon seçilmedi"
+          }
+        }
+      }
+    },
+    "Not Now" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Şimdi Değil"
+          }
+        }
+      }
+    },
+    "OK" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tamam"
+          }
+        }
+      }
+    },
+    "Online" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Çevrimiçi"
+          }
+        }
+      }
+    },
+    "Oops! Something went wrong on my end. Let's try that question once more." : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hata oluştu, sanırım benden kaynaklandı. Soruyu tekrar denemeye ne dersin?"
+          }
+        }
+      }
+    },
+    "Orders locations by proximity." : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lokasyonları yakınlığa göre sıralar."
+          }
+        }
+      }
+    },
+    "Organize your adventures! Create lists for different trips, add locations you've visited or want to explore, and track your travel memories all in one place." : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : " Maceralarını planla! Farklı seyahatler için listeler oluştur, gezdiğin veya keşfetmek istediğin yerleri ekle ve tüm gezi anılarını tek bir yerde takip et."
+          }
+        }
+      }
+    },
+    "Partially Added" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kısmen Eklendi"
+          }
+        }
+      }
+    },
+    "Please select at least %lld locations to create a route" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rota oluşturmak için en az %lld lokasyon seçmelisiniz"
+          }
+        }
+      }
+    },
+    "Please wait before making more route requests." : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yeni bir rota isteğinde bulunmadan önce lütfen bekleyin."
+          }
+        }
+      }
+    },
+    "Please wait while we fetch your data..." : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "→ Verileriniz alınırken lütfen bekleyin…"
+          }
+        }
+      }
+    },
+    "Rate Limit Exceeded" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "İstek sınırı aşıldı"
+          }
+        }
+      }
+    },
+    "Read More" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Daha Fazla Oku"
+          }
+        }
+      }
+    },
+    "Remove" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kaldır"
+          }
+        }
+      }
+    },
+    "Remove from favorites" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Favorilerden çıkar"
+          }
+        }
+      }
+    },
+    "Request failed. Please check your connection." : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "İstek başarısız oldu. Lütfen bağlantınızı kontrol edin."
+          }
+        }
+      }
+    },
+    "Save Changes" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : " Değişiklikleri Kaydet"
+          }
+        }
+      }
+    },
+    "Search %@ dishes..." : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ yemeklerinde ara…"
+          }
+        }
+      }
+    },
+    "Search %@ memories..." : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : " %@ anılarında ara…"
+          }
+        }
+      }
+    },
+    "Search by city..." : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Şehre göre ara…"
+          }
+        }
+      }
+    },
+    "Search by location within %@..." : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ içindeki konuma göre ara…"
+          }
+        }
+      }
+    },
+    "Search in Apple Maps" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : " Apple Haritalar’da Ara"
+          }
+        }
+      }
+    },
+    "Search in Google Maps" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : " Google Haritalar’da Ara"
+          }
+        }
+      }
+    },
+    "Select Color" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Renk Seç"
+          }
+        }
+      }
+    },
+    "Select Locations" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lokasyonları Seç"
+          }
+        }
+      }
+    },
+    "Select Map App" : {
+      "comment" : "Title for map selection dialog",
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Harita Uygulaması Seç"
+          }
+        }
+      }
+    },
+    "Select Map App to show vendors near you." : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yakınınızdaki satıcıları göstermek için bir harita uygulaması seçin."
+          }
+        }
+      }
+    },
+    "selected" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "seçildi"
+          }
+        }
+      }
+    },
+    "Selection Limit" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seçim Limiti"
+          }
+        }
+      }
+    },
+    "Share" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Paylaş"
+          }
+        }
+      }
+    },
+    "Shopping Guide" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alışveriş Rehberi"
+          }
+        }
+      }
+    },
+    "Show %@ Sellers Nearby" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yakındaki %@ Satıcılarını Göster"
+          }
+        }
+      }
+    },
+    "Show Less" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Daha Az Göster"
+          }
+        }
+      }
+    },
+    "Smart Route" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Akıllı Rota"
+          }
+        }
+      }
+    },
+    "Success" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Başarılı"
+          }
+        }
+      }
+    },
+    "Successfully added" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Başarıyla eklendi"
+          }
+        }
+      }
+    },
+    "System error" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sistem hatası"
+          }
+        }
+      }
+    },
+    "The image will be available soon." : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : " Görsel yakında görüntülenecek."
+          }
+        }
+      }
+    },
+    "The list was successfully deleted." : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Liste başarıyla silindi."
+          }
+        }
+      }
+    },
+    "The locations in %@ city are already ordered by proximity to you." : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ şehrindeki lokasyonlar size olan yakınlığa göre zaten sıralandı."
+          }
+        }
+      }
+    },
+    "These locations already exist in your list and were not added: " : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bu lokasyonlar listenizde zaten mevcut ve eklenmedi:"
+          }
+        }
+      }
+    },
+    "These locations were already in the list and were not added: " : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bu lokasyonlar listede zaten vardı ve eklenmedi:"
+          }
+        }
+      }
+    },
+    "Thinking..." : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Düşünüyorum…"
+          }
+        }
+      }
+    },
+    "This location already exists in your list." : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bu lokasyon zaten listenizde mevcut."
+          }
+        }
+      }
+    },
+    "To sort the nearest cities according to your location, you need to grant location permission." : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Size en yakın şehirleri sıralamak için konum izni vermeniz gerekiyor."
+          }
+        }
+      }
+    },
+    "Too many route requests. Please wait %d seconds before trying again." : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : " Çok fazla rota isteği yapıldı. Lütfen tekrar denemeden önce %d saniye bekleyin."
+          }
+        }
+      }
+    },
+    "Total Distance" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Toplam Mesafe"
+          }
+        }
+      }
+    },
+    "Try searching with a different keyword" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : " Farklı bir anahtar kelimeyle aramayı deneyin"
+          }
+        }
+      }
+    },
+    "View On Map" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Haritada Görüntüle"
+          }
+        }
+      }
+    },
+    "View Recipes" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tarifleri Görüntüle"
+          }
+        }
+      }
+    },
+    "Visited" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ziyaret Edildi"
+          }
+        }
+      }
+    },
+    "Warning" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uyarı"
+          }
+        }
+      }
+    },
+    "We couldn't find '%@' in %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "We couldn't find '%1$@' in %2$@"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "‘%1$@’ ifadesi %2$@ içinde bulunamadı"
+          }
+        }
+      }
+    },
+    "We couldn't find any location data for this area. Please check your connection or try another location." : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : " Bu bölgeye ait lokasyon verisi bulunamadı. Lütfen bağlantınızı kontrol edin veya başka bir konum deneyin."
+          }
+        }
+      }
+    },
+    "Yandex Maps" : {
+      "comment" : "Yandex Maps option",
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yandex Haritalar"
+          }
+        }
+      }
+    },
+    "You" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sen"
+          }
+        }
+      }
+    },
+    "You can add the locations you choose to your list." : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seçtiğiniz lokasyonları listenize ekleyebilirsiniz."
+          }
+        }
+      }
+    },
+    "You can select up to %lld locations only." : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : " En fazla %lld lokasyon seçebilirsiniz."
+          }
+        }
+      }
+    },
+    "You can select up to %lld locations to create a route. Please select the locations you want to include." : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rota oluşturmak için en fazla %lld lokasyon seçebilirsiniz. Lütfen dahil etmek istediğiniz lokasyonları seçin."
+          }
+        }
+      }
+    },
+    "You haven't added any locations to this list yet. Visit the Cities page to discover and add your favorite destinations to your travel list." : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : " Bu listeye henüz herhangi bir lokasyon eklemediniz. Şehirler sayfasını ziyaret ederek favori rotalarınızı keşfedip seyahat listenize ekleyebilirsiniz."
+          }
+        }
+      }
+    },
+    "You need to create a list to add locations." : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lokasyon ekleyebilmek için bir liste oluşturmanız gerekiyor."
+          }
+        }
+      }
+    },
+    "Your Favorites" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Favorileriniz"
+          }
+        }
+      }
+    },
+    "Your list is empty" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Listeniz boş"
+          }
+        }
+      }
+    },
+    "Your Travel Lists Await" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : " Seyahat Listeleriniz Sizi Bekliyor"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

@@ -25,7 +25,6 @@
 		F57453562DDE0DD40047E989 /* AppIcons.swift in Sources */ = {isa = PBXBuildFile; fileRef = F57453482DDE0DD40047E989 /* AppIcons.swift */; };
 		F57453572DDE0DD40047E989 /* AppImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = F57453492DDE0DD40047E989 /* AppImages.swift */; };
 		F57453582DDE0DD40047E989 /* Font+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = F574534B2DDE0DD40047E989 /* Font+Ext.swift */; };
-		F57453592DDE0DD40047E989 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F574534E2DDE0DD40047E989 /* ContentView.swift */; };
 		F574535A2DDE0DD40047E989 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F57453282DDE0DD40047E989 /* Launch Screen.storyboard */; };
 		F574535B2DDE0DD40047E989 /* Poppins-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F574533B2DDE0DD40047E989 /* Poppins-Bold.ttf */; };
 		F574535C2DDE0DD40047E989 /* Poppins-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F574533C2DDE0DD40047E989 /* Poppins-ExtraBold.ttf */; };
@@ -41,6 +40,7 @@
 		F5BFF5392DDE20F200AEF27D /* DTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5BFF5382DDE20F200AEF27D /* DTabView.swift */; };
 		F5BFF54E2DDE50D700AEF27D /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5BFF54D2DDE50D700AEF27D /* City.swift */; };
 		F5BFF66E2DDE5AAE00AEF27D /* DeveloperPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5BFF66D2DDE5AAE00AEF27D /* DeveloperPreview.swift */; };
+		F5E338762DF77FC7000106FA /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = F5E338752DF77FC7000106FA /* Localizable.xcstrings */; };
 		F5E3C8312DE780640077D3BF /* CityDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5E3C8302DE780640077D3BF /* CityDetail.swift */; };
 		F5F2D8152DDF257C008074F5 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5F2D8142DDF257C008074F5 /* Router.swift */; };
 		F5F337AC2DE0F32C00D8345F /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5F337AB2DE0F32C00D8345F /* Location.swift */; };
@@ -93,12 +93,12 @@
 		F57453482DDE0DD40047E989 /* AppIcons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIcons.swift; sourceTree = "<group>"; };
 		F57453492DDE0DD40047E989 /* AppImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppImages.swift; sourceTree = "<group>"; };
 		F574534B2DDE0DD40047E989 /* Font+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+Ext.swift"; sourceTree = "<group>"; };
-		F574534E2DDE0DD40047E989 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		F574534F2DDE0DD40047E989 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F5927BCA2DE9B34F0014D497 /* people-Walking.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "people-Walking.json"; sourceTree = "<group>"; };
 		F5BFF5382DDE20F200AEF27D /* DTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DTabView.swift; sourceTree = "<group>"; };
 		F5BFF54D2DDE50D700AEF27D /* City.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
 		F5BFF66D2DDE5AAE00AEF27D /* DeveloperPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeveloperPreview.swift; sourceTree = "<group>"; };
+		F5E338752DF77FC7000106FA /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		F5E3C8302DE780640077D3BF /* CityDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityDetail.swift; sourceTree = "<group>"; };
 		F5F2D8142DDF257C008074F5 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		F5F337AB2DE0F32C00D8345F /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
@@ -433,6 +433,7 @@
 				F57453662DDE0DF00047E989 /* Comman */,
 				F574534A2DDE0DD40047E989 /* Constants */,
 				F574534C2DDE0DD40047E989 /* Extensions */,
+				F5E338752DF77FC7000106FA /* Localizable.xcstrings */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -446,7 +447,6 @@
 				F574533A2DDE0DD40047E989 /* Models */,
 				F57453472DDE0DD40047E989 /* Resources */,
 				F574534D2DDE0DD40047E989 /* Utilities */,
-				F574534E2DDE0DD40047E989 /* ContentView.swift */,
 				F574534F2DDE0DD40047E989 /* Info.plist */,
 				F57453462DDE0DD40047E989 /* Assets.xcassets */,
 			);
@@ -519,6 +519,7 @@
 			knownRegions = (
 				en,
 				Base,
+				tr,
 			);
 			mainGroup = F553F6922DDE06B400E06FEA;
 			minimizedProjectReferenceProxies = 1;
@@ -543,6 +544,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F574535A2DDE0DD40047E989 /* Launch Screen.storyboard in Resources */,
+				F5E338762DF77FC7000106FA /* Localizable.xcstrings in Resources */,
 				F574535B2DDE0DD40047E989 /* Poppins-Bold.ttf in Resources */,
 				F574535C2DDE0DD40047E989 /* Poppins-ExtraBold.ttf in Resources */,
 				F574535D2DDE0DD40047E989 /* Poppins-Italic.ttf in Resources */,
@@ -586,7 +588,6 @@
 				F5F337AE2DE0F35500D8345F /* Food.swift in Sources */,
 				F5BFF54E2DDE50D700AEF27D /* City.swift in Sources */,
 				F5F337B02DE0F37100D8345F /* Memory.swift in Sources */,
-				F57453592DDE0DD40047E989 /* ContentView.swift in Sources */,
 				F5F2D8152DDF257C008074F5 /* Router.swift in Sources */,
 				F5F338482DE109A600D8345F /* View+Ext.swift in Sources */,
 				F5BFF5392DDE20F200AEF27D /* DTabView.swift in Sources */,
@@ -658,6 +659,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -715,6 +717,7 @@
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
