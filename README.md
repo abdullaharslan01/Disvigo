@@ -2,7 +2,10 @@
 
 #### 🔊 Pro Tip: Enable Sound for the Full Experience
 
-https://github.com/user-attachments/assets/31f729be-6d84-4b4d-844c-8f94f82e5079
+
+https://github.com/user-attachments/assets/f4e954b5-d99b-4aa7-b4cd-0b9d9a907c24
+
+
 
 **Disvigo** is a mobile travel assistant designed to help users explore the cultural richness of cities across Türkiye. Developed as a 90-day solo graduation project, Disvigo brings together cultural storytelling, intelligent navigation, and AI-powered interaction—everything needed for a modern and immersive travel experience.
 
